@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#3B82F6">
-    <title>¡A Moverse! v2 - Pro</title>
+    <title>¡A Moverse! v2.1</title>
+
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-        body { background-color: #f1f5f9; font-family: system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
-        .card-active { border: 4px solid #3b82f6; background-color: #eff6ff; transform: scale(1.02); }
+        body { background-color: #f1f5f9; font-family: system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
+        .card-active { border: 4px solid #3b82f6 !important; background-color: #eff6ff !important; transform: scale(1.02); }
         @keyframes bounce-icon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
         .animate-bounce-icon { animation: bounce-icon 1.5s infinite; }
     </style>
@@ -20,7 +22,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useCallback } = React;
 
         const EXERCISES = [
             { id: 'saltar', n: 'Saltar', e: '🦘', txt: 'Salta en tu lugar para activar el corazón.' },
@@ -37,9 +39,28 @@
             const [selectedEx, setSelectedEx] = useState(EXERCISES[0]);
             const [isAlerting, setIsAlerting] = useState(false);
 
+            // Recuperar datos al cargar
             useEffect(() => {
                 const saved = localStorage.getItem('amoverse_count');
                 if (saved) setDailyCount(parseInt(saved));
+            }, []);
+
+            // Alarma sonora (Sintetizada)
+            const playAlert = useCallback(() => {
+                try {
+                    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0, audioCtx.currentTime);
+                    gain.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.1);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.5);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 1.5);
+                } catch (e) { console.error("Audio error:", e); }
             }, []);
 
             useEffect(() => {
@@ -47,24 +68,13 @@
                 if (isRunning && timeLeft > 0) {
                     timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
                 } else if (timeLeft === 0 && isRunning) {
-                    handleAlarm();
+                    setIsRunning(false);
+                    setIsAlerting(true);
+                    playAlert();
+                    if ('vibrate' in navigator) navigator.vibrate([500, 200, 500]);
                 }
                 return () => clearInterval(timer);
-            }, [isRunning, timeLeft]);
-
-            const handleAlarm = () => {
-                setIsRunning(false);
-                setIsAlerting(true);
-                if ('vibrate' in navigator) navigator.vibrate([500, 200, 500, 200, 500]);
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2);
-                osc.stop(audioCtx.currentTime + 2);
-            };
+            }, [isRunning, timeLeft, playAlert]);
 
             const formatTime = (s) => {
                 const m = Math.floor(s / 60);
@@ -74,21 +84,77 @@
 
             return (
                 <div className="min-h-screen flex flex-col items-center p-4 space-y-4">
-                    {/* Stats */}
-                    <div className="w-full max-w-md flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm">
-                        <h1 className="font-black text-blue-600 text-xl tracking-tighter italic">¡A MOVERSE!</h1>
-                        <div className="bg-blue-600 text-white px-4 py-1 rounded-full font-bold">
-                            🏆 {dailyCount}
-                        </div>
+                    {/* Header */}
+                    <div className="w-full max-w-md flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                        <h1 className="font-black text-blue-600 text-xl tracking-tighter">¡A MOVERSE!</h1>
+                        <div className="bg-blue-600 text-white px-4 py-1 rounded-full font-bold">🏆 {dailyCount}</div>
                     </div>
 
-                    {/* Timer Card */}
-                    <div className="w-full max-w-md bg-white p-8 rounded-[2.5rem] shadow-xl text-center">
-                        <div className="text-7xl font-mono font-black text-slate-800 mb-6 tabular-nums">
+                    {/* Timer Main Card */}
+                    <div className="w-full max-w-md bg-white p-8 rounded-[2.5rem] shadow-xl text-center border border-slate-100">
+                        <div className="text-7xl font-mono font-black text-slate-800 mb-6 tabular-nums tracking-tight">
                             {formatTime(timeLeft)}
                         </div>
                         
-                        {/* Selectores de Tiempo */}
                         <div className="grid grid-cols-4 gap-2 mb-4">
                             {[15, 30, 60, 120].map(m => (
-                                <button key={m} onClick={() => {setTimeLeft
+                                <button key={m} onClick={() => {setTimeLeft(m * 60); setIsRunning(false);}} 
+                                    className="py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-600 text-xs active:bg-blue-100 transition-colors">
+                                    {m}m
+                                </button>
+                            ))}
+                        </div>
+
+                        <button onClick={() => {setTimeLeft(60); setIsRunning(true);}}
+                            className="w-full mb-6 py-2 border-2 border-dashed border-blue-200 rounded-xl text-blue-500 font-bold text-xs uppercase tracking-widest active:bg-blue-50">
+                            🧪 Prueba (1 min)
+                        </button>
+
+                        <button onClick={() => setIsRunning(!isRunning)}
+                            className={`w-full py-5 rounded-3xl text-2xl font-black text-white shadow-lg transition-all active:scale-95 ${isRunning ? 'bg-red-500 shadow-red-200' : 'bg-blue-600 shadow-blue-200'}`}>
+                            {isRunning ? 'PAUSAR' : 'INICIAR'}
+                        </button>
+                    </div>
+
+                    {/* Exercise Selector */}
+                    <div className="w-full max-w-md grid grid-cols-3 gap-3 pb-10">
+                        {EXERCISES.map(ex => (
+                            <button key={ex.id} onClick={() => setSelectedEx(ex)}
+                                className={`p-4 rounded-3xl bg-white flex flex-col items-center transition-all shadow-sm border-2 ${selectedEx.id === ex.id ? 'card-active border-blue-500' : 'border-transparent opacity-60'}`}>
+                                <span className="text-3xl mb-1">{ex.e}</span>
+                                <span className="font-bold text-[9px] uppercase text-slate-600 tracking-tighter">{ex.n}</span>
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Full Screen Alert */}
+                    {isAlerting && (
+                        <div className="fixed inset-0 bg-blue-600 z-[100] flex flex-col items-center justify-center p-8 text-center text-white">
+                            <div className="text-[10rem] mb-6 animate-bounce-icon">{selectedEx.e}</div>
+                            <h2 className="text-5xl font-black mb-4 uppercase">¡A {selectedEx.n}!</h2>
+                            <p className="text-2xl mb-12 font-medium opacity-90 max-w-xs">{selectedEx.txt}</p>
+                            <button 
+                                onClick={() => {
+                                    setIsAlerting(false);
+                                    const newCount = dailyCount + 1;
+                                    setDailyCount(newCount);
+                                    localStorage.setItem('amoverse_count', newCount);
+                                    setTimeLeft(1800);
+                                }}
+                                className="bg-white text-blue-600 px-16 py-6 rounded-full font-black text-3xl shadow-2xl active:scale-90 transition-transform"
+                            >
+                                ¡HECHO!
+                            </button>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // Inicialización segura para React 18
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+        root.render(<App />);
+    </script>
+</body>
+</html>
