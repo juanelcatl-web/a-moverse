@@ -1,7 +1,7 @@
 const CACHE_NAME = 'amoverse-v2';
 const ASSETS = [
-  './',
-  './index.html',
+  './',               // Esto guarda la ruta raíz
+  './index.html',     // Este es el nombre real ahora
   './manifest.json'
 ];
 
