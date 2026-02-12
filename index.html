@@ -4,92 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#3B82F6">
-    <title>¡A Moverse! v2</title>
-
+    <title>¡A Moverse! v2 - Full</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-
     <style>
-        /* Estilos para que se vea como una App real */
-        body { background-color: #f8fafc; font-family: system-ui, sans-serif; }
-        .app-container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; }
+        body { background-color: #f8fafc; font-family: system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+        @keyframes bounce-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .animate-bounce-slow { animation: bounce-slow 2s infinite ease-in-out; }
     </style>
 </head>
 <body>
-
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
+
+        const EXERCISES = [
+            { id: 1, n: 'Saltar', e: '🦘', txt: 'Salta en el lugar' },
+            { id: 2, n: 'Caminar', e: '🚶', txt: 'Camina un poco' },
+            { id: 3, n: 'Estirar', e: '🤸', txt: 'Estira los brazos' },
+            { id: 4, n: 'Sentadillas', e: '💪', txt: 'Haz 5 sentadillas' }
+        ];
 
         function App() {
-            const [timeLeft, setTimeLeft] = useState(1800); // 30 minutos
+            const [timeLeft, setTimeLeft] = useState(1800);
             const [isRunning, setIsRunning] = useState(false);
             const [count, setCount] = useState(0);
+            const [showExercise, setShowExercise] = useState(false);
+            const [currentEx, setCurrentEx] = useState(EXERCISES[0]);
 
-            // Lógica del Cronómetro
+            // Audio sin archivos externos (Beep sintético)
+            const playSound = () => {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1);
+                osc.start();
+                osc.stop(ctx.currentTime + 1);
+            };
+
             useEffect(() => {
                 let timer;
                 if (isRunning && timeLeft > 0) {
-                    timer = setInterval(() => {
-                        setTimeLeft(prev => prev - 1);
-                    }, 1000);
+                    timer = setInterval(() => setTimeLeft(t => t - 1), 1000);
                 } else if (timeLeft === 0) {
-                    setIsRunning(false);
-                    setCount(prev => prev + 1);
-                    setTimeLeft(1800);
-                    alert("¡HORA DE MOVERSE! 🤸‍♂️");
-                    if ('vibrate' in navigator) navigator.vibrate([500, 200, 500]);
+                    handleFinish();
                 }
                 return () => clearInterval(timer);
             }, [isRunning, timeLeft]);
 
-            // Formateador de tiempo (00:00)
+            const handleFinish = () => {
+                setIsRunning(false);
+                const randomEx = EXERCISES[Math.floor(Math.random() * EXERCISES.length)];
+                setCurrentEx(randomEx);
+                setShowExercise(true);
+                playSound();
+                if ('vibrate' in navigator) navigator.vibrate([500, 200, 500, 200, 500]);
+            };
+
             const formatTime = (s) => {
-                const mins = Math.floor(s / 60);
-                const secs = s % 60;
-                return `${mins}:${secs.toString().padStart(2, '0')}`;
+                const m = Math.floor(s / 60);
+                const sec = s % 60;
+                return `${m}:${sec.toString().padStart(2, '0')}`;
             };
 
             return (
-                <div className="app-container text-center">
-                    <div className="bg-white p-8 rounded-[3rem] shadow-2xl w-full max-w-sm border-4 border-blue-50">
-                        <h1 className="text-3xl font-black mb-6 text-slate-800 tracking-tighter">
-                            ¡A MOVERSE!
-                        </h1>
+                <div className="min-h-screen flex items-center justify-center p-4">
+                    <div className="bg-white p-8 rounded-[3rem] shadow-2xl w-full max-w-sm text-center border-4 border-blue-50">
+                        <h1 className="text-2xl font-black mb-6 text-slate-800 uppercase tracking-tighter">Mi Pausa Activa</h1>
                         
                         <div className="text-7xl font-mono font-black text-blue-600 mb-10 tabular-nums">
                             {formatTime(timeLeft)}
                         </div>
 
-                        <div className="space-y-4">
-                            <button 
-                                onClick={() => setIsRunning(!isRunning)}
-                                className={`w-full py-6 rounded-2xl text-2xl font-bold text-white transition-all active:scale-95 shadow-lg ${isRunning ? 'bg-red-500 shadow-red-200' : 'bg-blue-600 shadow-blue-200'}`}
-                            >
-                                {isRunning ? 'PAUSAR' : 'INICIAR'}
+                        <div className="flex flex-col gap-3">
+                            <button onClick={() => setIsRunning(!isRunning)}
+                                className={`w-full py-5 rounded-2xl text-xl font-bold text-white transition-all active:scale-95 shadow-lg ${isRunning ? 'bg-red-500 shadow-red-100' : 'bg-blue-600 shadow-blue-100'}`}>
+                                {isRunning ? 'PAUSAR' : 'EMPEZAR TRABAJO'}
                             </button>
-
-                            <button 
-                                onClick={() => { setIsRunning(false); setTimeLeft(1800); }}
-                                className="w-full py-3 text-slate-400 font-bold hover:text-slate-600"
-                            >
-                                REINICIAR
-                            </button>
+                            
+                            <button onClick={() => {setIsRunning(false); setTimeLeft(1800);}}
+                                className="text-slate-400 font-bold text-sm">REINICIAR</button>
                         </div>
 
-                        <div className="mt-10 p-5 bg-blue-50 rounded-3xl border border-blue-100">
-                            <p className="text-blue-600 font-black text-xs uppercase tracking-widest mb-1">Pausas Completadas</p>
+                        <div className="mt-8 p-5 bg-blue-50 rounded-3xl">
+                            <p className="text-blue-600 font-black text-xs uppercase tracking-widest mb-1">Rondas de hoy</p>
                             <p className="text-5xl font-black text-blue-900">{count}</p>
                         </div>
                     </div>
+
+                    {/* Pantalla de Ejercicio (Modal) */}
+                    {showExercise && (
+                        <div className="fixed inset-0 bg-blue-600 z-50 flex flex-col items-center justify-center p-6 text-white">
+                            <div className="text-9xl mb-8 animate-bounce-slow">{currentEx.e}</div>
+                            <h2 className="text-4xl font-black mb-2 uppercase">¡A MOVERSE!</h2>
+                            <p className="text-2xl mb-12 opacity-90">{currentEx.txt}</p>
+                            
+                            <button onClick={() => { 
+                                setShowExercise(false); 
+                                setCount(c => c + 1); 
+                                setTimeLeft(1800); 
+                            }} className="bg-white text-blue-600 px-12 py-5 rounded-full font-black text-2xl shadow-2xl active:scale-95 transition-transform">
+                                ¡HECHO!
+                            </button>
+                        </div>
+                    )}
                 </div>
             );
         }
 
-        // Renderizado Final
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
