@@ -4,43 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#3B82F6">
-    <title>¡A Moverse! v3.0</title>
-
-    <script>
-        const myManifest = {
-            "short_name": "AMoverse",
-            "name": "¡A Moverse! Pausas Activas",
-            "start_url": "./index.html",
-            "display": "standalone",
-            "background_color": "#f1f5f9",
-            "theme_color": "#3B82F6",
-            "icons": [{
-                "src": "https://cdn-icons-png.flaticon.com/512/384/384172.png",
-                "sizes": "512x512",
-                "type": "image/png",
-                "purpose": "any maskable"
-            }]
-        };
-        const manifestStr = JSON.stringify(myManifest);
-        const blob = new Blob([manifestStr], {type: 'application/json'});
-        const manifestURL = URL.createObjectURL(blob);
-        const link = document.createElement('link');
-        link.rel = 'manifest';
-        link.href = manifestURL;
-        document.head.appendChild(link);
-    </script>
-
-    <script>
-        if ('serviceWorker' in navigator) {
-            const swCode = `
-                self.addEventListener('install', e => self.skipWaiting());
-                self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));
-            `;
-            const swBlob = new Blob([swCode], {type: 'application/javascript'});
-            const swURL = URL.createObjectURL(swBlob);
-            navigator.serviceWorker.register(swURL).catch(console.error);
-        }
-    </script>
+    <title>¡A Moverse! v3.1</title>
 
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -48,7 +12,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        body { background-color: #f1f5f9; font-family: system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #f1f5f9; font-family: system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
         .card-active { border: 4px solid #3b82f6 !important; background-color: #eff6ff !important; transform: scale(1.02); }
         @keyframes bounce-icon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
         .animate-bounce-icon { animation: bounce-icon 1.5s infinite; }
@@ -108,4 +72,67 @@
             const formatTime = (s) => {
                 const m = Math.floor(s / 60);
                 const sec = s % 60;
-                return `${m}:${sec.toString().padStart(2
+                return `${m}:${sec.toString().padStart(2, '0')}`;
+            };
+
+            const completeExercise = () => {
+                const newCount = dailyCount + 1;
+                setDailyCount(newCount);
+                localStorage.setItem('amoverse_count', newCount);
+                setIsAlerting(false);
+                setTimeLeft(1800);
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col items-center p-4 space-y-4">
+                    {/* Header */}
+                    <div className="w-full max-w-md flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                        <h1 className="font-black text-blue-600 text-xl italic tracking-tighter">¡A MOVERSE!</h1>
+                        <div className="bg-blue-600 text-white px-4 py-1 rounded-full font-bold text-xs">Hoy: {dailyCount}</div>
+                    </div>
+
+                    {/* Timer Card */}
+                    <div className="w-full max-w-md bg-white p-8 rounded-[2.5rem] shadow-xl text-center border border-slate-100">
+                        <div className="text-7xl font-mono font-black text-slate-800 mb-6 tabular-nums">{formatTime(timeLeft)}</div>
+                        
+                        <div className="grid grid-cols-4 gap-2 mb-4">
+                            {[15, 30, 60, 120].map(m => (
+                                <button key={m} onClick={() => {setTimeLeft(m * 60); setIsRunning(false);}} className="py-2 bg-slate-50 border rounded-xl font-bold text-slate-600 text-xs active:bg-blue-50">{m}m</button>
+                            ))}
+                        </div>
+
+                        <button onClick={() => {setTimeLeft(60); setIsRunning(true);}} className="w-full mb-6 py-2 border-2 border-dashed border-blue-200 rounded-xl text-blue-500 font-bold text-xs uppercase tracking-widest active:bg-blue-50">🧪 Probar 1 min</button>
+
+                        <button onClick={() => setIsRunning(!isRunning)} className={`w-full py-5 rounded-3xl text-2xl font-black text-white shadow-lg active:scale-95 transition-all ${isRunning ? 'bg-red-500 shadow-red-200' : 'bg-blue-600 shadow-blue-200'}`}>
+                            {isRunning ? 'PAUSAR' : 'INICIAR'}
+                        </button>
+                    </div>
+
+                    {/* Exercise Grid */}
+                    <div className="w-full max-w-md grid grid-cols-3 gap-3">
+                        {EXERCISES.map(ex => (
+                            <button key={ex.id} onClick={() => setSelectedEx(ex)} className={`p-4 rounded-3xl bg-white flex flex-col items-center border-2 transition-all ${selectedEx.id === ex.id ? 'card-active border-blue-500' : 'border-transparent opacity-60'}`}>
+                                <span className="text-3xl mb-1">{ex.e}</span>
+                                <span className="font-bold text-[9px] uppercase text-slate-600 tracking-tighter">{ex.n}</span>
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Modal Alert */}
+                    {isAlerting && (
+                        <div className="fixed inset-0 bg-blue-600 z-[100] flex flex-col items-center justify-center p-8 text-center text-white">
+                            <div className="text-[10rem] mb-6 animate-bounce-icon">{selectedEx.e}</div>
+                            <h2 className="text-5xl font-black mb-4 uppercase leading-none">¡A {selectedEx.n}!</h2>
+                            <p className="text-2xl mb-12 opacity-90 max-w-xs">{selectedEx.txt}</p>
+                            <button onClick={completeExercise} className="bg-white text-blue-600 px-16 py-6 rounded-full font-black text-3xl shadow-2xl active:scale-95">¡HECHO!</button>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
