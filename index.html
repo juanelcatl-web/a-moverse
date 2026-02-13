@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#3B82F6">
-    <title>¡A Moverse! v3.3 - Notificaciones</title>
+    <title>¡A Moverse! v3.4</title>
 
     <link rel="manifest" href="manifest.json">
     <script>
@@ -47,76 +47,75 @@
             const [dailyCount, setDailyCount] = useState(0);
             const [selectedEx, setSelectedEx] = useState(EXERCISES[0]);
             const [isAlerting, setIsAlerting] = useState(false);
+            
+            const timerRef = useRef(null);
             const endTimeRef = useRef(null);
 
-            // Cargar datos y pedir permiso de notificaciones
             useEffect(() => {
                 const saved = localStorage.getItem('amoverse_count');
                 if (saved) setDailyCount(parseInt(saved));
-                
-                if ("Notification" in window && Notification.permission === "default") {
-                    Notification.requestPermission();
-                }
+                if ("Notification" in window) Notification.requestPermission();
             }, []);
 
-            // Sonido "Pipipi" x3
+            // SONIDO PI-PI-PI (Triple tono agudo)
             const playPipipi = useCallback(() => {
-                try {
-                    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    const playTone = (time) => {
-                        const osc = audioCtx.createOscillator();
-                        const gain = audioCtx.createGain();
-                        osc.connect(gain); gain.connect(audioCtx.destination);
-                        osc.type = 'sine';
-                        osc.frequency.setValueAtTime(880, time); // Nota LA alta
-                        gain.gain.setValueAtTime(0, time);
-                        gain.gain.linearRampToValueAtTime(0.3, time + 0.05);
-                        gain.gain.linearRampToValueAtTime(0, time + 0.2);
-                        osc.start(time);
-                        osc.stop(time + 0.2);
-                    };
-                    const now = audioCtx.currentTime;
-                    playTone(now);
-                    playTone(now + 0.3);
-                    playTone(now + 0.6);
-                } catch (e) { console.error(e); }
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const playTone = (delay) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain); gain.connect(audioCtx.destination);
+                    osc.type = 'square'; // Sonido más tipo "beep"
+                    osc.frequency.setValueAtTime(1000, audioCtx.currentTime + delay);
+                    gain.gain.setValueAtTime(0, audioCtx.currentTime + delay);
+                    gain.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + delay + 0.01);
+                    gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + delay + 0.15);
+                    osc.start(audioCtx.currentTime + delay);
+                    osc.stop(audioCtx.currentTime + delay + 0.2);
+                };
+                playTone(0);
+                playTone(0.3);
+                playTone(0.6);
             }, []);
 
-            // Enviar Notificación Visual
-            const sendNotification = useCallback(() => {
+            const triggerAlarm = useCallback(() => {
+                setIsRunning(false);
+                setIsAlerting(true);
+                playPipipi();
+                if ('vibrate' in navigator) navigator.vibrate([200, 100, 200, 100, 200]);
                 if ("Notification" in window && Notification.permission === "granted") {
                     new Notification("¡HORA DE MOVERSE!", {
-                        body: `Te toca: ${selectedEx.n} ${selectedEx.e}`,
-                        icon: "https://cdn-icons-png.flaticon.com/512/384/384172.png"
+                        body: `Te toca: ${selectedEx.n}`,
+                        icon: "icono.png"
                     });
                 }
-            }, [selectedEx]);
+            }, [selectedEx, playPipipi]);
 
+            // TIMER DE ALTA PRECISIÓN
             useEffect(() => {
-                let timer;
                 if (isRunning) {
-                    if (!endTimeRef.current) endTimeRef.current = Date.now() + (timeLeft * 1000);
-                    timer = setInterval(() => {
-                        const remaining = Math.round((endTimeRef.current - Date.now()) / 1000);
-                        if (remaining <= 0) {
-                            clearInterval(timer);
+                    if (!endTimeRef.current) {
+                        endTimeRef.current = Date.now() + (timeLeft * 1000);
+                    }
+
+                    timerRef.current = setInterval(() => {
+                        const now = Date.now();
+                        const diff = Math.ceil((endTimeRef.current - now) / 1000);
+
+                        if (diff <= 0) {
+                            clearInterval(timerRef.current);
                             endTimeRef.current = null;
                             setTimeLeft(0);
-                            setIsRunning(false);
-                            setIsAlerting(true);
-                            playPipipi();
-                            sendNotification();
-                            if ('vibrate' in navigator) navigator.vibrate([200, 100, 200, 100, 200]);
+                            triggerAlarm();
                         } else {
-                            setTimeLeft(remaining);
+                            setTimeLeft(diff);
                         }
-                    }, 500);
+                    }, 200); // Check rápido para no perder ni un milisegundo
                 } else {
+                    clearInterval(timerRef.current);
                     endTimeRef.current = null;
-                    clearInterval(timer);
                 }
-                return () => clearInterval(timer);
-            }, [isRunning, playPipipi, sendNotification]);
+                return () => clearInterval(timerRef.current);
+            }, [isRunning, triggerAlarm]);
 
             const formatTime = (s) => {
                 const m = Math.floor(s / 60);
@@ -124,29 +123,32 @@
                 return `${m}:${sec.toString().padStart(2, '0')}`;
             };
 
-            const changeTime = (minutes) => {
+            const startTimer = (mins) => {
                 setIsRunning(false);
                 endTimeRef.current = null;
-                setTimeLeft(minutes * 60);
+                setTimeLeft(mins * 60);
             };
 
             return (
                 <div className="min-h-screen flex flex-col items-center p-4 space-y-4">
                     <div className="w-full max-w-md flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
-                        <h1 className="font-black text-blue-600 text-xl italic tracking-tighter uppercase">Mi Pausa</h1>
-                        <div className="bg-blue-600 text-white px-4 py-1 rounded-full font-bold text-xs uppercase tracking-widest">Hoy: {dailyCount}</div>
+                        <img src="icono.png" className="w-10 h-10 rounded-lg shadow-sm" onerror="this.src='https://cdn-icons-png.flaticon.com/512/384/384172.png'" />
+                        <h1 className="font-black text-blue-600 text-xl italic uppercase">A Moverse</h1>
+                        <div className="bg-blue-600 text-white px-4 py-1 rounded-full font-bold text-xs italic">HOY: {dailyCount}</div>
                     </div>
 
                     <div className="w-full max-w-md bg-white p-8 rounded-[2.5rem] shadow-xl text-center border border-slate-100">
-                        <div className="text-7xl font-mono font-black text-slate-800 mb-6 tabular-nums tracking-tighter italic">{formatTime(timeLeft)}</div>
+                        <div className="text-7xl font-mono font-black text-slate-800 mb-6 tabular-nums italic tracking-tighter">
+                            {formatTime(timeLeft)}
+                        </div>
                         
                         <div className="grid grid-cols-4 gap-2 mb-4">
                             {[15, 30, 60, 120].map(m => (
-                                <button key={m} onClick={() => changeTime(m)} className="py-2 bg-slate-50 border rounded-xl font-bold text-slate-600 text-xs">{m}m</button>
+                                <button key={m} onClick={() => startTimer(m)} className="py-2 bg-slate-50 border rounded-xl font-bold text-slate-600 text-xs active:bg-blue-100">{m}m</button>
                             ))}
                         </div>
 
-                        <button onClick={() => { changeTime(1); setIsRunning(true); }} className="w-full mb-6 py-2 border-2 border-dashed border-blue-200 rounded-xl text-blue-500 font-bold text-xs uppercase tracking-widest">🧪 Probar 1 min</button>
+                        <button onClick={() => { startTimer(0.1); setIsRunning(true); }} className="w-full mb-6 py-2 border-2 border-dashed border-blue-200 rounded-xl text-blue-500 font-bold text-xs uppercase tracking-widest">🧪 PRUEBA (6 SEG)</button>
 
                         <button onClick={() => setIsRunning(!isRunning)} className={`w-full py-5 rounded-3xl text-2xl font-black text-white shadow-lg active:scale-95 transition-all ${isRunning ? 'bg-red-500 shadow-red-200' : 'bg-blue-600 shadow-blue-200'}`}>
                             {isRunning ? 'PAUSAR' : 'INICIAR'}
@@ -157,7 +159,7 @@
                         {EXERCISES.map(ex => (
                             <button key={ex.id} onClick={() => setSelectedEx(ex)} className={`p-4 rounded-3xl bg-white flex flex-col items-center border-2 transition-all ${selectedEx.id === ex.id ? 'card-active border-blue-500' : 'border-transparent opacity-60'}`}>
                                 <span className="text-3xl mb-1">{ex.e}</span>
-                                <span className="font-bold text-[9px] uppercase text-slate-600 tracking-tighter">{ex.n}</span>
+                                <span className="font-bold text-[9px] uppercase text-slate-600">{ex.n}</span>
                             </button>
                         ))}
                     </div>
@@ -165,8 +167,8 @@
                     {isAlerting && (
                         <div className="fixed inset-0 bg-blue-600 z-[100] flex flex-col items-center justify-center p-8 text-center text-white">
                             <div className="text-[10rem] mb-6 animate-bounce-icon">{selectedEx.e}</div>
-                            <h2 className="text-5xl font-black mb-4 uppercase leading-none italic">¡A {selectedEx.n}!</h2>
-                            <p className="text-2xl mb-12 opacity-90 max-w-xs font-medium">{selectedEx.txt}</p>
+                            <h2 className="text-5xl font-black mb-4 uppercase leading-none italic">¡HORA DE {selectedEx.n}!</h2>
+                            <p className="text-2xl mb-12 opacity-90 font-medium">{selectedEx.txt}</p>
                             <button onClick={() => { setIsAlerting(false); setDailyCount(c => c + 1); localStorage.setItem('amoverse_count', dailyCount + 1); setTimeLeft(1800); }} className="bg-white text-blue-600 px-16 py-6 rounded-full font-black text-3xl shadow-2xl active:scale-90">¡LISTO!</button>
                         </div>
                     )}
