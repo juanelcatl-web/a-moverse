@@ -4,22 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#3B82F6">
-    <title>¡A Moverse! v3.1</title>
-<link rel="manifest" href="manifest.json">
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js');
-    });
-  }
-</script>
+    <title>¡A Moverse! v3.3 - Notificaciones</title>
+
+    <link rel="manifest" href="manifest.json">
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js');
+        });
+      }
+    </script>
+
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        body { background-color: #f1f5f9; font-family: system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #f1f5f9; font-family: system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
         .card-active { border: 4px solid #3b82f6 !important; background-color: #eff6ff !important; transform: scale(1.02); }
         @keyframes bounce-icon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
         .animate-bounce-icon { animation: bounce-icon 1.5s infinite; }
@@ -29,7 +31,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useCallback } = React;
+        const { useState, useEffect, useCallback, useRef } = React;
 
         const EXERCISES = [
             { id: 'saltar', n: 'Saltar', e: '🦘', txt: 'Salta en tu lugar para activar el corazón.' },
@@ -45,36 +47,76 @@
             const [dailyCount, setDailyCount] = useState(0);
             const [selectedEx, setSelectedEx] = useState(EXERCISES[0]);
             const [isAlerting, setIsAlerting] = useState(false);
+            const endTimeRef = useRef(null);
 
+            // Cargar datos y pedir permiso de notificaciones
             useEffect(() => {
                 const saved = localStorage.getItem('amoverse_count');
                 if (saved) setDailyCount(parseInt(saved));
+                
+                if ("Notification" in window && Notification.permission === "default") {
+                    Notification.requestPermission();
+                }
             }, []);
 
-            const playAlert = useCallback(() => {
+            // Sonido "Pipipi" x3
+            const playPipipi = useCallback(() => {
                 try {
                     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.connect(gain); gain.connect(audioCtx.destination);
-                    osc.start(); 
-                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.5);
-                    osc.stop(audioCtx.currentTime + 1.5);
-                } catch (e) {}
+                    const playTone = (time) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.connect(gain); gain.connect(audioCtx.destination);
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(880, time); // Nota LA alta
+                        gain.gain.setValueAtTime(0, time);
+                        gain.gain.linearRampToValueAtTime(0.3, time + 0.05);
+                        gain.gain.linearRampToValueAtTime(0, time + 0.2);
+                        osc.start(time);
+                        osc.stop(time + 0.2);
+                    };
+                    const now = audioCtx.currentTime;
+                    playTone(now);
+                    playTone(now + 0.3);
+                    playTone(now + 0.6);
+                } catch (e) { console.error(e); }
             }, []);
+
+            // Enviar Notificación Visual
+            const sendNotification = useCallback(() => {
+                if ("Notification" in window && Notification.permission === "granted") {
+                    new Notification("¡HORA DE MOVERSE!", {
+                        body: `Te toca: ${selectedEx.n} ${selectedEx.e}`,
+                        icon: "https://cdn-icons-png.flaticon.com/512/384/384172.png"
+                    });
+                }
+            }, [selectedEx]);
 
             useEffect(() => {
                 let timer;
-                if (isRunning && timeLeft > 0) {
-                    timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
-                } else if (timeLeft === 0 && isRunning) {
-                    setIsRunning(false);
-                    setIsAlerting(true);
-                    playAlert();
-                    if ('vibrate' in navigator) navigator.vibrate([500, 200, 500]);
+                if (isRunning) {
+                    if (!endTimeRef.current) endTimeRef.current = Date.now() + (timeLeft * 1000);
+                    timer = setInterval(() => {
+                        const remaining = Math.round((endTimeRef.current - Date.now()) / 1000);
+                        if (remaining <= 0) {
+                            clearInterval(timer);
+                            endTimeRef.current = null;
+                            setTimeLeft(0);
+                            setIsRunning(false);
+                            setIsAlerting(true);
+                            playPipipi();
+                            sendNotification();
+                            if ('vibrate' in navigator) navigator.vibrate([200, 100, 200, 100, 200]);
+                        } else {
+                            setTimeLeft(remaining);
+                        }
+                    }, 500);
+                } else {
+                    endTimeRef.current = null;
+                    clearInterval(timer);
                 }
                 return () => clearInterval(timer);
-            }, [isRunning, timeLeft, playAlert]);
+            }, [isRunning, playPipipi, sendNotification]);
 
             const formatTime = (s) => {
                 const m = Math.floor(s / 60);
@@ -82,40 +124,35 @@
                 return `${m}:${sec.toString().padStart(2, '0')}`;
             };
 
-            const completeExercise = () => {
-                const newCount = dailyCount + 1;
-                setDailyCount(newCount);
-                localStorage.setItem('amoverse_count', newCount);
-                setIsAlerting(false);
-                setTimeLeft(1800);
+            const changeTime = (minutes) => {
+                setIsRunning(false);
+                endTimeRef.current = null;
+                setTimeLeft(minutes * 60);
             };
 
             return (
                 <div className="min-h-screen flex flex-col items-center p-4 space-y-4">
-                    {/* Header */}
                     <div className="w-full max-w-md flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
-                        <h1 className="font-black text-blue-600 text-xl italic tracking-tighter">¡A MOVERSE!</h1>
-                        <div className="bg-blue-600 text-white px-4 py-1 rounded-full font-bold text-xs">Hoy: {dailyCount}</div>
+                        <h1 className="font-black text-blue-600 text-xl italic tracking-tighter uppercase">Mi Pausa</h1>
+                        <div className="bg-blue-600 text-white px-4 py-1 rounded-full font-bold text-xs uppercase tracking-widest">Hoy: {dailyCount}</div>
                     </div>
 
-                    {/* Timer Card */}
                     <div className="w-full max-w-md bg-white p-8 rounded-[2.5rem] shadow-xl text-center border border-slate-100">
-                        <div className="text-7xl font-mono font-black text-slate-800 mb-6 tabular-nums">{formatTime(timeLeft)}</div>
+                        <div className="text-7xl font-mono font-black text-slate-800 mb-6 tabular-nums tracking-tighter italic">{formatTime(timeLeft)}</div>
                         
                         <div className="grid grid-cols-4 gap-2 mb-4">
                             {[15, 30, 60, 120].map(m => (
-                                <button key={m} onClick={() => {setTimeLeft(m * 60); setIsRunning(false);}} className="py-2 bg-slate-50 border rounded-xl font-bold text-slate-600 text-xs active:bg-blue-50">{m}m</button>
+                                <button key={m} onClick={() => changeTime(m)} className="py-2 bg-slate-50 border rounded-xl font-bold text-slate-600 text-xs">{m}m</button>
                             ))}
                         </div>
 
-                        <button onClick={() => {setTimeLeft(60); setIsRunning(true);}} className="w-full mb-6 py-2 border-2 border-dashed border-blue-200 rounded-xl text-blue-500 font-bold text-xs uppercase tracking-widest active:bg-blue-50">🧪 Probar 1 min</button>
+                        <button onClick={() => { changeTime(1); setIsRunning(true); }} className="w-full mb-6 py-2 border-2 border-dashed border-blue-200 rounded-xl text-blue-500 font-bold text-xs uppercase tracking-widest">🧪 Probar 1 min</button>
 
                         <button onClick={() => setIsRunning(!isRunning)} className={`w-full py-5 rounded-3xl text-2xl font-black text-white shadow-lg active:scale-95 transition-all ${isRunning ? 'bg-red-500 shadow-red-200' : 'bg-blue-600 shadow-blue-200'}`}>
                             {isRunning ? 'PAUSAR' : 'INICIAR'}
                         </button>
                     </div>
 
-                    {/* Exercise Grid */}
                     <div className="w-full max-w-md grid grid-cols-3 gap-3">
                         {EXERCISES.map(ex => (
                             <button key={ex.id} onClick={() => setSelectedEx(ex)} className={`p-4 rounded-3xl bg-white flex flex-col items-center border-2 transition-all ${selectedEx.id === ex.id ? 'card-active border-blue-500' : 'border-transparent opacity-60'}`}>
@@ -125,13 +162,12 @@
                         ))}
                     </div>
 
-                    {/* Modal Alert */}
                     {isAlerting && (
                         <div className="fixed inset-0 bg-blue-600 z-[100] flex flex-col items-center justify-center p-8 text-center text-white">
                             <div className="text-[10rem] mb-6 animate-bounce-icon">{selectedEx.e}</div>
-                            <h2 className="text-5xl font-black mb-4 uppercase leading-none">¡A {selectedEx.n}!</h2>
-                            <p className="text-2xl mb-12 opacity-90 max-w-xs">{selectedEx.txt}</p>
-                            <button onClick={completeExercise} className="bg-white text-blue-600 px-16 py-6 rounded-full font-black text-3xl shadow-2xl active:scale-95">¡HECHO!</button>
+                            <h2 className="text-5xl font-black mb-4 uppercase leading-none italic">¡A {selectedEx.n}!</h2>
+                            <p className="text-2xl mb-12 opacity-90 max-w-xs font-medium">{selectedEx.txt}</p>
+                            <button onClick={() => { setIsAlerting(false); setDailyCount(c => c + 1); localStorage.setItem('amoverse_count', dailyCount + 1); setTimeLeft(1800); }} className="bg-white text-blue-600 px-16 py-6 rounded-full font-black text-3xl shadow-2xl active:scale-90">¡LISTO!</button>
                         </div>
                     )}
                 </div>
