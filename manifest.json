@@ -3,11 +3,14 @@
   "name": "¡A Moverse! Pausas Activas",
   "description": "App para realizar pausas activas.",
   "icons": [
+    
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/384/384172.png",
+      "src": "icono.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+
     }
   ],
   "start_url": "./index.html",
