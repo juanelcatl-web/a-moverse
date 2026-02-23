@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>A Moverse! | Salud y Productividad</title>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5719496512652584 " crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5719496512652584" crossorigin="anonymous"></script>
 
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4f46e5">
@@ -13,38 +13,42 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Estilos básicos para que la app sea fluida */
         body { font-family: sans-serif; background: #f8fafc; margin: 0; overflow-x: hidden; }
         .cookie-banner {
             position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: white;
             padding: 1rem; z-index: 10000; font-size: 12px; display: flex; flex-direction: column; align-items: center; text-align: center;
         }
         .btn-cookie { background: #4f46e5; padding: 8px 20px; border-radius: 8px; margin-top: 10px; font-weight: bold; }
-        
-        /* Espacio reservado para el banner de publicidad */
-        .ad-slot { background: #f1f5f9; border: 1px dashed #cbd5e1; margin: 15px auto; text-align: center; color: #94a3b8; font-size: 10px; padding: 10px; min-height: 50px; }
+        .ad-slot { background: #f1f5f9; border: 1px dashed #cbd5e1; margin: 15px auto; text-align: center; color: #94a3b8; font-size: 10px; padding: 10px; min-height: 100px; display: flex; align-items: center; justify-content: center; }
+        .active-status { color: #10b981 !important; }
     </style>
 </head>
 <body>
 
     <div id="cookie-banner" class="cookie-banner">
-        Usamos cookies para mejorar tu experiencia y mostrar publicidad relevante. Al continuar, aceptas nuestro uso de cookies.
-        <button onclick="acceptCookies()" class="btn-cookie">ACEPTAR Y CONTINUAR</button>
+        Usamos cookies para mejorar tu experiencia y publicidad relevante.
+        <button onclick="acceptCookies()" class="btn-cookie">ACEPTAR</button>
     </div>
 
     <div class="p-6 max-w-md mx-auto">
         <header class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-black italic text-indigo-600">A MOVERSE!</h1>
-            <div class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-[10px] font-bold">PRO v3.7</div>
+            <div class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-[10px] font-bold">PRO v3.8</div>
         </header>
 
         <div class="ad-slot">
-            <p>ESPACIO PARA PUBLICIDAD DE GOOGLE</p>
-            </div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5719496512652584"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
 
         <div class="bg-white rounded-[2.5rem] p-8 shadow-xl border border-slate-100 text-center">
             <p class="text-slate-400 font-bold uppercase tracking-widest text-xs mb-4">Estado Actual</p>
-            <div id="status-display" class="text-5xl font-black text-slate-800 mb-6">¡Sentado!</div>
+            <div id="status-display" class="text-5xl font-black text-slate-800 mb-6 transition-all">¡Sentado!</div>
             
             <button id="main-btn" onclick="toggleTimer()" class="w-full bg-indigo-600 text-white py-6 rounded-3xl font-black text-xl shadow-lg active:scale-95 transition-all">
                 EMPEZAR RUTINA
@@ -57,18 +61,45 @@
     </div>
 
 <script>
-    // Gestión de Cookies
+    let isRunning = false;
+    let timerTimeout;
+
+    function toggleTimer() {
+        const btn = document.getElementById('main-btn');
+        const status = document.getElementById('status-display');
+
+        if (!isRunning) {
+            // ACTIVAR MODO RUTINA
+            isRunning = true;
+            btn.innerText = "DETENER RUTINA";
+            btn.classList.remove('bg-indigo-600');
+            btn.classList.add('bg-red-500');
+            status.innerText = "¡En Marcha!";
+            status.classList.add('active-status');
+
+            // Simulación de Alerta (en 30 minutos)
+            timerTimeout = setTimeout(() => {
+                alert("¡Tiempo cumplido! Es hora de moverse.");
+                toggleTimer(); // Se detiene sola al avisar
+            }, 1800000); 
+
+        } else {
+            // DESACTIVAR / RESET
+            isRunning = false;
+            btn.innerText = "EMPEZAR RUTINA";
+            btn.classList.remove('bg-red-500');
+            btn.classList.add('bg-indigo-600');
+            status.innerText = "¡Sentado!";
+            status.classList.remove('active-status');
+            clearTimeout(timerTimeout);
+        }
+    }
+
     function acceptCookies() {
         document.getElementById('cookie-banner').style.display = 'none';
         localStorage.setItem('cookiesAccepted', 'true');
     }
     if(localStorage.getItem('cookiesAccepted')) document.getElementById('cookie-banner').style.display = 'none';
-
-    // Tu lógica de temporizador y notificaciones iría aquí abajo...
-    function toggleTimer() {
-        // Aquí conectas tu función que ya tenías que suena y avisa
-        alert("¡Temporizador Activado! Te avisaré cuando sea hora de levantarse.");
-    }
 </script>
 </body>
 </html>
