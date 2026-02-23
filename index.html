@@ -207,10 +207,14 @@
     }
 
     // Registro Service Worker
-    if ('serviceWorker' in navigator) {
+        if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
+            // Agregamos un número aleatorio al final para forzar la descarga
+            navigator.serviceWorker.register('./sw.js?v=' + Date.now())
+                .catch(err => console.log(err));
         });
+        }
+    
     }
 </script>
 </body>
