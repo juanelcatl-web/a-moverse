@@ -1,30 +1,23 @@
-const CACHE_NAME = 'amoverse-v4.7-platinum'; // Cambiá esto
-// 
+const CACHE_NAME = 'amoverse-v4-8-fixed';
 
-const ASSETS = [
-  './',
-  './index.html',
-  './manifest.json',
-  './icono.png'
-];
-
-self.addEventListener('install', (e) => {
-  self.skipWaiting(); // Fuerza a que la nueva versión tome el mando
-  e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
-  );
+self.addEventListener('install', event => {
+    // Salta la espera y activa el nuevo SW al instante
+    self.skipWaiting();
 });
 
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys().then(keys => {
-      return Promise.all(keys.map(key => {
-        if (key !== CACHE_NAME) return caches.delete(key);
-      }));
-    })
-  );
+self.addEventListener('activate', event => {
+    // Toma el control de las pestañas abiertas inmediatamente
+    event.waitUntil(clients.claim());
+    // Limpia caches viejas
+    event.waitUntil(
+        caches.keys().then(keys => Promise.all(
+            keys.map(key => {
+                if (key !== CACHE_NAME) return caches.delete(key);
+            })
+        ))
+    );
 });
 
-self.addEventListener('fetch', (e) => {
-  e.respondWith(caches.match(e.request).then(res => res || fetch(e.request)));
+self.addEventListener('fetch', event => {
+    event.respondWith(fetch(event.request));
 });
