@@ -27,7 +27,7 @@
     <div class="max-w-md mx-auto space-y-4">
         <header class="flex justify-between items-center">
             <h1 class="text-3xl font-black italic text-indigo-600">A MOVERSE!</h1>
-            <span class="bg-indigo-600 text-white text-[10px] px-2 py-1 rounded-full font-bold uppercase tracking-widest">v4.7 Platinum</span>
+            <span class="bg-indigo-600 text-white text-[10px] px-2 py-1 rounded-full font-bold uppercase tracking-widest">v4.8 Fixed</span>
         </header>
 
         <div class="card text-center relative overflow-hidden">
@@ -40,7 +40,7 @@
 
             <p id="status-label" class="text-slate-400 font-bold uppercase tracking-widest text-[10px] mb-2">Próxima alerta en:</p>
             <div id="main-timer" class="text-7xl font-black text-slate-800 italic mb-2 tracking-tighter">30:00</div>
-            <p id="activity-label" class="text-indigo-500 font-bold text-sm h-5 italic">Selecciona un intervalo</p>
+            <p id="activity-label" class="text-indigo-500 font-bold text-sm h-5 italic">Listo para empezar</p>
         </div>
 
         <div class="card shadow-xl border border-slate-200">
@@ -104,9 +104,9 @@
         document.getElementById('main-timer').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     }
 
-    // Sonido puro de hardware (falla menos que la voz)
     function playBeep(freq = 440, duration = 0.5) {
         try {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.connect(gain);
@@ -121,7 +121,7 @@
 
     function speak(texto) {
         if (!texto || texto === "") return;
-        synth.cancel(); // Limpia la cola de voz
+        synth.cancel();
         const utter = new SpeechSynthesisUtterance(texto);
         utter.lang = 'es-ES';
         utter.rate = 1;
@@ -133,14 +133,12 @@
         const btn = document.getElementById('main-btn');
         const activity = document.getElementById('activity-label');
         if (!isRunning) {
-            // Desbloqueo forzado de audio para móviles
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            speak("Iniciando monitorización"); 
-            
+            speak("Activado"); 
             isRunning = true;
             btn.innerText = "DETENER";
             btn.classList.replace('bg-indigo-600', 'bg-red-500');
-            activity.innerText = "Monitorizando actividad...";
+            activity.innerText = "Monitorizando...";
             startMainTimer();
         } else {
             isRunning = false;
@@ -178,45 +176,30 @@
         overlay.classList.remove('hidden');
         exName.innerText = selectedExercise.toUpperCase();
         
-        // Alerta Híbrida
         playBeep(880, 0.8);
-        setTimeout(() => {
-            speak("¡Tiempo cumplido! Es momento de hacer " + selectedExercise);
-        }, 200);
+        setTimeout(() => { speak("Tiempo cumplido. Haz " + selectedExercise); }, 200);
 
         if (navigator.vibrate) navigator.vibrate([500, 200, 500]);
 
         exInterval = setInterval(() => {
             exTimeLeft--;
             exTimer.innerText = exTimeLeft;
-            
-            if(exTimeLeft === 3) {
-                playBeep(440, 0.2);
-                speak("Tres, dos, uno");
-            }
-
+            if(exTimeLeft === 3) speak("Tres, dos, uno");
             if (exTimeLeft <= 0) {
                 clearInterval(exInterval);
                 overlay.classList.add('hidden');
-                speak("Excelente. Ahora descansa hasta el próximo aviso.");
-                // Recarga de publicidad opcional
-                try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){}
+                speak("Listo. Descansa.");
                 startMainTimer(); 
             }
         }, 1000);
     }
 
-    // Registro Service Worker
-        if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            // Agregamos un número aleatorio al final para forzar la descarga
-            navigator.serviceWorker.register('./sw.js?v=' + Date.now())
-                .catch(err => console.log(err));
+            navigator.serviceWorker.register('./sw.js?v=' + Date.now()).catch(err => console.log(err));
         });
-        }
-    
     }
 </script>
 </body>
-    </html>
+</html>
     
