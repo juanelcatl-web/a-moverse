@@ -1,4 +1,6 @@
-const CACHE_NAME = 'amoverse-v4-final';
+const CACHE_NAME = 'amoverse-v4.7-platinum'; // Cambiá esto
+// 
+
 const ASSETS = [
   './',
   './index.html',
