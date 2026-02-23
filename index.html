@@ -3,123 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>A Moverse! | Salud y Productividad</title>
+    <title>A Moverse! | Temporizador PRO</title>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5719496512652584" crossorigin="anonymous"></script>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: sans-serif; background: #f1f5f9; margin: 0; }
-        .card { background: white; border-radius: 2rem; padding: 2rem; shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .btn-time, .btn-exercise { transition: all 0.3s; border: 2px solid transparent; }
+        body { font-family: sans-serif; background: #f1f5f9; }
+        .card { background: white; border-radius: 2rem; padding: 2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .btn-time, .btn-exercise { transition: all 0.2s; border: 2px solid transparent; }
         .selected { border-color: #4f46e5; background: #eef2ff; color: #4f46e5; font-weight: bold; }
-        .ad-slot { background: #e2e8f0; border-radius: 1rem; text-align: center; color: #64748b; font-size: 11px; padding: 10px; min-height: 80px; display: flex; align-items: center; justify-content: center; margin: 15px 0; }
-        .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; color: white; padding: 1rem; z-index: 10000; text-align: center; font-size: 12px; }
+        .ad-slot { background: #e2e8f0; border-radius: 1rem; text-align: center; color: #64748b; font-size: 11px; padding: 10px; min-height: 80px; margin: 15px 0; }
+        #countdown-circle { transition: all 0.5s ease-in-out; }
     </style>
 </head>
 <body class="p-4">
 
-    <div class="ad-slot max-w-md mx-auto">
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <div class="max-w-md mx-auto space-y-6">
+    <div class="max-w-md mx-auto space-y-4">
         <header class="flex justify-between items-center">
             <h1 class="text-3xl font-black italic text-indigo-600">A MOVERSE!</h1>
-            <span class="bg-indigo-600 text-white text-[10px] px-2 py-1 rounded-full font-bold">V4.0 PRO</span>
+            <span class="bg-indigo-600 text-white text-[10px] px-2 py-1 rounded-full font-bold">V4.5 PRO</span>
         </header>
 
+        <div class="card text-center relative overflow-hidden">
+            <div id="exercise-overlay" class="hidden absolute inset-0 bg-indigo-600 text-white flex flex-col items-center justify-center z-10">
+                <p class="text-xs uppercase font-bold mb-1">¡DALE!</p>
+                <h2 id="ex-name-display" class="text-2xl font-black mb-2">SENTADILLAS</h2>
+                <div id="ex-timer" class="text-6xl font-black italic">60</div>
+                <p class="text-[10px] mt-2">Segundos restantes</p>
+            </div>
+
+            <p id="status-label" class="text-slate-400 font-bold uppercase tracking-widest text-xs mb-2">Próximo aviso en:</p>
+            <div id="main-timer" class="text-7xl font-black text-slate-800 italic mb-2 tracking-tighter">00:00</div>
+            <p id="activity-label" class="text-indigo-500 font-bold text-sm h-5"></p>
+        </div>
+
         <div class="card shadow-xl border border-slate-200">
-            <label class="block text-slate-500 font-bold text-xs uppercase tracking-widest mb-3">¿Cada cuánto tiempo?</label>
             <div class="grid grid-cols-5 gap-2 mb-6">
-                <button onclick="setTime(0.1)" id="t0" class="btn-time bg-slate-100 py-2 rounded-xl text-xs">6s</button>
-                <button onclick="setTime(15)" id="t15" class="btn-time bg-slate-100 py-2 rounded-xl text-xs">15m</button>
-                <button onclick="setTime(30)" id="t30" class="btn-time bg-slate-100 py-2 rounded-xl text-xs selected">30m</button>
-                <button onclick="setTime(60)" id="t60" class="btn-time bg-slate-100 py-2 rounded-xl text-xs">60m</button>
-                <button onclick="setTime(120)" id="t120" class="btn-time bg-slate-100 py-2 rounded-xl text-xs">120m</button>
+                <button onclick="setTime(0.1, this)" class="btn-time bg-slate-100 py-2 rounded-xl text-xs">6s</button>
+                <button onclick="setTime(15, this)" class="btn-time bg-slate-100 py-2 rounded-xl text-xs">15m</button>
+                <button onclick="setTime(30, this)" class="btn-time bg-slate-100 py-2 rounded-xl text-xs selected">30m</button>
+                <button onclick="setTime(60, this)" class="btn-time bg-slate-100 py-2 rounded-xl text-xs">60m</button>
+                <button onclick="setTime(120, this)" class="btn-time bg-slate-100 py-2 rounded-xl text-xs">120m</button>
             </div>
 
-            <label class="block text-slate-500 font-bold text-xs uppercase tracking-widest mb-3">Elegí tu actividad</label>
             <div class="grid grid-cols-1 gap-2 mb-8">
-                <button onclick="setEx('Sentadillas')" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3" id="exSentadillas">
-                    <span>🦵</span> Sentadillas
-                </button>
-                <button onclick="setEx('Saltos')" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3" id="exSaltos">
-                    <span>🔥</span> Saltos
-                </button>
-                <button onclick="setEx('Caminar')" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3 selected" id="exCaminar">
-                    <span>🚶</span> Caminar
-                </button>
-                <button onclick="setEx('Estirar')" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3" id="exEstirar">
-                    <span>🙆‍♂️</span> Estirar
-                </button>
-                <button onclick="setEx('Respiración')" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3" id="exRespiración">
-                    <span>🫁</span> Respiración Guiada
-                </button>
+                <button onclick="setEx('Sentadillas', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3" id="default-ex"><span>🦵</span> Sentadillas</button>
+                <button onclick="setEx('Saltos', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3"><span>🔥</span> Saltos</button>
+                <button onclick="setEx('Caminar', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3"><span>🚶</span> Caminar</button>
+                <button onclick="setEx('Estirar', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3"><span>🙆‍♂️</span> Estirar</button>
+                <button onclick="setEx('Respiración', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3"><span>🫁</span> Respiración Guiada</button>
             </div>
 
-            <div id="status-text" class="text-center text-sm font-bold text-slate-400 mb-4 italic">Listo para empezar</div>
             <button id="main-btn" onclick="toggleApp()" class="w-full bg-indigo-600 text-white py-5 rounded-[2rem] font-black text-xl shadow-lg active:scale-95 transition-all">
                 ACTIVAR ALARMA
             </button>
         </div>
-    </div>
 
-    <div class="ad-slot max-w-md mx-auto">
-        <p>Publicidad Tandil Saludable</p>
-    </div>
-
-    <div id="cookie-banner" class="cookie-banner">
-        Usamos cookies para publicidad. <button onclick="closeCookies()" class="ml-4 bg-indigo-500 px-3 py-1 rounded font-bold">ACEPTAR</button>
+        <div class="ad-slot">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
     </div>
 
 <script>
-    let timer;
-    let selectedTime = 30;
-    let selectedEx = "Caminar";
+    let mainInterval;
+    let exInterval;
+    let selectedMinutes = 30;
+    let selectedExercise = "Sentadillas";
     let isRunning = false;
+    let timeLeft = 0;
 
-    function setTime(val) {
-        selectedTime = val;
+    function setTime(val, el) {
+        selectedMinutes = val;
         document.querySelectorAll('.btn-time').forEach(b => b.classList.remove('selected'));
-        event.target.classList.add('selected');
+        el.classList.add('selected');
+        updateDisplay(val * 60);
     }
 
-    function setEx(ex) {
-        selectedEx = ex;
+    function setEx(ex, el) {
+        selectedExercise = ex;
         document.querySelectorAll('.btn-exercise').forEach(b => b.classList.remove('selected'));
-        document.getElementById('ex' + ex).classList.add('selected');
+        el.classList.add('selected');
+    }
+
+    function updateDisplay(totalSecs) {
+        const m = Math.floor(totalSecs / 60);
+        const s = Math.floor(totalSecs % 60);
+        document.getElementById('main-timer').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     }
 
     function toggleApp() {
         const btn = document.getElementById('main-btn');
-        const status = document.getElementById('status-text');
-
         if (!isRunning) {
             isRunning = true;
-            btn.innerText = "DESACTIVAR";
+            btn.innerText = "DETENER";
             btn.classList.replace('bg-indigo-600', 'bg-red-500');
-            status.innerText = "Alarma cada " + (selectedTime < 1 ? "6 seg" : selectedTime + " min") + " para " + selectedEx;
-            
-            // Lógica de la alarma
-            const ms = selectedTime * 60 * 1000;
-            timer = setInterval(() => {
-                alert("¡HORA DE MOVERSE!\nActividad: " + selectedEx + " por 60 segundos.");
-            }, ms);
-            
-            if(selectedTime < 1) alert("Modo prueba de 6 segundos iniciado.");
-
+            startMainTimer();
         } else {
             isRunning = false;
-            clearInterval(timer);
+            clearInterval(mainInterval);
+            clearInterval(exInterval);
             btn.innerText = "ACTIVAR ALARMA";
             btn.classList.replace('bg-red-500', 'bg-indigo-600');
-            status.innerText = "Alarma detenida.";
+            document.getElementById('exercise-overlay').classList.add('hidden');
+            updateDisplay(selectedMinutes * 60);
         }
     }
 
-    function closeCookies() { document.getElementById('cookie-banner').style.display = 'none'; }
+    function startMainTimer() {
+        timeLeft = selectedMinutes * 60;
+        updateDisplay(timeLeft);
+        mainInterval = setInterval(() => {
+            timeLeft--;
+            updateDisplay(timeLeft);
+            if (timeLeft <= 0) {
+                clearInterval(mainInterval);
+                startExercise();
+            }
+        }, 1000);
+    }
+
+    function startExercise() {
+        const overlay = document.getElementById('exercise-overlay');
+        const exName = document.getElementById('ex-name-display');
+        const exTimer = document.getElementById('ex-timer');
+        let exTimeLeft = 60;
+
+        overlay.classList.remove('hidden');
+        exName.innerText = selectedExercise.toUpperCase();
+        
+        // Sonido de alerta
+        try { new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg').play(); } catch(e){}
+
+        exInterval = setInterval(() => {
+            exTimeLeft--;
+            exTimer.innerText = exTimeLeft;
+            if (exTimeLeft <= 0) {
+                clearInterval(exInterval);
+                overlay.classList.add('hidden');
+                startMainTimer(); // Reinicia el ciclo
+            }
+        }, 1000);
+    }
 </script>
 </body>
-</html>
+                    </html>
+                    
