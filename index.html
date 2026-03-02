@@ -3,140 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>A Moverse! | Alarma de Pausas Activas y Salud Laboral</title>
-
-    <meta name="description" content="Evita el sedentarismo con A Moverse!. Alarma inteligente de pausas activas para mejorar tu salud lumbar, circulación y productividad mientras trabajas.">
-
+    <title>A Moverse! | App de Pausas Activas</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5719496512652584" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-
     <style>
-        body { font-family: 'Inter', sans-serif; background: #f8fafc; touch-action: manipulation; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; }
         .card { background: white; border-radius: 2.5rem; padding: 2rem; border: 1px solid #e2e8f0; }
-        .btn-time, .btn-exercise { transition: all 0.2s; border: 2px solid transparent; cursor: pointer; }
         .selected { border-color: #4f46e5; background: #eef2ff; color: #4f46e5; font-weight: 800; transform: scale(1.02); }
-        
         .pulse-active { animation: pulse 2s infinite; }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(79, 70, 229, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
-        }
-
-        .ad-slot { background: #f1f5f9; border-radius: 1.5rem; text-align: center; color: #94a3b8; font-size: 10px; padding: 15px; min-height: 100px; margin: 20px 0; border: 1px dashed #cbd5e1; }
-        #main-timer { font-variant-numeric: tabular-nums; letter-spacing: -2px; }
-        
-        article h2 { color: #1e1b4b; font-weight: 900; margin-top: 2rem; margin-bottom: 1rem; text-transform: uppercase; font-size: 1.25rem; }
-        article p { color: #475569; margin-bottom: 1.25rem; line-height: 1.7; font-size: 0.95rem; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(79, 70, 229, 0); } 100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); } }
+        #install-banner { display: none; }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
     <div class="max-w-md mx-auto space-y-6">
+        
+        <div id="install-banner" class="bg-indigo-600 p-4 rounded-3xl text-white flex justify-between items-center shadow-xl animate-bounce">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">📱</span>
+                <div>
+                    <p class="text-[10px] font-black uppercase opacity-80">Lleva el control</p>
+                    <p class="text-xs font-bold">Instalar App en Inicio</p>
+                </div>
+            </div>
+            <button onclick="installApp()" class="bg-white text-indigo-600 px-4 py-2 rounded-xl text-[10px] font-black uppercase">Instalar</button>
+        </div>
+
         <header class="flex justify-between items-center px-2">
             <div>
                 <h1 class="text-3xl font-black italic text-indigo-600 tracking-tighter uppercase">A MOVERSE!</h1>
                 <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">Salud & Movimiento 2026</p>
             </div>
-            <span class="bg-indigo-600 text-white text-[10px] px-3 py-1 rounded-full font-black uppercase">v4.8 PRO</span>
+            <div class="bg-white px-3 py-1 rounded-2xl border flex items-center gap-2 shadow-sm">
+                <span class="text-xs">🏆</span>
+                <span id="streak-count" class="text-xs font-black text-slate-700">0</span>
+            </div>
         </header>
 
         <div class="card text-center relative overflow-hidden shadow-2xl border-none">
             <div id="exercise-overlay" class="hidden absolute inset-0 bg-indigo-600 text-white flex flex-col items-center justify-center z-20">
-                <p class="text-xs uppercase font-black mb-1 tracking-[0.3em] animate-pulse">¡Cuerpo en acción!</p>
+                <p class="text-xs uppercase font-black mb-1 tracking-[0.3em]">¡Dale!</p>
                 <h2 id="ex-name-display" class="text-4xl font-black mb-4 uppercase italic">SENTADILLAS</h2>
-                <div id="ex-timer" class="text-8xl font-black italic tabular-nums">60</div>
-                <p class="text-[10px] mt-4 opacity-70 font-bold uppercase tracking-widest">Sigue el ritmo</p>
+                <div id="ex-timer" class="text-8xl font-black italic">60</div>
             </div>
-
-            <p id="status-label" class="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px] mb-4">Próxima Pausa en</p>
+            <p class="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px] mb-4">Próxima Pausa</p>
             <div id="main-timer" class="text-8xl font-black text-slate-900 italic mb-4 tracking-tighter">30:00</div>
             <div id="activity-label" class="inline-block px-4 py-1 rounded-full bg-indigo-50 text-indigo-500 font-black text-[10px] uppercase tracking-widest">Listo para iniciar</div>
         </div>
 
-        <div class="card shadow-xl border-none space-y-8">
-            <div>
-                <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Intervalo de Alerta</label>
-                <div class="grid grid-cols-5 gap-2">
-                    <button onclick="setTime(0.1, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[10px] font-black">TEST</button>
-                    <button onclick="setTime(15, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[10px] font-black">15m</button>
-                    <button onclick="setTime(30, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[10px] font-black selected">30m</button>
-                    <button onclick="setTime(60, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[10px] font-black">60m</button>
-                    <button onclick="setTime(120, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[10px] font-black">120m</button>
-                </div>
+        <div class="card shadow-xl border-none space-y-6">
+            <div class="grid grid-cols-5 gap-2">
+                <button onclick="setTime(0.1, this)" class="bg-slate-100 py-3 rounded-xl text-[10px] font-black btn-time">TEST</button>
+                <button onclick="setTime(15, this)" class="bg-slate-100 py-3 rounded-xl text-[10px] font-black btn-time">15m</button>
+                <button onclick="setTime(30, this)" class="bg-slate-100 py-3 rounded-xl text-[10px] font-black btn-time selected">30m</button>
+                <button onclick="setTime(60, this)" class="bg-slate-100 py-3 rounded-xl text-[10px] font-black btn-time">60m</button>
+                <button onclick="setTime(120, this)" class="bg-slate-100 py-3 rounded-xl text-[10px] font-black btn-time">120m</button>
             </div>
 
-            <div>
-                <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Selecciona tu Actividad</label>
-                <div class="grid grid-cols-1 gap-3">
-                    <button onclick="setEx('Sentadillas', this)" class="btn-exercise p-4 bg-slate-50 rounded-[1.5rem] text-left flex items-center gap-4 selected" id="default-ex">
-                        <span class="text-2xl">🦵</span>
-                        <div><p class="font-black text-sm uppercase">Sentadillas</p><p class="text-[9px] text-slate-500 uppercase font-bold">Activa piernas y glúteos</p></div>
-                    </button>
-                    <button onclick="setEx('Saltos', this)" class="btn-exercise p-4 bg-slate-50 rounded-[1.5rem] text-left flex items-center gap-4">
-                        <span class="text-2xl">🔥</span>
-                        <div><p class="font-black text-sm uppercase">Saltos</p><p class="text-[9px] text-slate-500 uppercase font-bold">Cardio de alta intensidad</p></div>
-                    </button>
-                    <button onclick="setEx('Caminar', this)" class="btn-exercise p-4 bg-slate-50 rounded-[1.5rem] text-left flex items-center gap-4">
-                        <span class="text-2xl">🚶</span>
-                        <div><p class="font-black text-sm uppercase">Caminar</p><p class="text-[9px] text-slate-500 uppercase font-bold">Mejora la circulación venosa</p></div>
-                    </button>
-                    <button onclick="setEx('Estirar', this)" class="btn-exercise p-4 bg-slate-50 rounded-[1.5rem] text-left flex items-center gap-4">
-                        <span class="text-2xl">🙆‍♂️</span>
-                        <div><p class="font-black text-sm uppercase">Estirar</p><p class="text-[9px] text-slate-500 uppercase font-bold">Relaja cuello y espalda</p></div>
-                    </button>
-                    <button onclick="setEx('Respiración', this)" class="btn-exercise p-4 bg-slate-50 rounded-[1.5rem] text-left flex items-center gap-4">
-                        <span class="text-2xl">🫁</span>
-                        <div><p class="font-black text-sm uppercase">Respiración</p><p class="text-[9px] text-slate-500 uppercase font-bold">Oxigenación y calma mental</p></div>
-                    </button>
-                    <button onclick="setEx('Flexiones', this)" class="btn-exercise p-4 bg-slate-50 rounded-[1.5rem] text-left flex items-center gap-4">
-                        <span class="text-2xl">💪</span>
-                        <div><p class="font-black text-sm uppercase">Flexiones</p><p class="text-[9px] text-slate-500 uppercase font-bold">Fortalece tren superior</p></div>
-                    </button>
-                </div>
+            <div class="space-y-2">
+                <button onclick="setEx('Sentadillas', this)" class="w-full p-4 bg-slate-50 rounded-[1.5rem] text-left flex items-center gap-4 selected btn-exercise"><span>🦵</span> <p class="font-black text-xs uppercase">Sentadillas</p></button>
+                <button onclick="setEx('Saltos', this)" class="w-full p-4 bg-slate-50 rounded-[1.5rem] text-left flex items-center gap-4 btn-exercise"><span>🔥</span> <p class="font-black text-xs uppercase">Saltos</p></button>
+                <button onclick="setEx('Estirar', this)" class="w-full p-4 bg-slate-50 rounded-[1.5rem] text-left flex items-center gap-4 btn-exercise"><span>🙆‍♂️</span> <p class="font-black text-xs uppercase">Estirar</p></button>
+                <button onclick="setEx('Respiración', this)" class="w-full p-4 bg-slate-50 rounded-[1.5rem] text-left flex items-center gap-4 btn-exercise"><span>🫁</span> <p class="font-black text-xs uppercase">Respirar</p></button>
             </div>
 
-            <button id="main-btn" onclick="toggleApp()" class="w-full bg-indigo-600 text-white py-6 rounded-[2rem] font-black text-xl shadow-lg active:scale-95 transition-all uppercase italic tracking-tighter">
-                Activar Alarma
-            </button>
+            <button id="main-btn" onclick="toggleApp()" class="w-full bg-indigo-600 text-white py-6 rounded-[2rem] font-black text-xl shadow-lg uppercase italic">Activar Alarma</button>
         </div>
 
+        <a href="https://tandilprop.com" target="_blank" class="block card bg-emerald-50 border-emerald-100 p-4 text-center">
+            <p class="text-[9px] font-black text-emerald-600 uppercase tracking-widest mb-1">Ecosistema Saludable</p>
+            <p class="text-xs font-bold text-emerald-800">Encontrá parques y sendas en el mapa de TandilProp 🗺️</p>
+        </a>
+
         <div class="ad-slot">
-            <p class="text-[8px] mb-2 font-black opacity-50 uppercase tracking-[0.3em]">Publicidad Sugerida</p>
             <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
-        <article class="card border-none bg-indigo-900 text-white shadow-2xl">
-            <h2 class="text-white">La Ciencia de las Pausas Activas</h2>
-            <p class="text-indigo-200 text-sm">El sedentarismo prolongado apaga el metabolismo. Solo 60 segundos de actividad intensa pueden revertir los efectos negativos de estar sentado.</p>
-            
-            <div class="space-y-6">
-                <div class="border-l-4 border-emerald-400 pl-4">
-                    <h3 class="font-black text-emerald-400 uppercase text-xs mb-1">Beneficios Inmediatos</h3>
-                    <p class="text-[13px] text-indigo-100 opacity-80 italic">Reducción del estrés, mejora del flujo sanguíneo y prevención de dolores crónicos.</p>
-                </div>
-                <div class="border-l-4 border-emerald-400 pl-4">
-                    <h3 class="font-black text-emerald-400 uppercase text-xs mb-1">Productividad</h3>
-                    <p class="text-[13px] text-indigo-100 opacity-80 italic">Un cerebro oxigenado rinde un 40% más en tareas creativas y de análisis.</p>
-                </div>
-            </div>
+        <article class="card bg-indigo-900 text-white border-none">
+            <h2 class="text-lg font-black uppercase mb-4">¿Sabías que?</h2>
+            <p class="text-sm opacity-80 italic">Interrumpir el sedentarismo cada 30 minutos reduce el riesgo de diabetes en un 25%.</p>
         </article>
 
         <footer class="text-center py-10 opacity-30 text-[9px] font-black uppercase tracking-widest space-y-2">
             <p>&copy; 2026 A Moverse! - UrbanGrowth Health</p>
-            <p>Salud Laboral y Bienestar Digital</p>
         </footer>
     </div>
 
 <script>
-    let mainInterval, exInterval, selectedMinutes = 30, selectedExercise = "Sentadillas", isRunning = false, timeLeft = 0;
+    let mainInterval, exInterval, selectedMinutes = 30, selectedExercise = "Sentadillas", isRunning = false, timeLeft = 0, streaks = 0;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     const synth = window.speechSynthesis;
+
+    // LÓGICA DE INSTALACIÓN
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        document.getElementById('install-banner').style.display = 'flex';
+    });
+
+    function installApp() {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => {
+            document.getElementById('install-banner').style.display = 'none';
+            deferredPrompt = null;
+        });
+    }
 
     function setTime(val, el) {
         if(isRunning) return;
@@ -157,18 +133,6 @@
         document.getElementById('main-timer').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     }
 
-    function playBeep(freq = 440, duration = 0.5) {
-        try {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
-            osc.connect(gain); gain.connect(audioCtx.destination);
-            osc.frequency.value = freq;
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-            osc.start(); osc.stop(audioCtx.currentTime + duration);
-        } catch(e) {}
-    }
-
     function speak(texto) {
         if (!texto) return;
         synth.cancel();
@@ -178,22 +142,16 @@
     }
 
     function toggleApp() {
-        const btn = document.getElementById('main-btn'), activity = document.getElementById('activity-label'), timerCard = document.querySelector('.card');
+        const btn = document.getElementById('main-btn'), timerCard = document.querySelector('.card');
         if (!isRunning) {
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            speak("Iniciando monitorización"); 
-            isRunning = true;
-            btn.innerText = "DETENER";
-            btn.classList.replace('bg-indigo-600', 'bg-red-500');
-            activity.innerText = "En curso...";
+            speak("Iniciando"); isRunning = true;
+            btn.innerText = "DETENER"; btn.classList.replace('bg-indigo-600', 'bg-red-500');
             timerCard.classList.add('pulse-active');
             startMainTimer();
         } else {
-            isRunning = false;
-            clearInterval(mainInterval); clearInterval(exInterval); synth.cancel();
-            btn.innerText = "ACTIVAR ALARMA";
-            btn.classList.replace('bg-red-500', 'bg-indigo-600');
-            activity.innerText = "Detenido";
+            isRunning = false; clearInterval(mainInterval); clearInterval(exInterval);
+            btn.innerText = "ACTIVAR ALARMA"; btn.classList.replace('bg-red-500', 'bg-indigo-600');
             timerCard.classList.remove('pulse-active');
             document.getElementById('exercise-overlay').classList.add('hidden');
             updateDisplay(selectedMinutes * 60);
@@ -211,25 +169,25 @@
     }
 
     function startExercise() {
-        const overlay = document.getElementById('exercise-overlay'), exName = document.getElementById('ex-name-display'), exTimer = document.getElementById('ex-timer');
+        const overlay = document.getElementById('exercise-overlay'), exTimer = document.getElementById('ex-timer');
         let exTimeLeft = 60;
         overlay.classList.remove('hidden');
-        exName.innerText = selectedExercise.toUpperCase();
-        playBeep(880, 0.8);
-        setTimeout(() => { speak("Tiempo cumplido. Haz " + selectedExercise); }, 300);
-        if (navigator.vibrate) navigator.vibrate([500, 200, 500]);
+        document.getElementById('ex-name-display').innerText = selectedExercise.toUpperCase();
+        speak("Hora de " + selectedExercise);
+        
         exInterval = setInterval(() => {
             exTimeLeft--;
             exTimer.innerText = exTimeLeft;
-            if(exTimeLeft === 3) speak("Tres, dos, uno");
             if (exTimeLeft <= 0) {
                 clearInterval(exInterval);
                 overlay.classList.add('hidden');
-                speak("Listo, buen trabajo.");
+                streaks++; // SUMAR LOGRO
+                document.getElementById('streak-count').innerText = streaks;
+                speak("Excelente. Pausa completada.");
                 startMainTimer(); 
             }
         }, 1000);
     }
 </script>
 </body>
-</html>
+            </html>
