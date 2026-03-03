@@ -3,104 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>A Moverse! | Pausas Activas y Salud Laboral</title>
+    <title>A Moverse! | Salud Laboral y Pausas Activas</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background: #f8fafc; touch-action: manipulation; color: #1e293b; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; scroll-behavior: smooth; }
         .card { background: white; border-radius: 2.5rem; padding: 2rem; border: 1px solid #f1f5f9; }
         .btn-time, .btn-exercise { transition: all 0.2s; border: 2px solid transparent; cursor: pointer; }
         .selected { border-color: #4f46e5; background: #eef2ff !important; color: #4f46e5; font-weight: 800; transform: scale(1.01); }
         .bg-app-gradient { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
         #main-timer { font-variant-numeric: tabular-nums; letter-spacing: -3px; }
-        .content-text h2 { font-weight: 900; text-transform: uppercase; font-size: 1.1rem; color: #1e1b4b; margin-top: 1.5rem; margin-bottom: 0.5rem; }
-        .content-text p { font-size: 0.9rem; line-height: 1.6; color: #475569; margin-bottom: 1rem; }
         .pulse-active { animation: pulse 2s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(79, 70, 229, 0); } 100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); } }
+        .section-title { font-weight: 900; text-transform: uppercase; font-size: 0.75rem; color: #6366f1; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="bg-slate-50">
 
-    <div class="max-w-md mx-auto space-y-6">
-        
-        <header class="flex justify-between items-center px-2">
-            <div>
-                <h1 class="text-3xl font-black italic text-indigo-600 tracking-tighter uppercase leading-none">A MOVERSE!</h1>
-                <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">Health & Movement 2026</p>
+    <nav class="sticky top-0 z-[100] bg-white/80 backdrop-blur-md border-b border-slate-100 px-4 py-3">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <div class="flex flex-col leading-none">
+                <span class="text-xl font-black italic text-indigo-600 tracking-tighter uppercase">A MOVERSE!</span>
+                <span class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Urban Health 2026</span>
             </div>
-            <div class="bg-white px-4 py-2 rounded-2xl border border-slate-100 flex items-center gap-2 shadow-sm">
-                <span class="text-xs">🏆</span>
-                <span id="streak-count" class="text-xs font-black text-slate-700">0</span>
-            </div>
-        </header>
-
-        <div id="timer-card" class="card text-center relative overflow-hidden shadow-2xl transition-all">
-            <div id="exercise-overlay" class="hidden absolute inset-0 bg-app-gradient text-white flex flex-col items-center justify-center z-20">
-                <p class="text-xs uppercase font-black mb-1 tracking-[0.3em] animate-pulse text-indigo-200">¡Momento de Acción!</p>
-                <h2 id="ex-name-display" class="text-4xl font-black mb-4 uppercase italic">SENTADILLAS</h2>
-                <div id="ex-timer" class="text-8xl font-black italic">60</div>
-            </div>
-            <p class="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px] mb-2">Próxima Alerta</p>
-            <div id="main-timer" class="text-8xl font-black text-slate-900 italic mb-4">30:00</div>
-            <div class="inline-block px-4 py-1 rounded-full bg-indigo-50 text-indigo-500 font-black text-[9px] uppercase tracking-widest">Sincronizado</div>
+            <a href="#app-section" class="bg-indigo-600 text-white px-5 py-2 rounded-full font-bold text-xs uppercase tracking-tight shadow-md active:scale-95 transition-all">Ir a la App</a>
         </div>
+    </nav>
 
-        <div class="card shadow-xl space-y-8 border-none">
-            <div class="grid grid-cols-5 gap-2">
-                <button onclick="setTime(0.1, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[9px] font-black uppercase">Test</button>
-                <button onclick="setTime(15, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[9px] font-black uppercase">15m</button>
-                <button onclick="setTime(30, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[9px] font-black uppercase selected">30m</button>
-                <button onclick="setTime(60, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[9px] font-black uppercase">60m</button>
-                <button onclick="setTime(120, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[9px] font-black uppercase">2h</button>
+    <main class="max-w-4xl mx-auto p-4 md:p-8 space-y-12">
+
+        <section id="app-section" class="max-w-md mx-auto space-y-6 pt-6">
+            <header class="flex justify-between items-center px-2">
+                <p class="text-[10px] font-black text-slate-500 uppercase">Panel de Control</p>
+                <div class="flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-slate-100 text-[10px] font-black">
+                    🏆 <span id="streak-count">0</span> PAUSAS
+                </div>
+            </header>
+
+            <div id="timer-card" class="card text-center relative overflow-hidden shadow-2xl transition-all">
+                <div id="exercise-overlay" class="hidden absolute inset-0 bg-app-gradient text-white flex flex-col items-center justify-center z-20">
+                    <p class="text-xs uppercase font-black mb-1 tracking-[0.3em] animate-pulse">¡A Moverse!</p>
+                    <h2 id="ex-name-display" class="text-4xl font-black mb-4 uppercase italic">SENTADILLAS</h2>
+                    <div id="ex-timer" class="text-8xl font-black italic">60</div>
+                </div>
+                <p class="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px] mb-2">Próximo Aviso</p>
+                <div id="main-timer" class="text-7xl md:text-8xl font-black text-slate-900 italic mb-4">30:00</div>
+                <div class="inline-block px-4 py-1 rounded-full bg-indigo-50 text-indigo-500 font-black text-[9px] uppercase tracking-widest">Monitor Activo</div>
             </div>
 
-            <div class="grid grid-cols-1 gap-2">
-                <button onclick="setEx('Sentadillas', this)" class="btn-exercise p-4 bg-slate-50 rounded-2xl text-left flex items-center gap-4 selected">
-                    <span class="text-2xl">🦵</span>
-                    <div><p class="font-black text-[11px] uppercase">Sentadillas</p><p class="text-[8px] text-slate-400 font-bold uppercase">Metabolismo</p></div>
-                </button>
-                <button onclick="setEx('Saltos', this)" class="btn-exercise p-4 bg-slate-50 rounded-2xl text-left flex items-center gap-4">
-                    <span class="text-2xl">🔥</span>
-                    <div><p class="font-black text-[11px] uppercase">Saltos</p><p class="text-[8px] text-slate-400 font-bold uppercase">Cardio</p></div>
-                </button>
-                <button onclick="setEx('Estirar', this)" class="btn-exercise p-4 bg-slate-50 rounded-2xl text-left flex items-center gap-4">
-                    <span class="text-2xl">🙆‍♂️</span>
-                    <div><p class="font-black text-[11px] uppercase">Estirar</p><p class="text-[8px] text-slate-400 font-bold uppercase">Tensión</p></div>
-                </button>
-                <button onclick="setEx('Flexiones', this)" class="btn-exercise p-4 bg-slate-50 rounded-2xl text-left flex items-center gap-4">
-                    <span class="text-2xl">💪</span>
-                    <div><p class="font-black text-[11px] uppercase">Flexiones</p><p class="text-[8px] text-slate-400 font-bold uppercase">Fuerza</p></div>
-                </button>
-                <button onclick="setEx('Caminar', this)" class="btn-exercise p-4 bg-slate-50 rounded-2xl text-left flex items-center gap-4">
-                    <span class="text-2xl">🚶</span>
-                    <div><p class="font-black text-[11px] uppercase">Caminar</p><p class="text-[8px] text-slate-400 font-bold uppercase">Circulación</p></div>
-                </button>
-                <button onclick="setEx('Respiración', this)" class="btn-exercise p-4 bg-slate-50 rounded-2xl text-left flex items-center gap-4">
-                    <span class="text-2xl">🫁</span>
-                    <div><p class="font-black text-[11px] uppercase">Respiración</p><p class="text-[8px] text-slate-400 font-bold uppercase">Foco</p></div>
-                </button>
+            <div class="card shadow-xl space-y-6 border-none">
+                <div class="grid grid-cols-5 gap-2">
+                    <button onclick="setTime(0.1, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[9px] font-black uppercase">Test</button>
+                    <button onclick="setTime(15, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[9px] font-black uppercase">15m</button>
+                    <button onclick="setTime(30, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[9px] font-black uppercase selected">30m</button>
+                    <button onclick="setTime(60, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[9px] font-black uppercase">60m</button>
+                    <button onclick="setTime(120, this)" class="btn-time bg-slate-100 py-3 rounded-xl text-[9px] font-black uppercase">2h</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    <button onclick="setEx('Sentadillas', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3 selected">
+                        <span class="text-xl">🦵</span> <p class="font-black text-[10px] uppercase">Sentadillas</p>
+                    </button>
+                    <button onclick="setEx('Estirar', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3">
+                        <span class="text-xl">🙆‍♂️</span> <p class="font-black text-[10px] uppercase">Estirar</p>
+                    </button>
+                    <button onclick="setEx('Saltos', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3">
+                        <span class="text-xl">🔥</span> <p class="font-black text-[10px] uppercase">Saltos</p>
+                    </button>
+                    <button onclick="setEx('Caminar', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-3">
+                        <span class="text-xl">🚶</span> <p class="font-black text-[10px] uppercase">Caminar</p>
+                    </button>
+                </div>
+                <button id="main-btn" onclick="toggleApp()" class="w-full bg-indigo-600 text-white py-5 rounded-[2rem] font-black text-xl shadow-lg active:scale-95 transition-all uppercase italic">Activar Monitor</button>
             </div>
+        </section>
 
-            <button id="main-btn" onclick="toggleApp()" class="w-full bg-indigo-600 text-white py-6 rounded-[2rem] font-black text-xl shadow-lg active:scale-95 transition-all uppercase italic">Activar Monitor</button>
-        </div>
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10">
+            <div class="space-y-4">
+                <p class="section-title">¿Qué es A Moverse!?</p>
+                <h2 class="text-3xl font-black text-slate-900 leading-tight">Tu aliado contra el sedentarismo laboral.</h2>
+                <p class="text-slate-600 text-sm leading-relaxed">Nuestra plataforma utiliza intervalos de tiempo científicamente probados para recordarte romper la postura estática, mejorando tu circulación y claridad mental en solo 60 segundos.</p>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-indigo-50 p-6 rounded-3xl text-center">
+                    <p class="text-2xl mb-1">🧠</p>
+                    <p class="text-[10px] font-black uppercase">+ Foco</p>
+                </div>
+                <div class="bg-emerald-50 p-6 rounded-3xl text-center">
+                    <p class="text-2xl mb-1">💪</p>
+                    <p class="text-[10px] font-black uppercase">+ Energía</p>
+                </div>
+            </div>
+        </section>
 
-        <article class="card border-none bg-slate-50 content-text">
-            <h2>¿Por qué elegir A Moverse!?</h2>
-            <p>El sedentarismo es el nuevo tabaquismo. Pasar horas frente a la pantalla sin movimiento afecta tu postura y energía. <strong>A Moverse!</strong> es una herramienta diseñada para profesionales que buscan equilibrio entre productividad y salud.</p>
+        <section class="space-y-6">
+            <p class="section-title">Artículos y Salud</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all">
+                    <p class="text-[9px] font-bold text-indigo-500 mb-2 uppercase">Postura</p>
+                    <h3 class="font-black text-sm mb-3">5 Estiramientos para el dolor lumbar</h3>
+                    <p class="text-xs text-slate-500 mb-4 line-clamp-3">El dolor de espalda es la principal causa de ausentismo. Aprendé cómo prevenirlo con estos movimientos...</p>
+                    <a href="#" class="text-[10px] font-black uppercase text-indigo-600">Leer más →</a>
+                </div>
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all">
+                    <p class="text-[9px] font-bold text-emerald-500 mb-2 uppercase">Metabolismo</p>
+                    <h3 class="font-black text-sm mb-3">La ciencia de los 60 segundos</h3>
+                    <p class="text-xs text-slate-500 mb-4 line-clamp-3">Por qué un minuto de ejercicio intenso es suficiente para resetear tu metabolismo basal durante el trabajo.</p>
+                    <a href="#" class="text-[10px] font-black uppercase text-indigo-600">Leer más →</a>
+                </div>
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all">
+                    <p class="text-[9px] font-bold text-orange-500 mb-2 uppercase">Productividad</p>
+                    <h3 class="font-black text-sm mb-3">Pausas Activas vs Pausas de Café</h3>
+                    <p class="text-xs text-slate-500 mb-4 line-clamp-3">Descubrí por qué el movimiento supera a la cafeína cuando se trata de mantener la alerta cognitiva larga distancia.</p>
+                    <a href="#" class="text-[10px] font-black uppercase text-indigo-600">Leer más →</a>
+                </div>
+            </div>
+        </section>
 
-            <h2>Pausas Activas: Ciencia en Movimiento</h2>
-            <p>Realizar 60 segundos de <strong>Sentadillas</strong> o <strong>Estiramientos</strong> rompe el ciclo de fatiga mental. Los beneficios incluyen:</p>
-            <ul class="text-[0.8rem] text-slate-600 space-y-2 mb-4 list-disc pl-5 font-bold uppercase tracking-tight">
-                <li>Eliminación de dolor cervical.</li>
-                <li>Activación del retorno venoso.</li>
-                <li>Incremento de la oxigenación cerebral.</li>
-            </ul>
-        </article>
-
-        <footer class="text-center py-10 opacity-30 text-[9px] font-black uppercase tracking-widest">
-            <p>&copy; 2026 AMOVERSE.NET - Urban Growth Health</p>
+        <footer class="border-t border-slate-200 pt-10 pb-20 text-center space-y-4">
+            <div class="flex justify-center gap-6 text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+                <a href="#">Términos</a>
+                <a href="#">Privacidad</a>
+                <a href="#">Contacto</a>
+            </div>
+            <p class="text-[9px] font-medium text-slate-300 uppercase tracking-[0.3em]">&copy; 2026 AMOVERSE.NET - Urban Growth Health</p>
         </footer>
-    </div>
+
+    </main>
 
 <script>
     let mainInterval, exInterval, selectedMinutes = 30, selectedExercise = "Sentadillas", isRunning = false, timeLeft = 0, streaks = 0;
@@ -133,16 +161,16 @@
         const m = Math.floor(secs / 60), s = Math.floor(secs % 60);
         const format = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
         document.getElementById('main-timer').innerText = format;
-        document.title = isRunning ? `(${format}) A Moverse!` : "A Moverse! | Salud";
+        document.title = isRunning ? `(${format}) A Moverse!` : "A Moverse! | Salud Laboral";
     }
 
     function toggleApp() {
         const btn = document.getElementById('main-btn'), card = document.getElementById('timer-card');
         if (!isRunning) {
             isRunning = true;
-            btn.innerText = "DETENER MONITOR"; btn.classList.replace('bg-indigo-600', 'bg-red-500');
+            btn.innerText = "DETENER"; btn.classList.replace('bg-indigo-600', 'bg-red-500');
             card.classList.add('pulse-active');
-            speak("Monitor activado");
+            speak("Monitor iniciado");
             startMainTimer();
         } else {
             isRunning = false;
@@ -169,7 +197,7 @@
         let exTimeLeft = 60;
         overlay.classList.remove('hidden');
         document.getElementById('ex-name-display').innerText = selectedExercise.toUpperCase();
-        speak("Es momento de " + selectedExercise);
+        speak("Momento de " + selectedExercise);
         
         exInterval = setInterval(() => {
             exTimeLeft--;
@@ -180,7 +208,7 @@
                 streaks++;
                 localStorage.setItem('amov_st', streaks);
                 document.getElementById('streak-count').innerText = streaks;
-                speak("¡Logrado!");
+                speak("¡Excelente trabajo!");
                 startMainTimer();
             }
         }, 1000);
@@ -194,4 +222,5 @@
     }
 </script>
 </body>
-</html>
+    </html>
+    
