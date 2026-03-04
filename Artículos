@@ -1,0 +1,32 @@
+hidratacion-rendimiento.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidratación y Rendimiento Cognitivo | A Moverse!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white text-slate-800 font-['Inter'] leading-relaxed">
+    <nav class="p-6 border-b border-slate-100 flex justify-between items-center">
+        <a href="../index.html" class="text-xl font-black italic text-indigo-600 uppercase">A MOVERSE!</a>
+        <a href="../index.html" class="text-[10px] font-black uppercase tracking-widest text-slate-400">← Volver al Monitor</a>
+    </nav>
+    <article class="max-w-3xl mx-auto py-20 px-6">
+        <span class="text-indigo-600 font-black text-[10px] uppercase tracking-[0.3em]">Salud Metabólica</span>
+        <h1 class="text-4xl md:text-6xl font-black italic uppercase tracking-tighter my-6 leading-none text-slate-900">Hidratación: El combustible invisible del enfoque.</h1>
+        <p class="text-xl text-slate-500 mb-10 font-medium italic">¿Por qué el cerebro pierde capacidad de procesamiento ante una deshidratación del solo 2%?</p>
+        
+        <div class="space-y-6 text-lg text-slate-600">
+            <p>La hidratación no es solo una cuestión de sed; es una variable crítica en la <strong>neurotransmisión</strong>. El tejido cerebral está compuesto por un 75% de agua. Cuando los niveles de fluidos descienden, el volumen cerebral disminuye ligeramente, lo que genera una presión mecánica que se traduce en dolores de cabeza y pérdida de concentración.</p>
+            <h2 class="text-2xl font-black text-slate-900 pt-6 italic uppercase">La barrera hematoencefálica</h2>
+            <p>Un estado de hidratación óptimo facilita el transporte de nutrientes esenciales a través de la barrera hematoencefálica. Sin suficiente agua, la eliminación de toxinas metabólicas resultantes del esfuerzo mental se ralentiza, provocando la famosa "niebla mental" (brain fog).</p>
+            <p>En <strong>A Moverse!</strong>, recomendamos aprovechar cada pausa activa de 60 segundos no solo para mover el cuerpo, sino para ingerir al menos 200ml de agua mineralizada, optimizando así la sinapsis neuronal para el siguiente bloque de trabajo profundo.</p>
+        </div>
+    </article>
+    <footer class="bg-slate-50 py-10 text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+        &copy; 2026 AMOVERSE.NET - Tandil, Argentina
+    </footer>
+</body>
+</html>
