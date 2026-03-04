@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>A Moverse! | Guía Integral de Pausas Activas y Salud Laboral</title>
-    <meta name="description" content="Portal especializado en ergonomía y prevención del sedentarismo. Monitor de pausas activas con fundamentos en medicina del deporte.">
-    
+    <title>A Moverse! | Monitor de Pausas Activas y Salud Laboral</title>
+    <meta name="description" content="Portal de ergonomía y salud laboral. Monitor de pausas activas para combatir el sedentarismo con base científica.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    
     <style>
         body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1e293b; scroll-behavior: smooth; }
         .card-app { background: white; border-radius: 3rem; border: 1px solid #f1f5f9; box-shadow: 0 40px 80px -15px rgba(0,0,0,0.08); }
@@ -31,7 +28,7 @@
             <div class="hidden md:flex gap-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
                 <a href="#monitor" class="hover:text-indigo-600">Alarma</a>
                 <a href="#biblioteca" class="hover:text-indigo-600">Ciencia</a>
-                <a href="#ejercicios" class="hover:text-indigo-600">Guía Técnica</a>
+                <a href="#ejercicios" class="hover:text-indigo-600">Ejercicios</a>
             </div>
             <button onclick="unlockVoice()" class="bg-indigo-600 text-white px-5 py-2 rounded-full text-[9px] font-black uppercase shadow-md">Activar Audio</button>
         </div>
@@ -39,10 +36,10 @@
 
     <header class="pt-40 pb-16 max-w-4xl mx-auto px-6 text-center">
         <h1 class="text-5xl md:text-7xl font-black tracking-tighter text-slate-900 leading-[0.9] italic uppercase mb-6">
-            Optimización Biomecánica <br><span class="text-indigo-600">para el Trabajo Remoto.</span>
+            Salud Biomecánica <br><span class="text-indigo-600">en el Trabajo.</span>
         </h1>
         <p class="text-lg text-slate-500 font-medium max-w-2xl mx-auto italic leading-relaxed">
-            Un ecosistema de salud digital diseñado para mitigar los riesgos del sedentarismo crónico y potenciar el rendimiento neurocognitivo.
+            Mitigá los riesgos del sedentarismo crónico con pausas activas científicamente diseñadas.
         </p>
     </header>
 
@@ -50,19 +47,19 @@
         <div class="max-w-xl mx-auto">
             <div id="timer-card" class="card-app p-8 md:p-14 relative overflow-hidden">
                 <div id="exercise-overlay" class="hidden absolute inset-0 bg-overlay text-white flex flex-col items-center justify-center z-50 p-10">
-                    <p class="text-[11px] font-black uppercase tracking-[0.5em] mb-4 animate-pulse">Activación en Progreso</p>
+                    <p class="text-[11px] font-black uppercase tracking-[0.5em] mb-4 animate-pulse">Pausa Activa</p>
                     <h2 id="ex-name-display" class="text-5xl font-black italic uppercase text-center mb-10 leading-none">SENTADILLAS</h2>
                     <div id="ex-timer" class="text-9xl font-black italic">60</div>
                 </div>
 
                 <div class="text-center space-y-10">
                     <div>
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-2">Próximo Reset</p>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-2">Próximo Aviso</p>
                         <div id="main-timer" class="text-8xl md:text-9xl font-black text-slate-900 italic leading-none">30:00</div>
                     </div>
 
                     <div class="space-y-4">
-                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest text-center">Configuración de Tiempo</p>
+                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest text-center">Frecuencia</p>
                         <div class="grid grid-cols-4 gap-2" id="time-grid">
                             <button onclick="setTime(15, this)" class="btn-select bg-white py-4 rounded-2xl text-[10px] font-black uppercase">15m</button>
                             <button onclick="setTime(30, this)" class="btn-select bg-white py-4 rounded-2xl text-[10px] font-black uppercase selected">30m</button>
@@ -72,16 +69,16 @@
                     </div>
 
                     <div class="space-y-4">
-                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest text-center">Selección de Actividad</p>
+                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest text-center">Ejercicio</p>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-2" id="ex-grid">
                             <button onclick="setEx('Sentadillas', this)" class="btn-select bg-white p-4 rounded-2xl flex flex-col items-center gap-1 selected">
-                                <span class="text-xl">🦵</span> <span class="font-black text-[9px] uppercase">Sentadillas</span>
+                                <span class="text-xl">🦵</span> <span class="font-black text-[9px] uppercase">Piernas</span>
                             </button>
                             <button onclick="setEx('Respiración', this)" class="btn-select bg-white p-4 rounded-2xl flex flex-col items-center gap-1">
                                 <span class="text-xl">🫁</span> <span class="font-black text-[9px] uppercase">Respirar</span>
                             </button>
                             <button onclick="setEx('Estirar', this)" class="btn-select bg-white p-4 rounded-2xl flex flex-col items-center gap-1">
-                                <span class="text-xl">🙆‍♂️</span> <span class="font-black text-[9px] uppercase">Estirar</span>
+                                <span class="text-xl">🙆‍♂️</span> <span class="font-black text-[9px] uppercase">Espalda</span>
                             </button>
                             <button onclick="setEx('Saltos', this)" class="btn-select bg-white p-4 rounded-2xl flex flex-col items-center gap-1">
                                 <span class="text-xl">🔥</span> <span class="font-black text-[9px] uppercase">Saltos</span>
@@ -90,7 +87,7 @@
                                 <span class="text-xl">💪</span> <span class="font-black text-[9px] uppercase">Brazos</span>
                             </button>
                             <button onclick="setEx('Caminar', this)" class="btn-select bg-white p-4 rounded-2xl flex flex-col items-center gap-1">
-                                <span class="text-xl">🚶</span> <span class="font-black text-[9px] uppercase">Caminar</span>
+                                <span class="text-xl">🚶</span> <span class="font-black text-[9px] uppercase">Pasos</span>
                             </button>
                         </div>
                     </div>
@@ -104,138 +101,48 @@
     <section id="biblioteca" class="py-32 max-w-6xl mx-auto px-6">
         <div class="text-center mb-20 space-y-4">
             <h2 class="text-4xl md:text-5xl font-black uppercase italic tracking-tighter text-slate-900">Fundamentos Técnicos</h2>
-            <p class="text-slate-500 font-medium">Investigación aplicada a la salud en entornos de oficina y teletrabajo.</p>
+            <p class="text-slate-500 font-medium italic underline decoration-indigo-200">Educación para un entorno laboral saludable.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div class="article-card prose-text">
-                <h3>01. El Efecto de la Termogénesis (NEAT)</h3>
-                <p>La inactividad prolongada reduce drásticamente el <strong>NEAT (Non-Exercise Activity Thermogenesis)</strong>, que representa el gasto calórico no asociado al deporte. Al utilizar el monitor de A Moverse!, el usuario reactiva su metabolismo basal cada 30 minutos. Esta interrupción del sedentarismo es crucial para prevenir la resistencia a la insulina.</p>
-                <p class="mt-4 italic">Descubre más sobre cómo la <a href="articulos/hidratacion-rendimiento.html" class="text-indigo-600 font-bold underline">hidratación potencia estos procesos metabólicos</a>.</p>
+                <h3>01. Termogénesis (NEAT)</h3>
+                <p>Reactivar el metabolismo cada 30 minutos es crucial para prevenir la resistencia a la insulina y mejorar la oxidación de grasas.</p>
+                <p class="mt-4 italic"><a href="hidratacion-rendimiento.html" class="text-indigo-600 font-bold underline">Leer sobre Hidratación Metabólica →</a></p>
             </div>
 
             <div class="article-card prose-text">
-                <h3>02. Neuroplasticidad y Foco Cognitivo</h3>
-                <p>El cerebro humano funciona en ciclos denominados <strong>Ritmos Ultradianos</strong>. Mantener la atención en una pantalla por más de 90 minutos genera fatiga sináptica. Las micro-pausas que proponemos actúan como un "reset" neuroquímico estimulando la secreción de <em>irisin</em> y <em>BDNF</em>.</p>
-                <p class="mt-4 italic">Conoce la <a href="articulos/postura-y-vision.html" class="text-indigo-600 font-bold underline">relación entre tu visión y tu postura</a> para evitar la fatiga sináptica.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="ejercicios" class="py-32 bg-slate-900 text-white px-6">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-black uppercase italic tracking-tighter mb-16 border-l-8 border-indigo-600 pl-6 text-indigo-400">Guía Técnica de Ejecución</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div class="space-y-4">
-                    <h4 class="font-black text-xl uppercase italic text-white">Sentadillas Funcionales</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Ejecución enfocada en la activación de la cadena posterior. Los glúteos actúan como bombas musculares para el sistema circulatorio, enviando sangre oxigenada al cerebro.</p>
-                </div>
-                <div class="space-y-4">
-                    <h4 class="font-black text-xl uppercase italic text-white">Respiración Diafragmática</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Técnica 4-7-8 para modular el sistema nervioso autónomo. Baja la frecuencia cardíaca y reduce la tensión del músculo trapecio.</p>
-                </div>
-                <div class="space-y-4">
-                    <h4 class="font-black text-xl uppercase italic text-white">Extensión Escapular</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Fundamental para revertir la rotación interna de hombros. Previene el dolor cervical crónico y mejora la capacidad pulmonar total.</p>
-                </div>
+                <h3>02. Foco y Neuroplasticidad</h3>
+                <p>El movimiento rítmico estimula la secreción de proteínas protectoras neuronales, optimizando el enfoque sostenido.</p>
+                <p class="mt-4 italic"><a href="postura-y-vision.html" class="text-indigo-600 font-bold underline">Leer sobre Postura y Visión →</a></p>
             </div>
         </div>
     </section>
 
     <footer class="py-20 text-center border-t border-slate-100 bg-white">
         <div class="max-w-4xl mx-auto space-y-10 px-6">
-            <div class="flex flex-wrap justify-center gap-8 md:gap-12 text-[10px] font-black uppercase tracking-widest text-slate-400">
-                <a href="articulos/hidratacion-rendimiento.html" class="hover:text-indigo-600 transition-all">Hidratación</a>
-                <a href="articulos/postura-y-vision.html" class="hover:text-indigo-600 transition-all">Postura & Visión</a>
+            <div class="flex flex-wrap justify-center gap-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <a href="hidratacion-rendimiento.html" class="hover:text-indigo-600 transition-all">Hidratación</a>
+                <a href="postura-y-vision.html" class="hover:text-indigo-600 transition-all">Postura & Visión</a>
                 <a href="privacidad.html" class="hover:text-indigo-600">Privacidad</a>
                 <a href="terminos.html" class="hover:text-indigo-600">Términos</a>
                 <a href="mailto:hola@amoverse.net" class="hover:text-indigo-600">Contacto</a>
             </div>
-            <p class="text-[9px] font-bold text-slate-300 uppercase tracking-[0.5em] italic">A MOVERSE! Portal de Salud Laboral &copy; 2026 - Tandil, Argentina</p>
+            <p class="text-[9px] font-bold text-slate-300 uppercase tracking-[0.5em] italic">A MOVERSE! &copy; 2026</p>
         </div>
     </footer>
 
     <script>
         let mainInterval, exInterval, selectedMinutes = 30, selectedExercise = "Sentadillas", isRunning = false, timeLeft = 0;
         const synth = window.speechSynthesis;
-
-        function unlockVoice() {
-            const u = new SpeechSynthesisUtterance("Monitor listo. Seleccioná tu tiempo y comenzá.");
-            u.lang = 'es-ES';
-            synth.speak(u);
-        }
-
-        function setTime(val, el) {
-            if(isRunning) return;
-            selectedMinutes = val;
-            document.querySelectorAll('#time-grid .btn-select').forEach(b => b.classList.remove('selected'));
-            el.classList.add('selected');
-            updateDisplay(val * 60);
-        }
-
-        function setEx(ex, el) {
-            if(isRunning) return;
-            selectedExercise = ex;
-            document.querySelectorAll('#ex-grid .btn-select').forEach(b => b.classList.remove('selected'));
-            el.classList.add('selected');
-        }
-
-        function updateDisplay(secs) {
-            const m = Math.floor(secs / 60), s = Math.floor(secs % 60);
-            document.getElementById('main-timer').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-        }
-
-        function toggleApp() {
-            const btn = document.getElementById('main-btn');
-            if (!isRunning) {
-                isRunning = true;
-                btn.innerText = "DESACTIVAR"; btn.classList.replace('bg-indigo-600', 'bg-red-500');
-                speak("Monitor activado. Podés volver a tus tareas.");
-                startMainTimer();
-            } else {
-                isRunning = false;
-                clearInterval(mainInterval); clearInterval(exInterval);
-                btn.innerText = "ACTIVAR MONITOR"; btn.classList.replace('bg-red-500', 'bg-indigo-600');
-                document.getElementById('exercise-overlay').classList.add('hidden');
-                updateDisplay(selectedMinutes * 60);
-            }
-        }
-
-        function startMainTimer() {
-            timeLeft = Math.round(selectedMinutes * 60);
-            updateDisplay(timeLeft);
-            mainInterval = setInterval(() => {
-                timeLeft--;
-                if (timeLeft <= 0) { clearInterval(mainInterval); startExercise(); }
-                else { updateDisplay(timeLeft); }
-            }, 1000);
-        }
-
-        function startExercise() {
-            const overlay = document.getElementById('exercise-overlay');
-            let exTimeLeft = 60;
-            overlay.classList.remove('hidden');
-            document.getElementById('ex-name-display').innerText = selectedExercise.toUpperCase();
-            speak("Momento de " + selectedExercise + ". Activá tu cuerpo.");
-            exInterval = setInterval(() => {
-                exTimeLeft--;
-                document.getElementById('ex-timer').innerText = exTimeLeft;
-                if (exTimeLeft <= 0) {
-                    clearInterval(exInterval);
-                    overlay.classList.add('hidden');
-                    speak("Listo. Volvemos al trabajo.");
-                    startMainTimer();
-                }
-            }, 1000);
-        }
-
-        function speak(t) {
-            synth.cancel();
-            const u = new SpeechSynthesisUtterance(t);
-            u.lang = 'es-ES';
-            synth.speak(u);
-        }
+        function unlockVoice() { synth.speak(new SpeechSynthesisUtterance("Audio activado.")); }
+        function setTime(val, el) { if(isRunning) return; selectedMinutes = val; document.querySelectorAll('#time-grid .btn-select').forEach(b => b.classList.remove('selected')); el.classList.add('selected'); updateDisplay(val * 60); }
+        function setEx(ex, el) { if(isRunning) return; selectedExercise = ex; document.querySelectorAll('#ex-grid .btn-select').forEach(b => b.classList.remove('selected')); el.classList.add('selected'); }
+        function updateDisplay(secs) { const m = Math.floor(secs / 60), s = Math.floor(secs % 60); document.getElementById('main-timer').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`; }
+        function toggleApp() { const btn = document.getElementById('main-btn'); if (!isRunning) { isRunning = true; btn.innerText = "DETENER"; btn.classList.replace('bg-indigo-600', 'bg-red-500'); startMainTimer(); } else { isRunning = false; clearInterval(mainInterval); clearInterval(exInterval); btn.innerText = "ACTIVAR MONITOR"; btn.classList.replace('bg-red-500', 'bg-indigo-600'); document.getElementById('exercise-overlay').classList.add('hidden'); updateDisplay(selectedMinutes * 60); } }
+        function startMainTimer() { timeLeft = Math.round(selectedMinutes * 60); updateDisplay(timeLeft); mainInterval = setInterval(() => { timeLeft--; if (timeLeft <= 0) { clearInterval(mainInterval); startExercise(); } else { updateDisplay(timeLeft); } }, 1000); }
+        function startExercise() { const overlay = document.getElementById('exercise-overlay'); let exTimeLeft = 60; overlay.classList.remove('hidden'); document.getElementById('ex-name-display').innerText = selectedExercise.toUpperCase(); speak("Momento de " + selectedExercise); exInterval = setInterval(() => { exTimeLeft--; document.getElementById('ex-timer').innerText = exTimeLeft; if (exTimeLeft <= 0) { clearInterval(exInterval); overlay.classList.add('hidden'); startMainTimer(); } }, 1000); }
+        function speak(t) { synth.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = 'es-ES'; synth.speak(u); }
     </script>
 </body>
-    </html>
+                        </html>
