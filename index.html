@@ -3,175 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>A Moverse! | Pausas Activas Inteligentes</title>
+    <title>A Moverse! | Tu Monitor de Pausas Activas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1e293b; scroll-behavior: smooth; }
-        .card { background: white; border-radius: 2rem; padding: 2rem; border: 1px solid #f1f5f9; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); }
-        .btn-time, .btn-exercise { transition: all 0.2s; border: 2px solid transparent; cursor: pointer; }
-        .selected { border-color: #4f46e5; background: #eef2ff !important; color: #4f46e5; font-weight: 800; transform: scale(1.02); }
-        .bg-app-gradient { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
-        #main-timer { font-variant-numeric: tabular-nums; letter-spacing: -3px; }
-        .step-card { min-width: 280px; scroll-snap-align: center; }
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200; backdrop-blur: 10px; padding: 1.5rem; align-items: center; justify-content: center; }
-        .modal.active { display: flex; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-blur: 12px; border: 1px solid rgba(255, 255, 255, 0.3); }
+        .card-app { border-radius: 2.5rem; box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.1); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .btn-select { transition: all 0.2s; border: 2px solid #f1f5f9; }
+        .selected { border-color: #6366f1; background: #6366f1 !important; color: white !important; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3); }
+        .bg-gradient-active { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); }
+        #main-timer { font-variant-numeric: tabular-nums; letter-spacing: -2px; }
+        .pulse-active { animation: pulse-shadow 2s infinite; }
+        @keyframes pulse-shadow { 0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(99, 102, 241, 0); } 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); } }
+        ::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body>
+<body class="selection:bg-indigo-100 selection:text-indigo-900">
 
-    <nav class="sticky top-0 z-[100] bg-white/90 backdrop-blur-md border-b border-slate-100 px-6 py-4">
+    <nav class="fixed top-0 w-full z-[100] glass border-b border-slate-100 px-6 py-4">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <span class="text-2xl font-black italic text-indigo-600 tracking-tighter uppercase">A MOVERSE!</span>
-            <div class="hidden md:flex gap-8 text-[11px] font-black uppercase tracking-widest text-slate-400">
-                <a href="#pasos" class="hover:text-indigo-600">Cómo funciona</a>
-                <a href="#biblioteca" class="hover:text-indigo-600">Ciencia</a>
-                <a href="#app-section" class="hover:text-indigo-600">Alarma</a>
+            <div class="flex items-center gap-2">
+                <div class="w-3 h-3 bg-indigo-600 rounded-full"></div>
+                <span class="text-xl font-black italic text-slate-900 tracking-tighter uppercase">A MOVERSE!</span>
             </div>
-            <a href="#app-section" class="bg-indigo-600 text-white px-6 py-2 rounded-full font-black text-[10px] uppercase shadow-lg hover:bg-indigo-700 transition-all">Probar Alarma</a>
+            <a href="#app-section" class="bg-indigo-600 text-white px-5 py-2 rounded-full font-bold text-[10px] uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-lg">Abrir Alarma</a>
         </div>
     </nav>
 
-    <header class="pt-20 pb-16 px-6 text-center max-w-4xl mx-auto space-y-6">
-        <h1 class="text-5xl md:text-7xl font-black tracking-tighter text-slate-900 leading-none uppercase italic">
-            Transformá tu jornada con <span class="text-indigo-600">pausas activas.</span>
-        </h1>
-        <p class="text-lg text-slate-500 font-medium max-w-2xl mx-auto">
-            Una herramienta simple para combatir el sedentarismo, recuperar tu postura y resetear tu mente en solo 60 segundos.
-        </p>
-        <div class="pt-4">
-            <a href="#pasos" class="inline-block bg-slate-900 text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-xs hover:scale-105 transition-all">Descubrir más</a>
+    <header class="pt-32 pb-20 px-6 text-center max-w-4xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-black uppercase mb-6 tracking-widest">
+            ✨ Bienestar Digital en un clic
         </div>
+        <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-slate-900 leading-[0.85] italic uppercase mb-8">
+            Tu cuerpo <br><span class="text-indigo-600">pide acción.</span>
+        </h1>
+        <p class="text-lg text-slate-500 font-medium max-w-xl mx-auto leading-relaxed">
+            La herramienta más simple para hackear el sedentarismo. Configurá tu monitor y recuperá tu vitalidad mientras trabajás.
+        </p>
     </header>
 
-    <section id="pasos" class="py-20 bg-slate-50">
+    <section class="py-10 bg-white overflow-hidden">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-center text-xs font-black uppercase tracking-[0.4em] text-indigo-500 mb-12">Tres pasos hacia el bienestar</h2>
-            <div class="flex overflow-x-auto gap-6 pb-8 snap-x no-scrollbar md:justify-center">
-                
-                <div class="step-card card border-t-4 border-indigo-500 flex-1">
-                    <span class="text-3xl font-black text-indigo-100">01</span>
-                    <h3 class="text-xl font-black uppercase italic mt-2">Configurá</h3>
-                    <p class="text-sm text-slate-500 mt-4 leading-relaxed">Elegí cada cuánto querés que suene tu alarma. Recomendamos 30 o 60 minutos para mantener el metabolismo activo.</p>
+            <div class="flex overflow-x-auto gap-4 snap-x no-scrollbar">
+                <div class="min-w-[300px] snap-center bg-slate-50 p-8 rounded-[2.5rem] space-y-4">
+                    <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-2xl shadow-sm">⚙️</div>
+                    <h3 class="font-black uppercase italic text-slate-900">1. Ajustá</h3>
+                    <p class="text-sm text-slate-500">Definí el tiempo de tu próximo bloque de trabajo. El monitor se encarga del resto.</p>
                 </div>
-
-                <div class="step-card card border-t-4 border-emerald-500 flex-1">
-                    <span class="text-3xl font-black text-emerald-100">02</span>
-                    <h3 class="text-xl font-black uppercase italic mt-2">Elegí</h3>
-                    <p class="text-sm text-slate-500 mt-4 leading-relaxed">Sentadillas, estiramientos o respiración. Cada ejercicio está pensado para una necesidad específica del cuerpo.</p>
+                <div class="min-w-[300px] snap-center bg-slate-50 p-8 rounded-[2.5rem] space-y-4">
+                    <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-2xl shadow-sm">🏃</div>
+                    <h3 class="font-black uppercase italic text-slate-900">2. Mové</h3>
+                    <p class="text-sm text-slate-500">Cuando la alarma suene, realizá el ejercicio guiado durante 60 segundos.</p>
                 </div>
-
-                <div class="step-card card border-t-4 border-orange-500 flex-1">
-                    <span class="text-3xl font-black text-orange-100">03</span>
-                    <h3 class="text-xl font-black uppercase italic mt-2">Accioná</h3>
-                    <p class="text-sm text-slate-500 mt-4 leading-relaxed">Cuando suene la alarma, tomate 60 segundos. Es un compromiso con tu salud a largo plazo.</p>
+                <div class="min-w-[300px] snap-center bg-slate-50 p-8 rounded-[2.5rem] space-y-4">
+                    <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-2xl shadow-sm">🔋</div>
+                    <h3 class="font-black uppercase italic text-slate-900">3. Recargá</h3>
+                    <p class="text-sm text-slate-500">Sentí la oxigenación cerebral y volvé a tus tareas con energía renovada.</p>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <section id="app-section" class="py-24 px-6">
-        <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            
-            <div class="space-y-6">
-                <h2 class="text-4xl font-black uppercase italic tracking-tighter">Tu Monitor de <span class="text-indigo-600">Actividad.</span></h2>
-                <p class="text-slate-500">Dejá esta pestaña abierta mientras trabajás. Nosotros nos encargamos de avisarte cuándo es momento de levantarte de la silla.</p>
+    <section id="app-section" class="py-24 px-6 flex flex-col items-center">
+        <div class="w-full max-w-sm">
+            <div id="timer-card" class="card-app bg-white p-8 space-y-8 relative overflow-hidden border border-slate-100">
                 
-                <div class="bg-indigo-50 p-6 rounded-3xl space-y-4 border border-indigo-100">
-                    <h4 class="font-black text-[10px] uppercase text-indigo-600 tracking-widest">Beneficios de la alarma</h4>
-                    <ul class="text-xs font-bold text-indigo-900 space-y-2">
-                        <li>• Reduce la fatiga visual</li>
-                        <li>• Activa la circulación de las piernas</li>
-                        <li>• Reduce el cortisol (estrés)</li>
-                    </ul>
+                <div id="exercise-overlay" class="hidden absolute inset-0 bg-gradient-active text-white flex flex-col items-center justify-center z-50 p-8">
+                    <p class="text-[10px] font-black uppercase tracking-[0.4em] mb-2 animate-pulse">¡En Movimiento!</p>
+                    <h2 id="ex-name-display" class="text-4xl font-black italic uppercase leading-none mb-6">SENTADILLAS</h2>
+                    <div id="ex-timer" class="text-9xl font-black italic">60</div>
                 </div>
-            </div>
 
-            <div class="max-w-sm mx-auto w-full">
-                <div id="timer-card" class="card relative overflow-hidden border-2 border-slate-100">
-                    <div id="exercise-overlay" class="hidden absolute inset-0 bg-app-gradient text-white flex flex-col items-center justify-center z-20 p-8 text-center">
-                        <p class="text-[10px] uppercase font-black mb-1 tracking-[0.4em] animate-pulse">¡A Moverse!</p>
-                        <h2 id="ex-name-display" class="text-3xl font-black mb-4 uppercase italic">SENTADILLAS</h2>
-                        <div id="ex-timer" class="text-8xl font-black italic">60</div>
+                <div class="text-center space-y-6">
+                    <div>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-1">Cuenta Regresiva</p>
+                        <div id="main-timer" class="text-8xl font-black text-slate-900 italic leading-none">30:00</div>
                     </div>
 
-                    <div class="text-center space-y-6">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Próxima Alarma</p>
-                        <div id="main-timer" class="text-7xl font-black text-slate-900 italic">30:00</div>
-                        
-                        <div class="grid grid-cols-4 gap-1">
-                            <button onclick="setTime(15, this)" class="btn-time bg-slate-50 py-3 rounded-xl text-[9px] font-black uppercase">15m</button>
-                            <button onclick="setTime(30, this)" class="btn-time bg-slate-50 py-3 rounded-xl text-[9px] font-black uppercase selected">30m</button>
-                            <button onclick="setTime(60, this)" class="btn-time bg-slate-50 py-3 rounded-xl text-[9px] font-black uppercase">60m</button>
-                            <button onclick="setTime(0.1, this)" class="btn-time bg-indigo-50 text-indigo-600 py-3 rounded-xl text-[9px] font-black uppercase">Test</button>
+                    <div class="space-y-4">
+                        <p class="text-[9px] font-black text-indigo-600 uppercase tracking-widest text-left ml-1">Intervalo de trabajo</p>
+                        <div class="grid grid-cols-4 gap-2">
+                            <button onclick="setTime(15, this)" class="btn-select bg-slate-50 py-3 rounded-2xl text-[10px] font-bold">15m</button>
+                            <button onclick="setTime(30, this)" class="btn-select bg-slate-50 py-3 rounded-2xl text-[10px] font-bold selected">30m</button>
+                            <button onclick="setTime(60, this)" class="btn-select bg-slate-50 py-3 rounded-2xl text-[10px] font-bold">60m</button>
+                            <button onclick="setTime(0.1, this)" class="btn-select bg-indigo-50 text-indigo-600 py-3 rounded-2xl text-[10px] font-bold italic">TEST</button>
                         </div>
+                    </div>
 
+                    <div class="space-y-4">
+                        <p class="text-[9px] font-black text-indigo-600 uppercase tracking-widest text-left ml-1">Tipo de actividad</p>
                         <div class="grid grid-cols-2 gap-2">
-                            <button onclick="setEx('Sentadillas', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-2 selected">
-                                <span>🦵</span> <span class="font-black text-[9px] uppercase">Sentadillas</span>
+                            <button onclick="setEx('Sentadillas', this)" class="btn-select bg-slate-50 p-4 rounded-2xl text-left flex items-center gap-3 selected">
+                                <span class="text-xl">🦵</span> <span class="font-black text-[9px] uppercase">Sentadillas</span>
                             </button>
-                            <button onclick="setEx('Respiración', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-2">
-                                <span>🫁</span> <span class="font-black text-[9px] uppercase">Respirar</span>
+                            <button onclick="setEx('Respiración', this)" class="btn-select bg-slate-50 p-4 rounded-2xl text-left flex items-center gap-3">
+                                <span class="text-xl">🫁</span> <span class="font-black text-[9px] uppercase">Respirar</span>
                             </button>
-                            <button onclick="setEx('Estirar', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-2">
-                                <span>🙆‍♂️</span> <span class="font-black text-[9px] uppercase">Estirar</span>
+                            <button onclick="setEx('Estirar', this)" class="btn-select bg-slate-50 p-4 rounded-2xl text-left flex items-center gap-3">
+                                <span class="text-xl">🙆‍♂️</span> <span class="font-black text-[9px] uppercase">Estirar</span>
                             </button>
-                            <button onclick="setEx('Flexiones', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-2">
-                                <span>💪</span> <span class="font-black text-[9px] uppercase">Flexiones</span>
+                            <button onclick="setEx('Caminar', this)" class="btn-select bg-slate-50 p-4 rounded-2xl text-left flex items-center gap-3">
+                                <span class="text-xl">🚶</span> <span class="font-black text-[9px] uppercase">Caminar</span>
                             </button>
                         </div>
-
-                        <button id="main-btn" onclick="toggleApp()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black text-sm shadow-xl active:scale-95 transition-all uppercase italic">Activar Alarma</button>
                     </div>
+
+                    <button id="main-btn" onclick="toggleApp()" class="w-full bg-indigo-600 text-white py-5 rounded-[2rem] font-black text-sm shadow-xl hover:bg-indigo-700 active:scale-95 transition-all uppercase italic tracking-[0.2em]">Activar Alarma</button>
                 </div>
             </div>
-
+            <p class="mt-6 text-center text-[10px] text-slate-400 font-medium">⚠️ No cierres esta pestaña para que el monitor funcione correctamente.</p>
         </div>
     </section>
 
     <section id="biblioteca" class="py-24 bg-slate-900 text-white px-6">
         <div class="max-w-4xl mx-auto space-y-12">
-            <h2 class="text-3xl md:text-5xl font-black uppercase italic tracking-tighter text-center">Por qué es <span class="text-indigo-400">vital</span> moverse</h2>
-            
+            <h2 class="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-center">Datos que <span class="text-indigo-400 underline">importan.</span></h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="space-y-4 p-8 border border-slate-800 rounded-3xl">
-                    <h4 class="text-xl font-black uppercase italic">El Corazón y la Silla</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Estar sentado colapsa el flujo sanguíneo en las extremidades. Solo 60 segundos de actividad intensa reactivan las válvulas venosas y oxigenan todo el sistema.</p>
+                <div class="p-8 bg-slate-800/50 rounded-[2.5rem] border border-slate-700">
+                    <h4 class="text-xl font-black uppercase italic mb-4">Metabolismo en Pausa</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">Pasar 60 minutos sentado reduce la circulación sanguínea en las piernas un 50%. Levantarte solo 1 minuto revierte este efecto instantáneamente.</p>
                 </div>
-                <div class="space-y-4 p-8 border border-slate-800 rounded-3xl">
-                    <h4 class="text-xl font-black uppercase italic">Mente en Blanco</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">El cerebro consume el 20% de tu oxígeno. La pausa activa corta el ciclo de fatiga mental y te devuelve la claridad para resolver problemas complejos.</p>
+                <div class="p-8 bg-slate-800/50 rounded-[2.5rem] border border-slate-700">
+                    <h4 class="text-xl font-black uppercase italic mb-4">El Foco de 2026</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">El cerebro no puede mantener el enfoque profundo por más de 90 minutos. Las micro-pausas activas resetean la dopamina y eliminan la fatiga mental.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-16 text-center border-t border-slate-100">
-        <div class="flex justify-center gap-8 mb-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
-            <a href="privacidad.html" class="hover:text-indigo-600">Privacidad</a>
-            <a href="terminos.html" class="hover:text-indigo-600">Términos</a>
-            <a href="mailto:hola@amoverse.net" class="hover:text-indigo-600">Contacto</a>
+    <footer class="py-16 text-center">
+        <div class="flex justify-center gap-8 mb-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
+            <a href="privacidad.html" class="hover:text-indigo-600 transition-colors">Privacidad</a>
+            <a href="terminos.html" class="hover:text-indigo-600 transition-colors">Términos</a>
+            <a href="mailto:hola@amoverse.net" class="hover:text-indigo-600 transition-colors">Contacto</a>
         </div>
-        <p class="text-[9px] font-bold text-slate-300 uppercase tracking-[0.5em]">&copy; 2026 AMOVERSE.NET</p>
+        <p class="text-[9px] font-bold text-slate-300 uppercase tracking-[0.4em]">&copy; 2026 AMOVERSE.NET</p>
     </footer>
 
     <script>
         let mainInterval, exInterval, selectedMinutes = 30, selectedExercise = "Sentadillas", isRunning = false, timeLeft = 0;
         const synth = window.speechSynthesis;
 
+        // Desbloquear audio en browsers modernos
+        function unlockAudio() {
+            const u = new SpeechSynthesisUtterance("");
+            synth.speak(u);
+        }
+
         function setTime(val, el) {
             if(isRunning) return;
+            unlockAudio();
             selectedMinutes = val;
-            document.querySelectorAll('.btn-time').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('.btn-select').forEach(b => b.classList.remove('selected'));
             el.classList.add('selected');
             updateDisplay(val * 60);
         }
 
         function setEx(ex, el) {
             if(isRunning) return;
+            unlockAudio();
             selectedExercise = ex;
-            document.querySelectorAll('.btn-exercise').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('.btn-select').forEach(b => b.classList.remove('selected'));
             el.classList.add('selected');
         }
 
@@ -181,16 +174,18 @@
         }
 
         function toggleApp() {
-            const btn = document.getElementById('main-btn');
+            const btn = document.getElementById('main-btn'), card = document.getElementById('timer-card');
             if (!isRunning) {
                 isRunning = true;
                 btn.innerText = "DESACTIVAR ALARMA"; btn.classList.replace('bg-indigo-600', 'bg-red-500');
-                speak("Alarma activada.");
+                card.classList.add('pulse-active');
+                speak("Alarma configurada. Podés volver a tu trabajo.");
                 startMainTimer();
             } else {
                 isRunning = false;
                 clearInterval(mainInterval); clearInterval(exInterval);
                 btn.innerText = "ACTIVAR ALARMA"; btn.classList.replace('bg-red-500', 'bg-indigo-600');
+                card.classList.remove('pulse-active');
                 document.getElementById('exercise-overlay').classList.add('hidden');
                 updateDisplay(selectedMinutes * 60);
             }
@@ -211,20 +206,26 @@
             let exTimeLeft = 60;
             overlay.classList.remove('hidden');
             document.getElementById('ex-name-display').innerText = selectedExercise.toUpperCase();
-            speak("Momento de " + selectedExercise);
+            speak("Momento de " + selectedExercise + ". Conectá con tu cuerpo por un minuto.");
             exInterval = setInterval(() => {
                 exTimeLeft--;
                 document.getElementById('ex-timer').innerText = exTimeLeft;
                 if (exTimeLeft <= 0) {
                     clearInterval(exInterval);
                     overlay.classList.add('hidden');
-                    speak("Listo, a trabajar.");
+                    speak("Excelente trabajo. Regresamos al monitor.");
                     startMainTimer();
                 }
             }, 1000);
         }
 
-        function speak(t) { synth.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = 'es-ES'; synth.speak(u); }
+        function speak(t) {
+            synth.cancel();
+            const u = new SpeechSynthesisUtterance(t);
+            u.lang = 'es-ES';
+            u.rate = 0.9;
+            synth.speak(u);
+        }
     </script>
 </body>
-    </html>
+</html>
