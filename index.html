@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
     <title>A Moverse! | Monitor de Salud Laboral y Pausas Activas</title>
+    <meta name="description" content="Monitor inteligente de pausas activas para combatir el sedentarismo laboral. Basado en medicina del deporte y ergonomía cognitiva.">
+    <meta name="keywords" content="pausas activas, salud laboral, ejercicios oficina, sedentarismo, ergonomía, pomodoro salud">
+    
+    <meta property="og:title" content="A Moverse! | Monitor de Salud Laboral">
+    <meta property="og:description" content="Combatí el sedentarismo con micro-pausas científicas. Optimizá tu enfoque y bienestar.">
+    <meta property="og:url" content="https://amoverse.net">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://amoverse.net/og-image.jpg"> <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
     <style>
         body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1e293b; scroll-behavior: smooth; }
         .card-app { background: white; border-radius: 3rem; border: 1px solid #f1f5f9; box-shadow: 0 40px 80px -15px rgba(0,0,0,0.08); }
@@ -13,7 +24,7 @@
         .selected { border-color: #4f46e5; background: #4f46e5 !important; color: white !important; transform: scale(1.05); }
         #main-timer { font-variant-numeric: tabular-nums; letter-spacing: -3px; }
         .bg-overlay { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
-        .article-card { background: #f8fafc; border-radius: 2rem; padding: 2.5rem; border: 1px solid #f1f5f9; transition: all 0.3s ease; }
+        .article-card { background: #f8fafc; border-radius: 2.5rem; padding: 2.5rem; border: 1px solid #f1f5f9; transition: all 0.3s ease; }
         .article-card:hover { border-color: #4f46e5; background: #ffffff; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05); }
         @keyframes pulse-white { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
         .animate-pulse-soft { animation: pulse-white 2s infinite; }
@@ -25,42 +36,42 @@
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex flex-col">
                 <span class="text-2xl font-black italic text-indigo-600 tracking-tighter uppercase leading-none">A MOVERSE!</span>
-                <span id="status-tag" class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Sincronizado</span>
+                <span id="status-tag" class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Status: Online</span>
             </div>
             <div class="hidden md:flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
-                <a href="#monitor" class="hover:text-indigo-600">Alarma</a>
-                <a href="#articulos" class="hover:text-indigo-600">Ciencia</a>
+                <a href="#monitor" class="hover:text-indigo-600 transition-colors">Monitor</a>
+                <a href="#articulos" class="hover:text-indigo-600 transition-colors">Ciencia</a>
             </div>
-            <button onclick="unlockVoice()" class="bg-slate-100 text-slate-600 px-4 py-2 rounded-full text-[9px] font-black uppercase tracking-tighter hover:bg-slate-200 transition-all">🔊 Test Audio</button>
+            <button onclick="unlockVoice()" class="bg-indigo-50 text-indigo-600 px-4 py-2 rounded-full text-[9px] font-black uppercase tracking-tighter hover:bg-indigo-100 transition-all">🔊 Test Audio</button>
         </div>
     </nav>
 
-    <header class="pt-40 pb-20 max-w-5xl mx-auto px-6 text-center">
-        <div class="inline-block px-4 py-1.5 bg-indigo-50 rounded-full text-indigo-600 text-[10px] font-black uppercase tracking-widest mb-6">
-            🚀 Optimizá tu jornada laboral
+    <header class="pt-48 pb-24 max-w-5xl mx-auto px-6 text-center">
+        <div class="inline-block px-4 py-1.5 bg-indigo-50 rounded-full text-indigo-600 text-[10px] font-black uppercase tracking-widest mb-8">
+            ⚡️ Optimizá tu Bienestar Laboral
         </div>
-        <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-slate-900 leading-[0.85] italic uppercase mb-8">
+        <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-slate-900 leading-[0.85] italic uppercase mb-10">
             El cuerpo <br><span class="text-indigo-600">pide acción.</span>
         </h1>
         <p class="text-xl text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed italic">
-            "La mejor postura es la siguiente postura". Recuperá tu vitalidad con micro-pausas científicas.
+            "La mejor postura es la siguiente postura". Recuperá tu vitalidad con micro-pausas científicas y reset cognitivo.
         </p>
     </header>
 
-    <section id="monitor" class="py-20 bg-slate-50 border-y border-slate-100 px-6">
+    <section id="monitor" class="py-24 bg-slate-50 border-y border-slate-100 px-6">
         <div class="max-w-xl mx-auto">
-            <div id="timer-card" class="card-app p-8 md:p-14 space-y-10 relative overflow-hidden">
+            <div id="timer-card" class="card-app p-8 md:p-14 space-y-12 relative overflow-hidden">
                 
                 <div id="exercise-overlay" class="hidden absolute inset-0 bg-overlay text-white flex flex-col items-center justify-center z-50 p-10">
-                    <p class="text-[12px] font-black uppercase tracking-[0.5em] mb-4 animate-pulse-soft">¡En Movimiento!</p>
+                    <p class="text-[12px] font-black uppercase tracking-[0.5em] mb-4 animate-pulse-soft">¡Fase de Activación!</p>
                     <h2 id="ex-name-display" class="text-5xl md:text-6xl font-black italic uppercase text-center mb-10 leading-none drop-shadow-lg">SENTADILLAS</h2>
                     <div id="ex-timer" class="text-9xl font-black italic tracking-tighter drop-shadow-md">60</div>
-                    <p class="mt-8 text-[10px] font-bold uppercase tracking-widest opacity-80 italic">Sentí el flujo de energía</p>
+                    <p class="mt-8 text-[10px] font-bold uppercase tracking-widest opacity-80 italic">Sentí el flujo de energía en tu cuerpo</p>
                 </div>
 
-                <div class="text-center space-y-10">
+                <div class="text-center space-y-12">
                     <div>
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-3">Cuenta Regresiva</p>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-3">Próxima Alarma</p>
                         <div id="main-timer" class="text-8xl md:text-9xl font-black text-slate-900 italic leading-none">30:00</div>
                     </div>
 
@@ -75,7 +86,7 @@
                     </div>
 
                     <div class="space-y-4">
-                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest">Tipo de Activación</p>
+                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest">Tipo de Movimiento</p>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-2" id="ex-grid">
                             <button onclick="setEx('Sentadillas', this)" class="btn-select bg-white p-4 rounded-2xl flex flex-col items-center gap-1 selected">
                                 <span class="text-xl">🦵</span> <span class="font-black text-[9px] uppercase">Piernas</span>
@@ -98,54 +109,54 @@
                         </div>
                     </div>
 
-                    <button id="main-btn" onclick="toggleApp()" class="w-full bg-indigo-600 text-white py-6 rounded-3xl font-black text-sm shadow-2xl hover:bg-indigo-700 active:scale-95 transition-all uppercase italic tracking-[0.2em]">Iniciar Monitor</button>
+                    <button id="main-btn" onclick="toggleApp()" class="w-full bg-indigo-600 text-white py-7 rounded-[2.5rem] font-black text-sm shadow-2xl hover:bg-indigo-700 active:scale-95 transition-all uppercase italic tracking-[0.2em]">Iniciar Monitor</button>
                 </div>
             </div>
-            <p class="mt-8 text-center text-[10px] text-slate-400 font-bold uppercase tracking-[0.3em]">Mantené esta ventana activa para asegurar la precisión</p>
+            <p class="mt-8 text-center text-[10px] text-slate-400 font-bold uppercase tracking-[0.3em]">Mantené esta ventana activa para asegurar la precisión del sensor</p>
         </div>
     </section>
 
     <section id="articulos" class="py-32 max-w-6xl mx-auto px-6">
-        <div class="text-center mb-20">
-            <h2 class="text-4xl font-black uppercase italic tracking-tighter text-slate-900 mb-4">Ciencia Aplicada al Movimiento</h2>
-            <div class="h-1.5 w-24 bg-indigo-600 mx-auto rounded-full"></div>
+        <div class="text-center mb-24">
+            <h2 class="text-4xl font-black uppercase italic tracking-tighter text-slate-900 mb-6">Ciencia del Bienestar Digital</h2>
+            <div class="h-2 w-24 bg-indigo-600 mx-auto rounded-full"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
             <article class="article-card">
-                <h3 class="text-2xl font-black uppercase italic text-slate-900 mb-4">Por qué 30 minutos es el límite real</h3>
+                <h3 class="text-2xl font-black uppercase italic text-slate-900 mb-5 leading-tight">Homeostasis y el límite de los 30 minutos</h3>
                 <p class="text-sm text-slate-600 leading-relaxed mb-6 italic">
-                    La medicina deportiva ha identificado que tras 30 minutos de inactividad, los procesos de transporte de glucosa se ralentizan. Una pausa activa de 60 segundos reactiva la GLUT4, permitiendo que tu cuerpo procese mejor la energía y evitá picos de fatiga mental.
+                    La fisiología moderna indica que la inactividad prolongada altera la homeostasis metabólica. Al realizar pausas cada 30 minutos, reactivamos la lipoproteína lipasa y la traslocación de GLUT4, procesos esenciales para prevenir la fatiga crónica y mantener niveles óptimos de glucosa en sangre durante el trabajo intelectual.
                 </p>
-                <span class="text-[10px] font-black text-indigo-600 uppercase tracking-widest">Metabolismo • 4 min</span>
+                <span class="text-[10px] font-black text-indigo-600 uppercase tracking-widest bg-white px-4 py-2 rounded-full border border-indigo-100">Fisiología Humana • 4 min</span>
             </article>
 
             <article class="article-card">
-                <h3 class="text-2xl font-black uppercase italic text-slate-900 mb-4">Salud Ocular y Productividad</h3>
+                <h3 class="text-2xl font-black uppercase italic text-slate-900 mb-5 leading-tight">Ergonomía Ocular en Entornos de Alta Demanda</h3>
                 <p class="text-sm text-slate-600 leading-relaxed mb-6 italic">
-                    La fijación prolongada en el monitor reduce drásticamente el parpadeo. Al usar nuestro sistema por voz, podés cerrar los ojos durante el ejercicio, permitiendo la re-hidratación de la córnea y descansando el músculo ciliar.
+                    El uso de pantallas digitales reduce el parpadeo reflejo, provocando el Síndrome Visual Informático. El monitor A Moverse! utiliza alertas de audio para permitir que el usuario desvíe la vista del monitor y aplique la regla 20-20-20, lubricando la córnea y relajando el músculo ciliar para una visión nítida y duradera.
                 </p>
-                <span class="text-[10px] font-black text-indigo-600 uppercase tracking-widest">Ergonomía • 2 min</span>
+                <span class="text-[10px] font-black text-indigo-600 uppercase tracking-widest bg-white px-4 py-2 rounded-full border border-indigo-100">Salud Ocular • 3 min</span>
             </article>
 
             <article class="article-card md:col-span-2">
-                <h3 class="text-2xl font-black uppercase italic text-slate-900 mb-4">Ergonomía Cognitiva: Moverse para pensar mejor</h3>
-                <p class="text-sm text-slate-600 leading-relaxed italic">
-                    El cerebro humano no es una máquina de estado constante. Al cambiar de postura y aumentar el flujo sanguíneo mediante estiramientos, liberamos endorfinas que rompen el bloqueo creativo. No es solo ejercicio físico; es una herramienta de ingeniería mental para quienes trabajan con su intelecto en entornos digitales.
+                <h3 class="text-2xl font-black uppercase italic text-slate-900 mb-5">Ingeniería Mental: El impacto del movimiento en la Neuroplasticidad</h3>
+                <p class="text-sm text-slate-600 leading-relaxed italic text-left">
+                    El movimiento no es solo una necesidad muscular; es un catalizador cognitivo. Los estiramientos y la actividad física breve aumentan la producción de BDNF (Factor Neurotrófico Derivado del Cerebro), una proteína esencial para la neuroplasticidad y la memoria. Romper el ciclo de sedentarismo cada hora permite liberar la tensión del psoas y la columna lumbar, mejorando la postura y, por consecuencia, la capacidad de oxigenación cerebral necesaria para la resolución de problemas complejos.
                 </p>
             </article>
         </div>
     </section>
 
-    <footer class="py-20 text-center bg-slate-900 text-white">
-        <div class="max-w-4xl mx-auto space-y-8 px-6">
-            <div class="flex flex-wrap justify-center gap-8 md:gap-12 text-[10px] font-black uppercase tracking-widest text-slate-500">
+    <footer class="py-24 text-center bg-slate-900 text-white border-t-8 border-indigo-600">
+        <div class="max-w-4xl mx-auto space-y-12 px-6">
+            <div class="flex flex-wrap justify-center gap-10 md:gap-14 text-[10px] font-black uppercase tracking-widest text-slate-500">
                 <a href="privacidad.html" class="hover:text-indigo-400 transition-colors">Política de Privacidad</a>
-                <a href="terminos.html" class="hover:text-indigo-400 transition-colors">Términos de Uso</a>
+                <a href="terminos.html" class="hover:text-indigo-400 transition-colors">Términos Legales</a>
                 <a href="mailto:hola@amoverse.net" class="hover:text-indigo-400 transition-colors">Contacto</a>
             </div>
-            <div class="pt-8 border-t border-slate-800">
-                <p class="text-[9px] font-bold text-slate-600 uppercase tracking-[0.5em]">&copy; 2026 AMOVERSE.NET | Tandil, Argentina</p>
+            <div class="pt-10 border-t border-slate-800">
+                <p class="text-[10px] font-bold text-slate-600 uppercase tracking-[0.5em] italic">&copy; 2026 AMOVERSE.NET | Tandil, Buenos Aires</p>
             </div>
         </div>
     </footer>
@@ -154,20 +165,18 @@
         let mainInterval, exInterval, selectedMinutes = 30, selectedExercise = "Sentadillas", isRunning = false, timeLeft = 0;
         const synth = window.speechSynthesis;
 
-        // Desbloqueo de voz preventivo
         function unlockVoice() {
-            const u = new SpeechSynthesisUtterance("Audio activado correctamente");
+            const u = new SpeechSynthesisUtterance("Audio configurado. Estás listo para moverte.");
             u.lang = 'es-ES';
-            u.volume = 0.5;
+            u.volume = 1;
             synth.speak(u);
-            document.getElementById('status-tag').innerText = "AUDIO LISTO";
-            document.getElementById('status-tag').classList.replace('text-slate-400', 'text-indigo-600');
+            document.getElementById('status-tag').innerText = "AUDIO ACTIVADO";
+            document.getElementById('status-tag').classList.replace('text-slate-400', 'text-indigo-500');
         }
 
         function setTime(val, el) {
             if(isRunning) return;
             selectedMinutes = val;
-            // Solo desmarca los botones dentro de la grilla de tiempos
             document.querySelectorAll('#time-grid .btn-select').forEach(b => b.classList.remove('selected'));
             el.classList.add('selected');
             updateDisplay(val * 60);
@@ -176,7 +185,6 @@
         function setEx(ex, el) {
             if(isRunning) return;
             selectedExercise = ex;
-            // Solo desmarca los botones dentro de la grilla de ejercicios
             document.querySelectorAll('#ex-grid .btn-select').forEach(b => b.classList.remove('selected'));
             el.classList.add('selected');
         }
@@ -191,7 +199,7 @@
             if (!isRunning) {
                 isRunning = true;
                 btn.innerText = "DETENER MONITOR"; btn.classList.replace('bg-indigo-600', 'bg-red-500');
-                speak("Monitor de actividad activado. Siguiente pausa en " + selectedMinutes + " minutos.");
+                speak("Monitor de actividad activado. Iniciando sesión de trabajo.");
                 startMainTimer();
             } else {
                 isRunning = false;
@@ -221,7 +229,7 @@
             let exTimeLeft = 60;
             overlay.classList.remove('hidden');
             document.getElementById('ex-name-display').innerText = selectedExercise.toUpperCase();
-            speak("Atención. Es momento de " + selectedExercise + ". Activá tu cuerpo por sesenta segundos.");
+            speak("Atención. Es momento de " + selectedExercise + ". Activá tu cuerpo ahora.");
             
             exInterval = setInterval(() => {
                 exTimeLeft--;
@@ -229,7 +237,7 @@
                 if (exTimeLeft <= 0) {
                     clearInterval(exInterval);
                     overlay.classList.add('hidden');
-                    speak("Buen trabajo. Regresamos al tiempo de enfoque.");
+                    speak("Excelente trabajo. Regresamos al tiempo de enfoque.");
                     startMainTimer();
                 }
             }, 1000);
@@ -244,4 +252,4 @@
         }
     </script>
 </body>
-</html>
+                                                                   </html>
