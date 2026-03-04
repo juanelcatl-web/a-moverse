@@ -21,7 +21,7 @@
 </head>
 <body>
 
-    <nav class="sticky top-0 z-[100] bg-white/90 backdrop-blur-md border-b border-slate-50 px-6 py-4">
+    <nav class="sticky top-0 z-[100] bg-white/90 backdrop-blur-md border-b border-slate-50 px-6 py-4 text-left">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex flex-col">
                 <span class="text-2xl font-black italic text-indigo-600 tracking-tighter uppercase leading-none">A MOVERSE!</span>
@@ -29,79 +29,90 @@
             </div>
             <div class="hidden md:flex gap-8 text-[11px] font-black uppercase tracking-widest text-slate-500">
                 <a href="#beneficios" class="hover:text-indigo-600">Beneficios</a>
-                <a href="#app-section" class="hover:text-indigo-600">Usar App</a>
+                <a href="#app-section" class="hover:text-indigo-600">Monitor</a>
                 <a href="#biblioteca" class="hover:text-indigo-600">Ciencia</a>
             </div>
             <button onclick="scrollToApp()" class="bg-indigo-600 text-white px-6 py-2.5 rounded-full font-black text-[10px] uppercase shadow-xl hover:bg-indigo-700 transition-all">Iniciar Ahora</button>
         </div>
     </nav>
 
-    <section class="relative overflow-hidden pt-20 pb-32 px-6">
-        <div class="max-w-4xl mx-auto text-center space-y-8">
+    <section class="relative overflow-hidden pt-20 pb-24 px-6 text-center">
+        <div class="max-w-4xl mx-auto space-y-8">
             <div class="inline-block px-4 py-1.5 bg-indigo-50 rounded-full text-indigo-600 text-[10px] font-black uppercase tracking-widest">
-                🚀 El futuro del trabajo es saludable
+                🚀 Innovación en Salud Laboral 2026
             </div>
-            <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-slate-900 leading-[0.9] italic uppercase">
+            <h1 class="text-5xl md:text-8xl font-black tracking-tighter text-slate-900 leading-[0.9] italic uppercase">
                 Tu cuerpo no nació para <span class="text-indigo-600">estar quieto.</span>
             </h1>
-            <p class="text-xl text-slate-500 max-w-2xl mx-auto font-medium">
+            <p class="text-xl text-slate-500 max-w-2xl mx-auto font-medium leading-relaxed text-center">
                 Recuperá tu energía y claridad mental con pausas inteligentes diseñadas para el profesional moderno.
             </p>
             <div class="flex flex-col md:flex-row justify-center gap-4 pt-4">
-                <button onclick="scrollToApp()" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:scale-105 transition-all shadow-2xl text-sm">Abrir Monitor Gratis</button>
-                <button class="bg-white border-2 border-slate-100 px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-slate-50 transition-all text-sm">Descargar App</button>
+                <button onclick="scrollToApp()" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:scale-105 transition-all shadow-2xl text-sm">Activar el Faro</button>
+                <button class="bg-white border-2 border-slate-100 px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-slate-50 transition-all text-sm">Descargar PWA</button>
             </div>
         </div>
     </section>
 
-    <section id="beneficios" class="bg-slate-50 py-24 px-6">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+    <section id="beneficios" class="bg-slate-50 py-24 px-6 text-center">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
             <div class="space-y-4">
-                <div class="text-4xl">🧠</div>
-                <h3 class="font-black uppercase italic text-indigo-900">Foco Profundo</h3>
-                <p class="text-sm text-slate-500 leading-relaxed">Romper el sedentarismo aumenta la oxigenación cerebral un 20%, mejorando tu capacidad de concentración.</p>
+                <div class="text-4xl text-center">🧠</div>
+                <h3 class="font-black uppercase italic text-indigo-900 text-center">Foco Profundo</h3>
+                <p class="text-sm text-slate-500 leading-relaxed text-center">Romper el sedentarismo aumenta la oxigenación cerebral un 20%, mejorando tu capacidad de concentración.</p>
             </div>
             <div class="space-y-4">
-                <div class="text-4xl">💪</div>
-                <h3 class="font-black uppercase italic text-indigo-900">Salud Postural</h3>
-                <p class="text-sm text-slate-500 leading-relaxed">Prevení el dolor cervical y lumbar activando cadenas musculares atrofiadas por la silla.</p>
+                <div class="text-4xl text-center">💪</div>
+                <h3 class="font-black uppercase italic text-indigo-900 text-center">Salud Postural</h3>
+                <p class="text-sm text-slate-500 leading-relaxed text-center">Prevení el dolor cervical y lumbar activando cadenas musculares atrofiadas por la silla.</p>
             </div>
             <div class="space-y-4">
-                <div class="text-4xl">⚡</div>
-                <h3 class="font-black uppercase italic text-indigo-900">Energía Basal</h3>
-                <p class="text-sm text-slate-500 leading-relaxed">Activá tu metabolismo y evitá el cansancio de media tarde sin necesidad de cafeína extra.</p>
+                <div class="text-4xl text-center">⚡</div>
+                <h3 class="font-black uppercase italic text-indigo-900 text-center">Energía Basal</h3>
+                <p class="text-sm text-slate-500 leading-relaxed text-center">Activá tu metabolismo y evitá el cansancio de media tarde sin necesidad de cafeína extra.</p>
             </div>
         </div>
     </section>
 
     <section id="app-section" class="py-32 px-6 bg-white">
-        <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div class="space-y-6 text-left">
-                <h2 class="text-4xl font-black tracking-tighter uppercase italic leading-none">Configurá tu <span class="text-indigo-600 underline">Faro.</span></h2>
-                <p class="text-slate-500 text-lg">Elegí tu intervalo de trabajo y el ejercicio que más necesites hoy. El monitor te avisará cuándo es momento de reconectar.</p>
-                <ul class="space-y-3 font-bold text-slate-700 uppercase text-[11px] tracking-widest">
-                    <li>✅ 100% Privado (Funciona en tu browser)</li>
-                    <li>✅ Sin Registros Obligatorios</li>
-                    <li>✅ Sincronización por Voz</li>
-                </ul>
+        <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8 text-left">
+                <h2 class="text-4xl md:text-5xl font-black tracking-tighter uppercase italic leading-none">Configurá tu <span class="text-indigo-600 underline text-left">Faro.</span></h2>
+                <p class="text-slate-500 text-lg text-left leading-relaxed">Elegí tu intervalo de trabajo y el ejercicio que más necesites hoy. El monitor te avisará cuándo es momento de reconectar con tu cuerpo.</p>
+                <div class="space-y-4 pt-2">
+                    <div class="flex items-center gap-3">
+                        <span class="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                        <span class="font-bold text-slate-700 uppercase text-[11px] tracking-widest text-left">100% Privado: Funciona en tu browser</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                        <span class="font-bold text-slate-700 uppercase text-[11px] tracking-widest text-left">Sin registros ni publicidad invasiva</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                        <span class="font-bold text-slate-700 uppercase text-[11px] tracking-widest text-left">Sincronización por voz en español</span>
+                    </div>
+                </div>
             </div>
 
             <div class="max-w-sm mx-auto w-full">
-                <div id="timer-card" class="card relative overflow-hidden transition-all">
+                <div id="timer-card" class="card relative overflow-hidden transition-all border-2 border-indigo-50">
                     <div id="exercise-overlay" class="hidden absolute inset-0 bg-app-gradient text-white flex flex-col items-center justify-center z-20 p-8 text-center">
                         <p class="text-[10px] uppercase font-black mb-1 tracking-[0.4em] animate-pulse">Momento Consciente</p>
-                        <h2 id="ex-name-display" class="text-3xl font-black mb-4 uppercase italic">SENTADILLAS</h2>
+                        <h2 id="ex-name-display" class="text-4xl font-black mb-4 uppercase italic leading-none">SENTADILLAS</h2>
                         <div id="ex-timer" class="text-8xl font-black italic">60</div>
                     </div>
                     
                     <div class="text-center space-y-6">
+                        <p class="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">Próxima Alerta</p>
                         <div id="main-timer" class="text-7xl font-black text-slate-900 italic">30:00</div>
                         
-                        <div class="grid grid-cols-4 gap-1">
+                        <div class="grid grid-cols-5 gap-1">
+                            <button onclick="setTime(0.1, this)" class="btn-time bg-indigo-50 text-indigo-600 py-3 rounded-xl text-[8px] font-black">TEST</button>
                             <button onclick="setTime(15, this)" class="btn-time bg-slate-50 py-3 rounded-xl text-[8px] font-black">15m</button>
                             <button onclick="setTime(30, this)" class="btn-time bg-slate-50 py-3 rounded-xl text-[8px] font-black selected">30m</button>
                             <button onclick="setTime(60, this)" class="btn-time bg-slate-50 py-3 rounded-xl text-[8px] font-black">60m</button>
-                            <button onclick="setTime(0.1, this)" class="btn-time bg-indigo-50 text-indigo-600 py-3 rounded-xl text-[8px] font-black">TEST</button>
+                            <button onclick="setTime(120, this)" class="btn-time bg-slate-50 py-3 rounded-xl text-[8px] font-black">2h</button>
                         </div>
 
                         <div class="grid grid-cols-2 gap-2">
@@ -111,9 +122,15 @@
                             <button onclick="setEx('Respiración', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-2">
                                 <span class="text-lg">🫁</span> <span class="font-black text-[9px] uppercase">Respirar</span>
                             </button>
+                            <button onclick="setEx('Saltos', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-2">
+                                <span class="text-lg">🔥</span> <span class="font-black text-[9px] uppercase">Saltos</span>
+                            </button>
+                            <button onclick="setEx('Estirar', this)" class="btn-exercise p-3 bg-slate-50 rounded-2xl text-left flex items-center gap-2">
+                                <span class="text-lg">🙆‍♂️</span> <span class="font-black text-[9px] uppercase">Estirar</span>
+                            </button>
                         </div>
                         
-                        <button id="main-btn" onclick="toggleApp()" class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black text-sm shadow-xl active:scale-95 transition-all uppercase italic">Activar Faro</button>
+                        <button id="main-btn" onclick="toggleApp()" class="w-full bg-indigo-600 text-white py-5 rounded-2xl font-black text-sm shadow-xl active:scale-95 transition-all uppercase italic tracking-widest">Activar Faro</button>
                     </div>
                 </div>
             </div>
@@ -121,47 +138,60 @@
     </section>
 
     <section id="biblioteca" class="py-24 px-6 border-t border-slate-100 bg-slate-50">
-        <div class="max-w-4xl mx-auto space-y-12">
-            <div class="text-center">
-                <h2 class="text-xs font-black uppercase tracking-[0.4em] text-indigo-500 mb-2">Conocimiento</h2>
-                <p class="text-4xl font-black italic uppercase tracking-tighter">Biblioteca del Movimiento</p>
+        <div class="max-w-4xl mx-auto space-y-16">
+            <div class="text-center space-y-4">
+                <h2 class="text-xs font-black uppercase tracking-[0.4em] text-indigo-500">Documentación científica</h2>
+                <p class="text-4xl md:text-5xl font-black italic uppercase tracking-tighter text-center leading-none">La Ciencia del Movimiento</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <article class="bg-white p-10 rounded-[2.5rem] shadow-sm space-y-4">
-                    <h3 class="text-xl font-black uppercase italic leading-tight">El Sedentarismo en 2026</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed">Según la OMS, la inactividad física es el cuarto factor de riesgo de mortalidad global. En entornos de teletrabajo, el cuerpo entra en "hibernación celular".</p>
-                    <button onclick="openArticle('sedentarismo')" class="text-indigo-600 font-black text-[10px] uppercase tracking-widest">Leer Investigación →</button>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <article class="bg-white p-10 rounded-[3rem] shadow-sm space-y-4 text-left">
+                    <div class="h-1 bg-indigo-600 w-12 text-left"></div>
+                    <h3 class="text-xl font-black uppercase italic leading-tight text-left text-indigo-900">El Sedentarismo: Desafío 2026</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed text-left">Según la <strong>OMS</strong>, la inactividad física es el cuarto factor de riesgo de mortalidad global. Estar sentado por más de 6 horas diarias aumenta drásticamente el riesgo de diabetes y enfermedades cardiovasculares.</p>
+                    <button onclick="openArticle('sedentarismo')" class="text-indigo-600 font-black text-[10px] uppercase tracking-widest text-left">Leer Investigación →</button>
                 </article>
-                <article class="bg-white p-10 rounded-[2.5rem] shadow-sm space-y-4">
-                    <h3 class="text-xl font-black uppercase italic leading-tight">Por qué 60 segundos</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed">Ráfagas de 60 segundos actúan como una "bomba muscular" que oxigena la corteza prefrontal, reiniciando tu capacidad cognitiva.</p>
-                    <button onclick="openArticle('metabolismo')" class="text-indigo-600 font-black text-[10px] uppercase tracking-widest">Ver Fisiología →</button>
+
+                <article class="bg-white p-10 rounded-[3rem] shadow-sm space-y-4 text-left">
+                    <div class="h-1 bg-emerald-500 w-12 text-left"></div>
+                    <h3 class="text-xl font-black uppercase italic leading-tight text-left text-indigo-900">Neurociencia del Foco</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed text-left">Ráfagas de 60 segundos de movimiento intenso actúan como una "bomba muscular" que empuja sangre oxigenada al cerebro, reiniciando la capacidad cognitiva y el enfoque profundo.</p>
+                    <button onclick="openArticle('metabolismo')" class="text-indigo-600 font-black text-[10px] uppercase tracking-widest text-left">Ver Fisiología →</button>
                 </article>
             </div>
         </div>
     </section>
 
-    <footer class="py-20 text-center border-t border-slate-100">
+    <footer class="py-20 text-center border-t border-slate-100 bg-white">
         <div class="max-w-4xl mx-auto space-y-8">
             <div class="flex justify-center gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                <a href="/privacidad.html" class="hover:text-indigo-600">Privacidad</a>
-                <a href="/terminos.html" class="hover:text-indigo-600">Términos</a>
-                <a href="mailto:hola@amoverse.net" class="hover:text-indigo-600">Contacto</a>
+                <a href="privacidad.html" class="hover:text-indigo-600 transition-colors">Privacidad</a>
+                <a href="terminos.html" class="hover:text-indigo-600 transition-colors">Términos</a>
+                <a href="mailto:hola@amoverse.net" class="hover:text-indigo-600 transition-colors">Contacto</a>
             </div>
-            <p class="text-[9px] font-bold text-slate-300 uppercase tracking-[0.5em]">AMOVERSE.NET - URBAN GROWTH HEALTH 2026</p>
+            <div class="opacity-40">
+                <p class="text-[10px] font-black uppercase tracking-[0.5em] text-slate-600 text-center">AMOVERSE.NET - URBAN GROWTH HEALTH 2026</p>
+                <p class="text-[8px] mt-2 italic text-slate-400 text-center uppercase tracking-widest">Sincronización de Bienestar Digital</p>
+            </div>
         </div>
     </footer>
 
     <div id="article-modal" class="modal" onclick="closeArticle()">
         <div class="bg-white w-full max-w-lg rounded-[3rem] p-10 max-h-[80vh] overflow-y-auto" onclick="event.stopPropagation()">
             <div id="modal-content" class="space-y-4 text-left"></div>
-            <button onclick="closeArticle()" class="mt-8 w-full bg-slate-100 py-4 rounded-2xl font-black uppercase text-[10px]">Cerrar</button>
+            <button onclick="closeArticle()" class="mt-10 w-full bg-slate-100 py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest">Cerrar</button>
         </div>
     </div>
 
 <script>
-    // Lógica de navegación
+    let mainInterval, exInterval, selectedMinutes = 30, selectedExercise = "Sentadillas", isRunning = false, timeLeft = 0;
+    const synth = window.speechSynthesis;
+
+    const ARTICULOS = {
+        sedentarismo: { titulo: "El Desafío del Sedentarismo", cuerpo: "Pasar más de 6 horas sentado colapsa la eficiencia del metabolismo lipídico. Romper la inercia cada 30 minutos reactiva la enzima lipoproteína lipasa encargada de degradar las grasas en sangre, reduciendo el riesgo de mortalidad prematura hasta en un 33%." },
+        metabolismo: { titulo: "Fisiología de la Pausa", cuerpo: "60 segundos de sentadillas actúan como una bomba muscular que empuja la sangre desde las piernas hacia el corazón y el cerebro, oxigenando la corteza prefrontal. Esto mejora la toma de decisiones y el enfoque creativo de forma inmediata." }
+    };
+
     function scrollToApp() {
         document.getElementById('app-section').scrollIntoView({ behavior: 'smooth' });
         setTimeout(() => {
@@ -169,15 +199,6 @@
             setTimeout(() => document.getElementById('timer-card').classList.remove('faro-active'), 2000);
         }, 800);
     }
-
-    // (Aquí va toda tu lógica de timer, speak e intervalos que ya teníamos)
-    let mainInterval, exInterval, selectedMinutes = 30, selectedExercise = "Sentadillas", isRunning = false, timeLeft = 0;
-    const synth = window.speechSynthesis;
-
-    const ARTICULOS = {
-        sedentarismo: { titulo: "El Desafío del Sedentarismo", cuerpo: "Pasar más de 6 horas sentado colapsa la eficiencia del metabolismo lipídico. Romper la inercia cada 30 minutos reactiva la enzima lipoproteína lipasa..." },
-        metabolismo: { titulo: "Fisiología de la Pausa", cuerpo: "60 segundos de sentadillas actúan como una bomba muscular que empuja la sangre desde las piernas hacia el cerebro, oxigenando la corteza prefrontal." }
-    };
 
     function setTime(val, el) {
         if(isRunning) return;
@@ -205,12 +226,12 @@
             isRunning = true;
             btn.innerText = "DETENER MONITOR"; btn.classList.replace('bg-indigo-600', 'bg-red-500');
             card.classList.add('faro-active');
-            speak("Monitor iniciado.");
+            speak("Monitor activado. Regresá a tu centro.");
             startMainTimer();
         } else {
             isRunning = false;
             clearInterval(mainInterval); clearInterval(exInterval);
-            btn.innerText = "ACTIVAR MONITOR"; btn.classList.replace('bg-red-500', 'bg-indigo-600');
+            btn.innerText = "ACTIVAR FARO"; btn.classList.replace('bg-red-500', 'bg-indigo-600');
             card.classList.remove('faro-active');
             document.getElementById('exercise-overlay').classList.add('hidden');
             updateDisplay(selectedMinutes * 60);
@@ -232,14 +253,14 @@
         let exTimeLeft = 60;
         overlay.classList.remove('hidden');
         document.getElementById('ex-name-display').innerText = selectedExercise.toUpperCase();
-        speak("Momento de " + selectedExercise);
+        speak("Momento de " + selectedExercise + ". Conectá con tu cuerpo.");
         exInterval = setInterval(() => {
             exTimeLeft--;
             document.getElementById('ex-timer').innerText = exTimeLeft;
             if (exTimeLeft <= 0) {
                 clearInterval(exInterval);
                 overlay.classList.add('hidden');
-                speak("Excelente.");
+                speak("Excelente trabajo. Regresamos al flujo.");
                 startMainTimer();
             }
         }, 1000);
@@ -247,11 +268,12 @@
 
     function openArticle(id) {
         const art = ARTICULOS[id];
-        document.getElementById('modal-content').innerHTML = `<h2 class="text-2xl font-black text-indigo-600 uppercase italic">${art.titulo}</h2><p class="text-slate-600 leading-relaxed">${art.cuerpo}</p>`;
+        document.getElementById('modal-content').innerHTML = `<h2 class="text-3xl font-black text-indigo-600 uppercase italic leading-none">${art.titulo}</h2><p class="text-slate-600 leading-relaxed text-sm pt-4">${art.cuerpo}</p>`;
         document.getElementById('article-modal').classList.add('active');
     }
+
     function closeArticle() { document.getElementById('article-modal').classList.remove('active'); }
     function speak(t) { synth.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = 'es-ES'; synth.speak(u); }
 </script>
 </body>
-        </html>
+</html>
