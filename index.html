@@ -2,17 +2,19 @@
 <html lang="es">
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y376J66Y5W"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Y376J66Y5W');
-</script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y376J66Y5W');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5719496512652584" crossorigin="anonymous"></script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>A Moverse! | Monitor de Pausas Activas y Salud Laboral</title>
-    <meta name="description" content="Portal de ergonomía y salud laboral. Monitor de pausas activas para combatir el sedentarismo con base científica.">
+    <meta name="description" content="Optimiza tu salud metabólica y biomecánica. Monitor de pausas activas científicamente diseñado para combatir el sedentarismo laboral.">
+    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -35,7 +37,7 @@
             <span class="text-2xl font-black italic text-indigo-600 tracking-tighter uppercase">A MOVERSE!</span>
             <div class="hidden md:flex gap-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
                 <a href="#monitor" class="hover:text-indigo-600">Alarma</a>
-                <a href="#biblioteca" class="hover:text-indigo-600">Ciencia</a>
+                <a href="#ciencia" class="hover:text-indigo-600">Ciencia</a>
                 <a href="#ejercicios" class="hover:text-indigo-600">Ejercicios</a>
             </div>
             <button onclick="unlockVoice()" class="bg-indigo-600 text-white px-5 py-2 rounded-full text-[9px] font-black uppercase shadow-md">Activar Audio</button>
@@ -47,7 +49,7 @@
             Salud Biomecánica <br><span class="text-indigo-600">en el Trabajo.</span>
         </h1>
         <p class="text-lg text-slate-500 font-medium max-w-2xl mx-auto italic leading-relaxed">
-            Mitigá los riesgos del sedentarismo crónico con pausas activas científicamente diseñadas.
+            Mitigá los riesgos del sedentarismo crónico con pausas activas diseñadas para optimizar tu rendimiento metabólico.
         </p>
     </header>
 
@@ -67,7 +69,7 @@
                     </div>
 
                     <div class="space-y-4">
-                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest text-center">Frecuencia</p>
+                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest text-center">Frecuencia de Alerta</p>
                         <div class="grid grid-cols-4 gap-2" id="time-grid">
                             <button onclick="setTime(15, this)" class="btn-select bg-white py-4 rounded-2xl text-[10px] font-black uppercase">15m</button>
                             <button onclick="setTime(30, this)" class="btn-select bg-white py-4 rounded-2xl text-[10px] font-black uppercase selected">30m</button>
@@ -77,7 +79,7 @@
                     </div>
 
                     <div class="space-y-4">
-                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest text-center">Ejercicio</p>
+                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest text-center">Rutina Seleccionada</p>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-2" id="ex-grid">
                             <button onclick="setEx('Sentadillas', this)" class="btn-select bg-white p-4 rounded-2xl flex flex-col items-center gap-1 selected">
                                 <span class="text-xl">🦵</span> <span class="font-black text-[9px] uppercase">Piernas</span>
@@ -88,41 +90,74 @@
                             <button onclick="setEx('Estirar', this)" class="btn-select bg-white p-4 rounded-2xl flex flex-col items-center gap-1">
                                 <span class="text-xl">🙆‍♂️</span> <span class="font-black text-[9px] uppercase">Espalda</span>
                             </button>
-                            <button onclick="setEx('Saltos', this)" class="btn-select bg-white p-4 rounded-2xl flex flex-col items-center gap-1">
-                                <span class="text-xl">🔥</span> <span class="font-black text-[9px] uppercase">Saltos</span>
-                            </button>
-                            <button onclick="setEx('Flexiones', this)" class="btn-select bg-white p-4 rounded-2xl flex flex-col items-center gap-1">
-                                <span class="text-xl">💪</span> <span class="font-black text-[9px] uppercase">Brazos</span>
-                            </button>
-                            <button onclick="setEx('Caminar', this)" class="btn-select bg-white p-4 rounded-2xl flex flex-col items-center gap-1">
-                                <span class="text-xl">🚶</span> <span class="font-black text-[9px] uppercase">Pasos</span>
-                            </button>
                         </div>
                     </div>
 
                     <button id="main-btn" onclick="toggleApp()" class="w-full bg-indigo-600 text-white py-6 rounded-3xl font-black text-sm shadow-xl hover:bg-indigo-700 active:scale-95 transition-all uppercase italic tracking-[0.2em]">Activar Monitor</button>
                 </div>
             </div>
+
+            <div class="mt-8 min-h-[100px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-5719496512652584"
+                     data-ad-slot="auto"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
         </div>
     </section>
 
-    <section id="biblioteca" class="py-32 max-w-6xl mx-auto px-6">
-        <div class="text-center mb-20 space-y-4">
-            <h2 class="text-4xl md:text-5xl font-black uppercase italic tracking-tighter text-slate-900">Fundamentos Técnicos</h2>
-            <p class="text-slate-500 font-medium italic underline decoration-indigo-200">Educación para un entorno laboral saludable.</p>
+    <section id="ciencia" class="py-24 max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="prose-text">
+                <h2 class="text-3xl font-black text-slate-900 uppercase italic mb-6 border-l-8 border-indigo-600 pl-6">Ciencia del Movimiento</h2>
+                <p class="mb-4">
+                    Permanecer en postura sedente por más de 60 minutos genera una caída drástica en la actividad de la <strong>lipoproteína lipasa</strong>, enzima clave para el metabolismo de las grasas. Las pausas activas no son solo estiramientos; son intervenciones neuroendócrinas.
+                </p>
+                <p class="mb-6">
+                    Al reactivar los grandes grupos musculares (como los cuádriceps en las sentadillas), enviamos señales al cerebro para reducir la producción de cortisol y mejorar la captación de glucosa periférica, combatiendo la fatiga cognitiva.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-slate-50 p-4 rounded-2xl">
+                        <span class="block text-2xl mb-1">🧠</span>
+                        <h4 class="font-black text-[10px] uppercase">Foco Mental</h4>
+                        <p class="text-[11px]">Oxigenación cerebral inmediata para retomar tareas complejas.</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-2xl">
+                        <span class="block text-2xl mb-1">🦴</span>
+                        <h4 class="font-black text-[10px] uppercase">Ergonomía</h4>
+                        <p class="text-[11px]">Prevención de síndromes posturales y tensión lumbar cronificada.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-indigo-600 p-10 rounded-[3rem] text-white shadow-2xl relative overflow-hidden">
+                <h3 class="text-2xl font-black mb-4 uppercase italic">La Regla 20-20-20</h3>
+                <p class="opacity-80 mb-8 font-medium text-sm">
+                    Para proteger tu salud visual, por cada 20 minutos frente a la pantalla, mira algo a 20 pies de distancia durante 20 segundos. A Moverse! integra estos principios en cada alerta.
+                </p>
+                <ul class="space-y-3 font-bold text-xs uppercase tracking-widest">
+                    <li class="flex items-center gap-2">✓ Reducción de fatiga ocular</li>
+                    <li class="flex items-center gap-2">✓ Reajuste del ciclo circadiano</li>
+                    <li class="flex items-center gap-2">✓ Prevención de miopía digital</li>
+                </ul>
+            </div>
         </div>
+    </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <section id="biblioteca" class="py-16 bg-slate-50 px-6 border-t border-slate-100">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
             <div class="article-card prose-text">
-                <h3>01. Termogénesis (NEAT)</h3>
-                <p>Reactivar el metabolismo cada 30 minutos es crucial para prevenir la resistencia a la insulina y mejorar la oxidación de grasas.</p>
-                <p class="mt-4 italic"><a href="hidratacion-rendimiento.html" class="text-indigo-600 font-bold underline">Leer sobre Hidratación Metabólica →</a></p>
+                <h3>01. Termogénesis No Ejercicio (NEAT)</h3>
+                <p>Aprende cómo pequeñas ráfagas de movimiento durante la jornada laboral pueden quemar hasta 300 kcal adicionales por día y estabilizar tus niveles de energía por la tarde.</p>
+                <p class="mt-4 italic"><a href="hidratacion-rendimiento.html" class="text-indigo-600 font-bold underline">Guía de Hidratación Metabólica →</a></p>
             </div>
 
             <div class="article-card prose-text">
-                <h3>02. Foco y Neuroplasticidad</h3>
-                <p>El movimiento rítmico estimula la secreción de proteínas protectoras neuronales, optimizando el enfoque sostenido.</p>
-                <p class="mt-4 italic"><a href="postura-y-vision.html" class="text-indigo-600 font-bold underline">Leer sobre Postura y Visión →</a></p>
+                <h3>02. Ergonomía Cognitiva</h3>
+                <p>La postura no solo afecta tu espalda; afecta tu confianza y capacidad de toma de decisiones. Analizamos la conexión entre la apertura torácica y la claridad mental.</p>
+                <p class="mt-4 italic"><a href="postura-y-vision.html" class="text-indigo-600 font-bold underline">Postura y Visión Digital →</a></p>
             </div>
         </div>
     </section>
@@ -134,23 +169,22 @@
                 <a href="postura-y-vision.html" class="hover:text-indigo-600 transition-all">Postura & Visión</a>
                 <a href="privacidad.html" class="hover:text-indigo-600">Privacidad</a>
                 <a href="terminos.html" class="hover:text-indigo-600">Términos</a>
-                <a href="mailto:hola@amoverse.net" class="hover:text-indigo-600">Contacto</a>
             </div>
-            <p class="text-[9px] font-bold text-slate-300 uppercase tracking-[0.5em] italic">A MOVERSE! &copy; 2026</p>
+            <p class="text-[9px] font-bold text-slate-300 uppercase tracking-[0.5em] italic">A MOVERSE! &copy; 2026 | BIOMECÁNICA LABORAL</p>
         </div>
     </footer>
 
     <script>
         let mainInterval, exInterval, selectedMinutes = 30, selectedExercise = "Sentadillas", isRunning = false, timeLeft = 0;
         const synth = window.speechSynthesis;
-        function unlockVoice() { synth.speak(new SpeechSynthesisUtterance("Audio activado.")); }
+        function unlockVoice() { synth.speak(new SpeechSynthesisUtterance("Audio activado correctamente.")); }
         function setTime(val, el) { if(isRunning) return; selectedMinutes = val; document.querySelectorAll('#time-grid .btn-select').forEach(b => b.classList.remove('selected')); el.classList.add('selected'); updateDisplay(val * 60); }
         function setEx(ex, el) { if(isRunning) return; selectedExercise = ex; document.querySelectorAll('#ex-grid .btn-select').forEach(b => b.classList.remove('selected')); el.classList.add('selected'); }
         function updateDisplay(secs) { const m = Math.floor(secs / 60), s = Math.floor(secs % 60); document.getElementById('main-timer').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`; }
-        function toggleApp() { const btn = document.getElementById('main-btn'); if (!isRunning) { isRunning = true; btn.innerText = "DETENER"; btn.classList.replace('bg-indigo-600', 'bg-red-500'); startMainTimer(); } else { isRunning = false; clearInterval(mainInterval); clearInterval(exInterval); btn.innerText = "ACTIVAR MONITOR"; btn.classList.replace('bg-red-500', 'bg-indigo-600'); document.getElementById('exercise-overlay').classList.add('hidden'); updateDisplay(selectedMinutes * 60); } }
+        function toggleApp() { const btn = document.getElementById('main-btn'); if (!isRunning) { isRunning = true; btn.innerText = "DETENER MONITOR"; btn.classList.replace('bg-indigo-600', 'bg-red-500'); startMainTimer(); } else { isRunning = false; clearInterval(mainInterval); clearInterval(exInterval); btn.innerText = "ACTIVAR MONITOR"; btn.classList.replace('bg-red-500', 'bg-indigo-600'); document.getElementById('exercise-overlay').classList.add('hidden'); updateDisplay(selectedMinutes * 60); } }
         function startMainTimer() { timeLeft = Math.round(selectedMinutes * 60); updateDisplay(timeLeft); mainInterval = setInterval(() => { timeLeft--; if (timeLeft <= 0) { clearInterval(mainInterval); startExercise(); } else { updateDisplay(timeLeft); } }, 1000); }
-        function startExercise() { const overlay = document.getElementById('exercise-overlay'); let exTimeLeft = 60; overlay.classList.remove('hidden'); document.getElementById('ex-name-display').innerText = selectedExercise.toUpperCase(); speak("Momento de " + selectedExercise); exInterval = setInterval(() => { exTimeLeft--; document.getElementById('ex-timer').innerText = exTimeLeft; if (exTimeLeft <= 0) { clearInterval(exInterval); overlay.classList.add('hidden'); startMainTimer(); } }, 1000); }
+        function startExercise() { const overlay = document.getElementById('exercise-overlay'); let exTimeLeft = 60; overlay.classList.remove('hidden'); document.getElementById('ex-name-display').innerText = selectedExercise.toUpperCase(); speak("Es momento de tu pausa activa. Ejercicio: " + selectedExercise); exInterval = setInterval(() => { exTimeLeft--; document.getElementById('ex-timer').innerText = exTimeLeft; if (exTimeLeft <= 0) { clearInterval(exInterval); overlay.classList.add('hidden'); startMainTimer(); } }, 1000); }
         function speak(t) { synth.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = 'es-ES'; synth.speak(u); }
     </script>
 </body>
-                        </html>
+                            </html>
