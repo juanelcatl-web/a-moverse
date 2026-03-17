@@ -19,6 +19,7 @@
     
     <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-analytics-compat.js"></script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
@@ -106,12 +107,12 @@
     <section class="py-24 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
         <div class="article-card prose-text">
             <h3 class="text-xl font-black text-slate-900 uppercase italic mb-4">01. Termogénesis No Ejercicio (NEAT)</h3>
-            <p class="text-sm">Las pequeñas ráfagas de movimiento durante la jornada laboral pueden quemar hasta 300 kcal adicionales por día y estabilizar tus niveles de energía. Combatir el sedentarismo es clave para la salud metabólica a largo plazo.</p>
+            <p class="text-sm">Las pequeñas ráfagas de movimiento durante la jornada laboral pueden quemar hasta 300 kcal adicionales por día y estabilizar tus niveles de energía.</p>
             <p class="mt-4 italic"><a href="hidratacion-rendimiento.html" class="text-indigo-600 font-bold underline">Hidratación y Rendimiento →</a></p>
         </div>
         <div class="article-card prose-text">
             <h3 class="text-xl font-black text-slate-900 uppercase italic mb-4">02. Ergonomía Cognitiva</h3>
-            <p class="text-sm">La postura no solo afecta tu espalda; afecta tu confianza y capacidad de toma de decisiones. Analizamos la conexión entre la apertura torácica y la claridad mental durante el trabajo remoto.</p>
+            <p class="text-sm">La postura no solo afecta tu espalda; afecta tu confianza y capacidad de toma de decisiones.</p>
             <p class="mt-4 italic"><a href="postura-y-vision.html" class="text-indigo-600 font-bold underline">Guía de Postura y Visión →</a></p>
         </div>
     </section>
@@ -121,15 +122,22 @@
     </footer>
 
     <script>
+        // Configuración de Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyA_KA4b9c-EuhlSlAEwMQ2EpeQSObIoRKQ",
             authDomain: "alarma-de-movimiento-j1989.firebaseapp.com",
             projectId: "alarma-de-movimiento-j1989",
-            databaseURL: "https://alarma-de-movimiento-j1989-default-rtdb.firebaseio.com"
+            databaseURL: "https://alarma-de-movimiento-j1989-default-rtdb.firebaseio.com",
+            storageBucket: "alarma-de-movimiento-j1989.appspot.com",
+            messagingSenderId: "360098921820",
+            appId: "1:360098921820:web:86551b9e078b548f078e8b",
+            measurementId: "G-Y376J66Y5W" // Vinculación con Analytics
         };
         
-        firebase.initializeApp(firebaseConfig);
+        // Inicializar Firebase
+        const app = firebase.initializeApp(firebaseConfig);
         const db = firebase.database().ref('logs_amoverse');
+        const analytics = firebase.analytics(); // ¡ESTO ES LO QUE FALTABA PARA FIREBASE!
 
         let mainInterval, exInterval, selectedMinutes = 30, selectedExercise = "Sentadillas", isRunning = false, timeLeft = 0;
         const synth = window.speechSynthesis;
@@ -138,6 +146,8 @@
             const u = new SpeechSynthesisUtterance("Audio activado");
             u.lang = 'es-ES';
             synth.speak(u); 
+            // Log de evento manual en Analytics
+            analytics.logEvent('audio_unlocked');
         }
 
         function setTime(val, el) {
@@ -161,11 +171,18 @@
                 isRunning = true;
                 btn.innerText = "DETENER MONITOR";
                 btn.classList.replace('bg-indigo-600', 'bg-red-500');
-                try { db.push({ evento: "start", ejercicio: selectedExercise, fecha: new Date().toISOString() }); } catch(e){}
+                
+                // Registro de inicio en DB y Analytics
+                try { 
+                    db.push({ evento: "start", ejercicio: selectedExercise, fecha: new Date().toISOString() }); 
+                    analytics.logEvent('monitor_start', { exercise: selectedExercise });
+                } catch(e){}
+                
                 timeLeft = Math.round(selectedMinutes * 60);
                 startMainTimer();
             } else {
                 stopAll();
+                analytics.logEvent('monitor_stop');
             }
         }
 
@@ -187,6 +204,8 @@
             overlay.classList.remove('hidden');
             document.getElementById('ex-name-display').innerText = selectedExercise.toUpperCase();
             speak("Momento de pausa activa: " + selectedExercise);
+            analytics.logEvent('exercise_triggered', { exercise: selectedExercise });
+            
             exInterval = setInterval(() => {
                 exTimeLeft--;
                 document.getElementById('ex-timer').innerText = exTimeLeft;
