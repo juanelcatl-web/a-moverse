@@ -1,35 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- ✅ Analytics unificado via Firebase (evita doble conteo con gtag separado) -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>A Moverse! | Monitor de Pausas Activas y Salud Laboral</title>
 
-    <!-- ✅ Meta SEO -->
     <meta name="description" content="Optimizá tu salud metabólica con pausas activas científicamente diseñadas. Monitor de movimiento para trabajadores de escritorio.">
     <meta name="keywords" content="pausas activas, salud laboral, NEAT, ergonomía, escritorio, bienestar">
     <meta name="author" content="A Moverse!">
 
-    <!-- ✅ Open Graph (vista previa en redes y WhatsApp) -->
     <meta property="og:title" content="A Moverse! | Monitor de Pausas Activas">
     <meta property="og:description" content="Pausas activas científicamente diseñadas para trabajadores de escritorio. Mejorá tu salud metabólica y postura.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://amoverse.net">
     <meta property="og:image" content="https://amoverse.net/og-image.png">
 
-    <!-- ✅ AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5719496512652584" crossorigin="anonymous"></script>
 
-    <!-- ✅ Google Fonts como link (evita bloqueo de render que causaba @import) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CDN (reemplazar por build compilado para producción óptima) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- ✅ Firebase diferido: se carga solo al activar el monitor -->
     <style>
         body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1e293b; scroll-behavior: smooth; }
         .card-app { background: white; border-radius: 3rem; border: 1px solid #f1f5f9; box-shadow: 0 40px 80px -15px rgba(0,0,0,0.08); }
@@ -39,6 +32,8 @@
         #main-timer { font-variant-numeric: tabular-nums; letter-spacing: -2px; }
         .article-card { background: #ffffff; border-radius: 2rem; padding: 2.5rem; border: 1px solid #f1f5f9; height: 100%; }
         .prose-text { line-height: 1.8; color: #475569; }
+        .stat-card { background: #fff; border: 1px solid #f1f5f9; border-radius: 1.5rem; padding: 1.5rem; text-align: center; }
+        .step-num { width: 2rem; height: 2rem; background: #eef2ff; color: #4f46e5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; flex-shrink: 0; margin-top: 2px; }
     </style>
 </head>
 <body class="selection:bg-indigo-100">
@@ -46,12 +41,12 @@
     <nav class="fixed top-0 w-full z-[100] bg-white/90 backdrop-blur-lg border-b border-slate-100 px-6 py-4">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <span class="text-2xl font-black italic text-indigo-600 tracking-tighter uppercase">A MOVERSE!</span>
-            <!-- ✅ Texto agrandado de 9px a 12px para mejor usabilidad en mobile -->
             <button onclick="unlockVoice()" class="bg-indigo-600 text-white px-5 py-2 rounded-full text-[12px] font-black uppercase shadow-md">Activar Audio</button>
         </div>
     </nav>
 
-    <header class="pt-40 pb-16 max-w-4xl mx-auto px-6 text-center">
+    <!-- HERO -->
+    <header class="pt-40 pb-10 max-w-4xl mx-auto px-6 text-center">
         <h1 class="text-5xl md:text-7xl font-black tracking-tighter text-slate-900 leading-[0.9] italic uppercase mb-6">
             Salud Metabólica <br><span class="text-indigo-600">en el Escritorio.</span>
         </h1>
@@ -60,7 +55,25 @@
         </p>
     </header>
 
-    <!-- ✅ Unidad de anuncio adicional entre header y app -->
+    <!-- STATS -->
+    <section class="max-w-4xl mx-auto px-6 pb-10">
+        <div class="grid grid-cols-3 gap-4">
+            <div class="stat-card">
+                <div class="text-3xl font-black italic text-indigo-600 tracking-tighter leading-none mb-2">+300</div>
+                <div class="text-[10px] font-black uppercase text-slate-400 tracking-widest leading-relaxed">kcal/día extra<br>con movimiento regular</div>
+            </div>
+            <div class="stat-card">
+                <div class="text-3xl font-black italic text-indigo-600 tracking-tighter leading-none mb-2">-34%</div>
+                <div class="text-[10px] font-black uppercase text-slate-400 tracking-widest leading-relaxed">riesgo cardíaco<br>con pausas activas</div>
+            </div>
+            <div class="stat-card">
+                <div class="text-3xl font-black italic text-indigo-600 tracking-tighter leading-none mb-2">+23%</div>
+                <div class="text-[10px] font-black uppercase text-slate-400 tracking-widest leading-relaxed">concentración<br>tras moverse 60s</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AD: entre stats y app -->
     <div class="max-w-xl mx-auto px-6 mb-4">
         <div class="min-h-[90px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl overflow-hidden">
             <ins class="adsbygoogle w-full" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="5249616039" data-ad-format="auto" data-full-width-responsive="true"></ins>
@@ -68,6 +81,7 @@
         </div>
     </div>
 
+    <!-- APP / MONITOR -->
     <section id="monitor" class="py-12 bg-slate-50 border-y border-slate-100 px-6">
         <div class="max-w-xl mx-auto">
             <div id="timer-card" class="card-app p-8 md:p-14 relative overflow-hidden">
@@ -87,7 +101,6 @@
 
                     <div class="space-y-3 text-center">
                         <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest">Frecuencia</p>
-                        <!-- ✅ Botón TEST removido de producción -->
                         <div class="grid grid-cols-3 gap-2" id="time-grid">
                             <button onclick="setTime(15, this)" class="btn-select bg-white py-3 rounded-2xl text-[10px] font-black uppercase">15m</button>
                             <button onclick="setTime(30, this)" class="btn-select bg-white py-3 rounded-2xl text-[10px] font-black uppercase selected">30m</button>
@@ -114,7 +127,7 @@
                 </div>
             </div>
 
-            <!-- ✅ Slot corregido: 5249616039 -->
+            <!-- AD: bajo el monitor -->
             <div class="mt-8 min-h-[100px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl overflow-hidden">
                 <ins class="adsbygoogle w-full" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="5249616039" data-ad-format="auto" data-full-width-responsive="true"></ins>
                 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -122,7 +135,43 @@
         </div>
     </section>
 
-    <section class="py-24 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+    <!-- CÓMO FUNCIONA -->
+    <section class="py-20 max-w-3xl mx-auto px-6">
+        <h2 class="text-2xl font-black italic uppercase text-slate-900 tracking-tighter text-center mb-10">Cómo funciona</h2>
+        <div class="space-y-6">
+            <div class="flex items-start gap-4">
+                <div class="step-num">01</div>
+                <div>
+                    <p class="font-black text-slate-900 text-sm uppercase tracking-wide mb-1">Elegí tu frecuencia</p>
+                    <p class="text-sm text-slate-500">Configurá cada cuánto querés que el monitor te avise: cada 15, 30 o 60 minutos según tu jornada.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-4">
+                <div class="step-num">02</div>
+                <div>
+                    <p class="font-black text-slate-900 text-sm uppercase tracking-wide mb-1">Seleccioná tu rutina</p>
+                    <p class="text-sm text-slate-500">Piernas, respiración o espalda. Cada pausa dura 60 segundos y está diseñada para hacerse sin salir de tu lugar de trabajo.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-4">
+                <div class="step-num">03</div>
+                <div>
+                    <p class="font-black text-slate-900 text-sm uppercase tracking-wide mb-1">Activá el monitor</p>
+                    <p class="text-sm text-slate-500">El temporizador corre en segundo plano. Cuando llega el momento, recibís un aviso visual y de voz.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-4">
+                <div class="step-num">04</div>
+                <div>
+                    <p class="font-black text-slate-900 text-sm uppercase tracking-wide mb-1">Repetí todo el día</p>
+                    <p class="text-sm text-slate-500">Los efectos son acumulativos. Cada pausa suma al total diario de actividad y mejora tu metabolismo, postura y concentración.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTÍCULOS -->
+    <section class="pb-16 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
         <div class="article-card prose-text">
             <h3 class="text-xl font-black text-slate-900 uppercase italic mb-4">01. Termogénesis No Ejercicio (NEAT)</h3>
             <p class="text-sm">Las pequeñas ráfagas de movimiento durante la jornada laboral pueden quemar hasta 300 kcal adicionales por día y estabilizar tus niveles de energía.</p>
@@ -135,7 +184,7 @@
         </div>
     </section>
 
-    <!-- ✅ Unidad de anuncio adicional antes del footer -->
+    <!-- AD: antes del footer -->
     <div class="max-w-4xl mx-auto px-6 pb-12">
         <div class="min-h-[90px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl overflow-hidden">
             <ins class="adsbygoogle w-full" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="5249616039" data-ad-format="auto" data-full-width-responsive="true"></ins>
@@ -147,7 +196,6 @@
         A MOVERSE! &copy; 2026 | <a href="privacidad.html" class="underline">Privacidad</a> | <a href="terminos.html" class="underline">Términos</a>
     </footer>
 
-    <!-- ✅ Firebase scripts diferidos (se cargan solo al necesitarlos) -->
     <script>
         let firebaseLoaded = false;
         let db, analytics;
@@ -170,7 +218,7 @@
                 appId: "1:360098921820:web:86551b9e078b548f078e8b",
                 measurementId: "G-Y376J66Y5W"
             };
-            const app = firebase.initializeApp(firebaseConfig);
+            firebase.initializeApp(firebaseConfig);
             db = firebase.database().ref('logs_amoverse');
             analytics = firebase.analytics();
         }
