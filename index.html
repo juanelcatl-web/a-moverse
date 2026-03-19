@@ -6,7 +6,7 @@
     <title>A Moverse! | Monitor de Pausas Activas y Salud Laboral</title>
 
     <meta name="description" content="Optimizá tu salud metabólica con pausas activas científicamente diseñadas. Monitor de movimiento para trabajadores de escritorio.">
-    <meta name="keywords" content="pausas activas, salud laboral, NEAT, ergonomía, escritorio, bienestar, meditación, ejercicio">
+    <meta name="keywords" content="pausas activas, salud laboral, NEAT, ergonomía, escritorio, bienestar, sedentarismo, productividad">
     <meta name="author" content="A Moverse!">
 
     <meta property="og:title" content="A Moverse! | Monitor de Pausas Activas">
@@ -30,11 +30,11 @@
         .selected { border-color: #4f46e5; background: #4f46e5 !important; color: white !important; transform: scale(1.05); }
         .bg-overlay { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
         #main-timer { font-variant-numeric: tabular-nums; letter-spacing: -2px; }
-        .article-card { background: #ffffff; border-radius: 2rem; padding: 2.5rem; border: 1px solid #f1f5f9; height: 100%; }
+        .article-card { background: #ffffff; border-radius: 2rem; padding: 2.5rem; border: 1px solid #f1f5f9; height: 100%; transition: box-shadow 0.2s; }
+        .article-card:hover { box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08); }
         .prose-text { line-height: 1.8; color: #475569; }
         .stat-card { background: #fff; border: 1px solid #f1f5f9; border-radius: 1.5rem; padding: 1.5rem; text-align: center; }
         .step-num { width: 2rem; height: 2rem; background: #eef2ff; color: #4f46e5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; flex-shrink: 0; margin-top: 2px; }
-        /* Barra de progreso en el overlay */
         #ex-progress-bar { transition: width 1s linear; }
     </style>
 </head>
@@ -75,7 +75,7 @@
         </div>
     </section>
 
-    <!-- AD: entre stats y app -->
+    <!-- AD -->
     <div class="max-w-xl mx-auto px-6 mb-4">
         <div class="min-h-[90px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl overflow-hidden">
             <ins class="adsbygoogle w-full" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="5249616039" data-ad-format="auto" data-full-width-responsive="true"></ins>
@@ -88,14 +88,12 @@
         <div class="max-w-xl mx-auto">
             <div id="timer-card" class="card-app p-8 md:p-14 relative overflow-hidden">
 
-                <!-- OVERLAY de ejercicio con barra de progreso -->
                 <div id="exercise-overlay" class="hidden absolute inset-0 bg-overlay text-white flex flex-col items-center justify-center z-50 p-10 text-center">
                     <p class="text-[11px] font-black uppercase tracking-[0.5em] mb-3 animate-pulse">Pausa Activa en curso</p>
                     <div id="ex-emoji-display" class="text-6xl mb-3">🦵</div>
                     <h2 id="ex-name-display" class="text-4xl font-black italic uppercase mb-2 leading-none">¡MUÉVETE!</h2>
                     <p id="ex-hint-display" class="text-[11px] uppercase tracking-widest text-white/70 mb-6">De pie, despacio</p>
                     <div id="ex-timer" class="text-9xl font-black italic leading-none mb-6">60</div>
-                    <!-- Barra de progreso -->
                     <div class="w-full bg-white/20 rounded-full h-1.5 mb-6">
                         <div id="ex-progress-bar" class="bg-white h-1.5 rounded-full" style="width:100%"></div>
                     </div>
@@ -119,7 +117,6 @@
 
                     <div class="space-y-3">
                         <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest">Rutina</p>
-                        <!-- 6 ejercicios en grilla 3x2 -->
                         <div class="grid grid-cols-3 gap-2" id="ex-grid">
                             <button onclick="setEx(0, this)" class="btn-select bg-white p-3 rounded-2xl flex flex-col items-center gap-1 selected">
                                 <span class="text-xl">🦵</span>
@@ -152,7 +149,7 @@
                 </div>
             </div>
 
-            <!-- AD: bajo el monitor -->
+            <!-- AD bajo el monitor -->
             <div class="mt-8 min-h-[100px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl overflow-hidden">
                 <ins class="adsbygoogle w-full" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="5249616039" data-ad-format="auto" data-full-width-responsive="true"></ins>
                 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -195,21 +192,38 @@
         </div>
     </section>
 
-    <!-- ARTÍCULOS -->
-    <section class="pb-16 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
-        <div class="article-card prose-text">
-            <h3 class="text-xl font-black text-slate-900 uppercase italic mb-4">01. Termogénesis No Ejercicio (NEAT)</h3>
-            <p class="text-sm">Las pequeñas ráfagas de movimiento durante la jornada laboral pueden quemar hasta 300 kcal adicionales por día y estabilizar tus niveles de energía.</p>
-            <p class="mt-4 italic"><a href="hidratacion-rendimiento.html" class="text-indigo-600 font-bold underline">Hidratación y Rendimiento →</a></p>
-        </div>
-        <div class="article-card prose-text">
-            <h3 class="text-xl font-black text-slate-900 uppercase italic mb-4">02. Ergonomía Cognitiva</h3>
-            <p class="text-sm">La postura no solo afecta tu espalda; afecta tu confianza y capacidad de toma de decisiones.</p>
-            <p class="mt-4 italic"><a href="postura-y-vision.html" class="text-indigo-600 font-bold underline">Guía de Postura y Visión →</a></p>
+    <!-- ARTÍCULOS — 4 en grilla 2x2 -->
+    <section class="pb-16 max-w-6xl mx-auto px-6">
+        <h2 class="text-2xl font-black italic uppercase text-slate-900 tracking-tighter text-center mb-10">Ciencia del Movimiento</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <a href="sedentarismo.html" class="article-card prose-text block">
+                <span class="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600">Salud Laboral</span>
+                <h3 class="text-lg font-black text-slate-900 uppercase italic mt-2 mb-3">Síndrome del Sedentarismo: Qué le Pasa a tu Cuerpo</h3>
+                <p class="text-sm">Estar sentado 8 horas no es simplemente "no moverse". Qué ocurre en tu cuerpo hora a hora y por qué el ejercicio solo no alcanza.</p>
+                <p class="mt-4 text-indigo-600 font-bold text-sm">Leer artículo →</p>
+            </a>
+            <a href="productividad-movimiento.html" class="article-card prose-text block">
+                <span class="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600">Ciencia del Movimiento</span>
+                <h3 class="text-lg font-black text-slate-900 uppercase italic mt-2 mb-3">Productividad y Movimiento: La Ciencia Detrás</h3>
+                <p class="text-sm">El movimiento es combustible para el cerebro. Cómo 60 segundos de actividad mejoran tu concentración, creatividad y toma de decisiones.</p>
+                <p class="mt-4 text-indigo-600 font-bold text-sm">Leer artículo →</p>
+            </a>
+            <a href="hidratacion-rendimiento.html" class="article-card prose-text block">
+                <span class="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600">Nutrición</span>
+                <h3 class="text-lg font-black text-slate-900 uppercase italic mt-2 mb-3">Hidratación y Rendimiento en el Trabajo</h3>
+                <p class="text-sm">Una deshidratación del 2% ya afecta tu rendimiento cognitivo. Lo que tomás durante tu jornada impacta directamente en tu energía y foco.</p>
+                <p class="mt-4 text-indigo-600 font-bold text-sm">Leer artículo →</p>
+            </a>
+            <a href="postura-y-vision.html" class="article-card prose-text block">
+                <span class="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600">Ergonomía</span>
+                <h3 class="text-lg font-black text-slate-900 uppercase italic mt-2 mb-3">Guía de Postura y Visión</h3>
+                <p class="text-sm">La postura no solo afecta tu espalda — afecta tu confianza y capacidad de toma de decisiones. Cómo configurar tu espacio para proteger tu cuerpo.</p>
+                <p class="mt-4 text-indigo-600 font-bold text-sm">Leer artículo →</p>
+            </a>
         </div>
     </section>
 
-    <!-- AD: antes del footer -->
+    <!-- AD antes del footer -->
     <div class="max-w-4xl mx-auto px-6 pb-12">
         <div class="min-h-[90px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl overflow-hidden">
             <ins class="adsbygoogle w-full" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="5249616039" data-ad-format="auto" data-full-width-responsive="true"></ins>
@@ -222,18 +236,16 @@
     </footer>
 
     <script>
-        // Catálogo de ejercicios: nombre, emoji, pista visual, voz, duración en segundos
         const EXERCISES = [
-            { name: "Sentadillas", emoji: "🦵", hint: "De pie, bajá despacio", voice: "Hora de mover las piernas. Hacé sentadillas suaves.", duration: 60 },
-            { name: "Estirar",     emoji: "🙆‍♂️", hint: "Hombros, cuello y brazos", voice: "Momento de estirar. Soltá la tensión de la espalda y los hombros.", duration: 60 },
-            { name: "Respiración", emoji: "🫁", hint: "Inhalá 4s · Exhalá 6s",  voice: "Pausa de respiración. Inhalá profundo por cuatro segundos, exhalá por seis.", duration: 60 },
-            { name: "Meditar",     emoji: "🧘", hint: "Ojos cerrados, mente quieta", voice: "Momento de meditar. Cerrá los ojos y enfocate en tu respiración.", duration: 90 },
-            { name: "Caminar",     emoji: "🚶", hint: "Salí del escritorio",      voice: "Es hora de caminar. Levantate y dá una vuelta por la oficina.", duration: 60 },
-            { name: "Saltar",      emoji: "⬆️", hint: "Jumping jacks suaves",    voice: "¡A saltar! Movimiento rápido para activar la circulación.", duration: 45 },
+            { name: "Sentadillas", emoji: "🦵", hint: "De pie, bajá despacio",       voice: "Hora de mover las piernas. Hacé sentadillas suaves.",                              duration: 60 },
+            { name: "Estirar",     emoji: "🙆‍♂️", hint: "Hombros, cuello y brazos",   voice: "Momento de estirar. Soltá la tensión de la espalda y los hombros.",               duration: 60 },
+            { name: "Respiración", emoji: "🫁", hint: "Inhalá 4s · Exhalá 6s",       voice: "Pausa de respiración. Inhalá profundo por cuatro segundos, exhalá por seis.",      duration: 60 },
+            { name: "Meditar",     emoji: "🧘", hint: "Ojos cerrados, mente quieta", voice: "Momento de meditar. Cerrá los ojos y enfocate en tu respiración.",                 duration: 90 },
+            { name: "Caminar",     emoji: "🚶", hint: "Salí del escritorio",          voice: "Es hora de caminar. Levantate y dá una vuelta.",                                   duration: 60 },
+            { name: "Saltar",      emoji: "⬆️", hint: "Jumping jacks suaves",        voice: "¡A saltar! Movimiento rápido para activar la circulación.",                        duration: 45 },
         ];
 
         let selectedExIndex = 0;
-
         let firebaseLoaded = false;
         let db, analytics;
 
@@ -273,8 +285,7 @@
 
         function unlockVoice() {
             const u = new SpeechSynthesisUtterance("Audio activado");
-            u.lang = 'es-ES';
-            synth.speak(u);
+            u.lang = 'es-ES'; synth.speak(u);
             if (analytics) analytics.logEvent('audio_unlocked');
         }
 
@@ -326,24 +337,18 @@
             const ex = EXERCISES[selectedExIndex];
             const overlay = document.getElementById('exercise-overlay');
             let exTimeLeft = ex.duration;
-            const totalDuration = ex.duration;
-
             overlay.classList.remove('hidden');
             document.getElementById('ex-emoji-display').innerText = ex.emoji;
             document.getElementById('ex-name-display').innerText = ex.name.toUpperCase();
             document.getElementById('ex-hint-display').innerText = ex.hint;
             document.getElementById('ex-timer').innerText = exTimeLeft;
             document.getElementById('ex-progress-bar').style.width = '100%';
-
             speak(ex.voice);
             if (analytics) analytics.logEvent('exercise_triggered', { exercise: ex.name });
-
             exInterval = setInterval(() => {
                 exTimeLeft--;
                 document.getElementById('ex-timer').innerText = exTimeLeft;
-                // Actualizar barra de progreso
-                const pct = (exTimeLeft / totalDuration) * 100;
-                document.getElementById('ex-progress-bar').style.width = pct + '%';
+                document.getElementById('ex-progress-bar').style.width = ((exTimeLeft / ex.duration) * 100) + '%';
                 if (exTimeLeft <= 0) { stopExercise(); }
             }, 1000);
         }
@@ -357,8 +362,7 @@
 
         function stopAll() {
             isRunning = false;
-            clearInterval(mainInterval);
-            clearInterval(exInterval);
+            clearInterval(mainInterval); clearInterval(exInterval);
             const btn = document.getElementById('main-btn');
             btn.innerText = "ACTIVAR MONITOR";
             btn.classList.replace('bg-red-500', 'bg-indigo-600');
@@ -375,8 +379,7 @@
         function speak(t) {
             synth.cancel();
             const u = new SpeechSynthesisUtterance(t);
-            u.lang = 'es-ES';
-            synth.speak(u);
+            u.lang = 'es-ES'; synth.speak(u);
         }
     </script>
 </body>
