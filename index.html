@@ -15,6 +15,10 @@
     <meta property="og:url" content="https://amoverse.net">
     <meta property="og:image" content="https://amoverse.net/og-image.png">
 
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icono.png">
+    <link rel="apple-touch-icon" href="icono.png">
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5719496512652584" crossorigin="anonymous"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,9 +40,23 @@
         .stat-card { background: #fff; border: 1px solid #f1f5f9; border-radius: 1.5rem; padding: 1.5rem; text-align: center; }
         .step-num { width: 2rem; height: 2rem; background: #eef2ff; color: #4f46e5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; flex-shrink: 0; margin-top: 2px; }
         #ex-progress-bar { transition: width 1s linear; }
+        /* Banner de notificaciones */
+        #notif-banner { display: none; position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 200; background: #1e293b; color: white; border-radius: 1.5rem; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 20px 40px rgba(0,0,0,0.2); max-width: 420px; width: calc(100% - 3rem); }
+        #notif-banner.hidden { display: none !important; }
     </style>
 </head>
 <body class="selection:bg-indigo-100">
+
+    <!-- BANNER PERMISO NOTIFICACIONES -->
+    <div id="notif-banner" class="hidden">
+        <span class="text-xl">🔔</span>
+        <div class="flex-1">
+            <p class="font-black text-[11px] uppercase tracking-widest mb-0.5">Activar notificaciones</p>
+            <p class="text-[11px] text-white/60">Recibí el aviso aunque estés en otra pestaña</p>
+        </div>
+        <button onclick="requestNotifPermission()" class="bg-indigo-500 hover:bg-indigo-400 transition-colors text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase whitespace-nowrap">Activar</button>
+        <button onclick="dismissNotifBanner()" class="text-white/40 hover:text-white/70 text-lg leading-none px-1">✕</button>
+    </div>
 
     <nav class="fixed top-0 w-full z-[100] bg-white/90 backdrop-blur-lg border-b border-slate-100 px-6 py-4">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
@@ -179,7 +197,7 @@
                 <div class="step-num">03</div>
                 <div>
                     <p class="font-black text-slate-900 text-sm uppercase tracking-wide mb-1">Activá el monitor</p>
-                    <p class="text-sm text-slate-500">El temporizador corre en segundo plano. Cuando llega el momento, recibís un aviso visual y de voz.</p>
+                    <p class="text-sm text-slate-500">El temporizador corre en segundo plano. Cuando llega el momento, recibís un aviso visual, de voz y una notificación del sistema.</p>
                 </div>
             </div>
             <div class="flex items-start gap-4">
@@ -192,7 +210,7 @@
         </div>
     </section>
 
-    <!-- ARTÍCULOS — 4 en grilla 2x2 -->
+    <!-- ARTÍCULOS -->
     <section class="pb-16 max-w-6xl mx-auto px-6">
         <h2 class="text-2xl font-black italic uppercase text-slate-900 tracking-tighter text-center mb-10">Ciencia del Movimiento</h2>
         <div class="grid md:grid-cols-2 gap-8">
@@ -237,17 +255,63 @@
 
     <script>
         const EXERCISES = [
-            { name: "Sentadillas", emoji: "🦵", hint: "De pie, bajá despacio",       voice: "Hora de mover las piernas. Hacé sentadillas suaves.",                              duration: 60 },
-            { name: "Estirar",     emoji: "🙆‍♂️", hint: "Hombros, cuello y brazos",   voice: "Momento de estirar. Soltá la tensión de la espalda y los hombros.",               duration: 60 },
-            { name: "Respiración", emoji: "🫁", hint: "Inhalá 4s · Exhalá 6s",       voice: "Pausa de respiración. Inhalá profundo por cuatro segundos, exhalá por seis.",      duration: 60 },
-            { name: "Meditar",     emoji: "🧘", hint: "Ojos cerrados, mente quieta", voice: "Momento de meditar. Cerrá los ojos y enfocate en tu respiración.",                 duration: 90 },
-            { name: "Caminar",     emoji: "🚶", hint: "Salí del escritorio",          voice: "Es hora de caminar. Levantate y dá una vuelta.",                                   duration: 60 },
-            { name: "Saltar",      emoji: "⬆️", hint: "Jumping jacks suaves",        voice: "¡A saltar! Movimiento rápido para activar la circulación.",                        duration: 45 },
+            { name: "Sentadillas", emoji: "🦵", hint: "De pie, bajá despacio",       voice: "Hora de mover las piernas. Hacé sentadillas suaves.",                         duration: 60 },
+            { name: "Estirar",     emoji: "🙆‍♂️", hint: "Hombros, cuello y brazos",   voice: "Momento de estirar. Soltá la tensión de la espalda y los hombros.",          duration: 60 },
+            { name: "Respiración", emoji: "🫁", hint: "Inhalá 4s · Exhalá 6s",       voice: "Pausa de respiración. Inhalá profundo por cuatro segundos, exhalá por seis.", duration: 60 },
+            { name: "Meditar",     emoji: "🧘", hint: "Ojos cerrados, mente quieta", voice: "Momento de meditar. Cerrá los ojos y enfocate en tu respiración.",            duration: 90 },
+            { name: "Caminar",     emoji: "🚶", hint: "Salí del escritorio",          voice: "Es hora de caminar. Levantate y dá una vuelta.",                              duration: 60 },
+            { name: "Saltar",      emoji: "⬆️", hint: "Jumping jacks suaves",        voice: "¡A saltar! Movimiento rápido para activar la circulación.",                   duration: 45 },
         ];
 
         let selectedExIndex = 0;
         let firebaseLoaded = false;
         let db, analytics;
+        let swRegistration = null;
+        let notifPermission = Notification.permission;
+
+        // Registrar Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').then(reg => {
+                swRegistration = reg;
+            });
+        }
+
+        // Mostrar banner si no pidió permiso aún
+        window.addEventListener('load', () => {
+            if (notifPermission === 'default') {
+                setTimeout(() => {
+                    document.getElementById('notif-banner').classList.remove('hidden');
+                }, 3000);
+            }
+        });
+
+        function dismissNotifBanner() {
+            document.getElementById('notif-banner').classList.add('hidden');
+        }
+
+        async function requestNotifPermission() {
+            const result = await Notification.requestPermission();
+            notifPermission = result;
+            dismissNotifBanner();
+        }
+
+        async function sendNotification(ex) {
+            if (notifPermission !== 'granted') return;
+            const title = `⏰ ¡Hora de moverse!`;
+            const options = {
+                body: `${ex.emoji} ${ex.name} — ${ex.hint}`,
+                icon: '/icono.png',
+                badge: '/icono.png',
+                tag: 'pausa-activa',
+                renotify: true,
+                vibrate: [200, 100, 200],
+            };
+            if (swRegistration) {
+                swRegistration.showNotification(title, options);
+            } else {
+                new Notification(title, options);
+            }
+        }
 
         async function loadFirebase() {
             if (firebaseLoaded) return;
@@ -306,6 +370,12 @@
 
         async function toggleApp() {
             await loadFirebase();
+            // Pedir permiso de notificaciones al activar si aún no se pidió
+            if (notifPermission === 'default') {
+                const result = await Notification.requestPermission();
+                notifPermission = result;
+                dismissNotifBanner();
+            }
             const btn = document.getElementById('main-btn');
             if (!isRunning) {
                 isRunning = true;
@@ -337,14 +407,18 @@
             const ex = EXERCISES[selectedExIndex];
             const overlay = document.getElementById('exercise-overlay');
             let exTimeLeft = ex.duration;
+
             overlay.classList.remove('hidden');
             document.getElementById('ex-emoji-display').innerText = ex.emoji;
             document.getElementById('ex-name-display').innerText = ex.name.toUpperCase();
             document.getElementById('ex-hint-display').innerText = ex.hint;
             document.getElementById('ex-timer').innerText = exTimeLeft;
             document.getElementById('ex-progress-bar').style.width = '100%';
+
             speak(ex.voice);
+            sendNotification(ex); // 🔔 Notificación del sistema
             if (analytics) analytics.logEvent('exercise_triggered', { exercise: ex.name });
+
             exInterval = setInterval(() => {
                 exTimeLeft--;
                 document.getElementById('ex-timer').innerText = exTimeLeft;
