@@ -19,6 +19,15 @@
     <link rel="icon" href="icono.png">
     <link rel="apple-touch-icon" href="icono.png">
 
+    <!-- GA4 — trackea pageviews automáticamente -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y376J66Y5W"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y376J66Y5W');
+    </script>
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5719496512652584" crossorigin="anonymous"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,14 +49,13 @@
         .stat-card { background: #fff; border: 1px solid #f1f5f9; border-radius: 1.5rem; padding: 1.5rem; text-align: center; }
         .step-num { width: 2rem; height: 2rem; background: #eef2ff; color: #4f46e5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; flex-shrink: 0; margin-top: 2px; }
         #ex-progress-bar { transition: width 1s linear; }
-        /* Banner de notificaciones */
-        #notif-banner { display: none; position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 200; background: #1e293b; color: white; border-radius: 1.5rem; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 20px 40px rgba(0,0,0,0.2); max-width: 420px; width: calc(100% - 3rem); }
+        #notif-banner { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 200; background: #1e293b; color: white; border-radius: 1.5rem; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 20px 40px rgba(0,0,0,0.2); max-width: 420px; width: calc(100% - 3rem); }
         #notif-banner.hidden { display: none !important; }
     </style>
 </head>
 <body class="selection:bg-indigo-100">
 
-    <!-- BANNER PERMISO NOTIFICACIONES -->
+    <!-- BANNER NOTIFICACIONES -->
     <div id="notif-banner" class="hidden">
         <span class="text-xl">🔔</span>
         <div class="flex-1">
@@ -264,19 +272,55 @@
         ];
 
         let selectedExIndex = 0;
-        let firebaseLoaded = false;
-        let db, analytics;
         let swRegistration = null;
         let notifPermission = Notification.permission;
+        let firebaseDBLoaded = false;
+        let db, analytics;
 
-        // Registrar Service Worker
+        // Service Worker
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js').then(reg => {
                 swRegistration = reg;
             });
         }
 
-        // Mostrar banner si no pidió permiso aún
+        // Firebase Analytics al cargar — trackea todas las visitas
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const s = document.createElement('script');
+                s.src = src; s.onload = resolve; s.onerror = reject;
+                document.head.appendChild(s);
+            });
+        }
+
+        (async () => {
+            await Promise.all([
+                loadScript('https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js'),
+                loadScript('https://www.gstatic.com/firebasejs/9.1.3/firebase-analytics-compat.js'),
+            ]);
+            const firebaseConfig = {
+                apiKey: "AIzaSyA_KA4b9c-EuhlSlAEwMQ2EpeQSObIoRKQ",
+                authDomain: "alarma-de-movimiento-j1989.firebaseapp.com",
+                projectId: "alarma-de-movimiento-j1989",
+                databaseURL: "https://alarma-de-movimiento-j1989-default-rtdb.firebaseio.com",
+                storageBucket: "alarma-de-movimiento-j1989.appspot.com",
+                messagingSenderId: "360098921820",
+                appId: "1:360098921820:web:86551b9e078b548f078e8b",
+                measurementId: "G-Y376J66Y5W"
+            };
+            firebase.initializeApp(firebaseConfig);
+            analytics = firebase.analytics();
+        })();
+
+        // DB se carga solo cuando el usuario activa el monitor
+        async function loadFirebaseDB() {
+            if (firebaseDBLoaded) return;
+            firebaseDBLoaded = true;
+            await loadScript('https://www.gstatic.com/firebasejs/9.1.3/firebase-database-compat.js');
+            db = firebase.database().ref('logs_amoverse');
+        }
+
+        // Banner notificaciones
         window.addEventListener('load', () => {
             if (notifPermission === 'default') {
                 setTimeout(() => {
@@ -297,7 +341,6 @@
 
         async function sendNotification(ex) {
             if (notifPermission !== 'granted') return;
-            const title = `⏰ ¡Hora de moverse!`;
             const options = {
                 body: `${ex.emoji} ${ex.name} — ${ex.hint}`,
                 icon: '/icono.png',
@@ -307,41 +350,10 @@
                 vibrate: [200, 100, 200],
             };
             if (swRegistration) {
-                swRegistration.showNotification(title, options);
+                swRegistration.showNotification('⏰ ¡Hora de moverse!', options);
             } else {
-                new Notification(title, options);
+                new Notification('⏰ ¡Hora de moverse!', options);
             }
-        }
-
-        async function loadFirebase() {
-            if (firebaseLoaded) return;
-            firebaseLoaded = true;
-            await Promise.all([
-                loadScript('https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js'),
-                loadScript('https://www.gstatic.com/firebasejs/9.1.3/firebase-database-compat.js'),
-                loadScript('https://www.gstatic.com/firebasejs/9.1.3/firebase-analytics-compat.js'),
-            ]);
-            const firebaseConfig = {
-                apiKey: "AIzaSyA_KA4b9c-EuhlSlAEwMQ2EpeQSObIoRKQ",
-                authDomain: "alarma-de-movimiento-j1989.firebaseapp.com",
-                projectId: "alarma-de-movimiento-j1989",
-                databaseURL: "https://alarma-de-movimiento-j1989-default-rtdb.firebaseio.com",
-                storageBucket: "alarma-de-movimiento-j1989.appspot.com",
-                messagingSenderId: "360098921820",
-                appId: "1:360098921820:web:86551b9e078b548f078e8b",
-                measurementId: "G-Y376J66Y5W"
-            };
-            firebase.initializeApp(firebaseConfig);
-            db = firebase.database().ref('logs_amoverse');
-            analytics = firebase.analytics();
-        }
-
-        function loadScript(src) {
-            return new Promise((resolve, reject) => {
-                const s = document.createElement('script');
-                s.src = src; s.onload = resolve; s.onerror = reject;
-                document.head.appendChild(s);
-            });
         }
 
         let mainInterval, exInterval, selectedMinutes = 30, isRunning = false, timeLeft = 0;
@@ -369,8 +381,7 @@
         }
 
         async function toggleApp() {
-            await loadFirebase();
-            // Pedir permiso de notificaciones al activar si aún no se pidió
+            await loadFirebaseDB();
             if (notifPermission === 'default') {
                 const result = await Notification.requestPermission();
                 notifPermission = result;
@@ -407,18 +418,15 @@
             const ex = EXERCISES[selectedExIndex];
             const overlay = document.getElementById('exercise-overlay');
             let exTimeLeft = ex.duration;
-
             overlay.classList.remove('hidden');
             document.getElementById('ex-emoji-display').innerText = ex.emoji;
             document.getElementById('ex-name-display').innerText = ex.name.toUpperCase();
             document.getElementById('ex-hint-display').innerText = ex.hint;
             document.getElementById('ex-timer').innerText = exTimeLeft;
             document.getElementById('ex-progress-bar').style.width = '100%';
-
             speak(ex.voice);
-            sendNotification(ex); // 🔔 Notificación del sistema
+            sendNotification(ex);
             if (analytics) analytics.logEvent('exercise_triggered', { exercise: ex.name });
-
             exInterval = setInterval(() => {
                 exTimeLeft--;
                 document.getElementById('ex-timer').innerText = exTimeLeft;
