@@ -16,4 +16,4 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ALARMA_DE_MOVIMIENTO_J1989 }}
           channelId: live
-          projectId: alarma-de-movimiento-j1989
+          projectId: alarma-de-movimiento-j1989 
