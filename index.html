@@ -8,12 +8,39 @@
     <meta name="description" content="Optimizá tu salud metabólica con pausas activas científicamente diseñadas. Monitor de movimiento para trabajadores de escritorio.">
     <meta name="keywords" content="pausas activas, salud laboral, NEAT, ergonomía, escritorio, bienestar, sedentarismo, productividad">
     <meta name="author" content="A Moverse!">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://amoverse.net/">
 
     <meta property="og:title" content="A Moverse! | Monitor de Pausas Activas">
     <meta property="og:description" content="Pausas activas científicamente diseñadas para trabajadores de escritorio. Mejorá tu salud metabólica y postura.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://amoverse.net">
+    <meta property="og:url" content="https://amoverse.net/">
     <meta property="og:image" content="https://amoverse.net/og-image.png">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:site_name" content="A Moverse!">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Moverse! | Monitor de Pausas Activas">
+    <meta name="twitter:description" content="Pausas activas científicamente diseñadas para trabajadores de escritorio. Mejorá tu salud metabólica y postura.">
+    <meta name="twitter:image" content="https://amoverse.net/og-image.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "A Moverse!",
+      "url": "https://amoverse.net",
+      "description": "Monitor de pausas activas y salud laboral para trabajadores de escritorio. Pausas científicamente diseñadas para mejorar el metabolismo y la postura.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "ARS" },
+      "publisher": {
+        "@type": "Organization",
+        "name": "A Moverse!",
+        "url": "https://amoverse.net"
+      }
+    }
+    </script>
 
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="icono.png">
@@ -50,6 +77,7 @@
         #ex-progress-bar { transition: width 1s linear; }
         #notif-banner { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 200; background: #1e293b; color: white; border-radius: 1.5rem; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 20px 40px rgba(0,0,0,0.2); max-width: 420px; width: calc(100% - 3rem); }
         #notif-banner.hidden { display: none !important; }
+        .ad-slot { display: block; width: 100%; }
     </style>
 </head>
 <body class="selection:bg-indigo-100">
@@ -97,11 +125,15 @@
         </div>
     </section>
 
+    <!-- ADSENSE BANNER 1 — después de stats -->
     <div class="max-w-xl mx-auto px-6 mb-4">
-        <div class="min-h-[90px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl overflow-hidden">
-            <ins class="adsbygoogle w-full" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="5249616039" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
+        <ins class="adsbygoogle ad-slot"
+             style="display:block"
+             data-ad-client="ca-pub-5719496512652584"
+             data-ad-slot="5249616039"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <section id="monitor" class="py-12 bg-slate-50 border-y border-slate-100 px-6">
@@ -169,8 +201,14 @@
                 </div>
             </div>
 
-            <div class="mt-8 min-h-[100px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl overflow-hidden">
-                <ins class="adsbygoogle w-full" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="5249616039" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <!-- ADSENSE BANNER 2 — debajo del monitor -->
+            <div class="mt-8">
+                <ins class="adsbygoogle ad-slot"
+                     style="display:block"
+                     data-ad-client="ca-pub-5719496512652584"
+                     data-ad-slot="5249616039"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
                 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
             </div>
         </div>
@@ -213,7 +251,7 @@
     <section class="pb-16 max-w-6xl mx-auto px-6">
         <h2 class="text-2xl font-black italic uppercase text-slate-900 tracking-tighter text-center mb-10">Ciencia del Movimiento</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
+
             <a href="articles/peligros-sedentarismo-2026.html" class="article-card prose-text block border-2 border-emerald-50 hover:border-emerald-200 transition-all">
                 <span class="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-600">Salud Laboral</span>
                 <h3 class="text-lg font-black text-slate-900 uppercase italic mt-2 mb-3 leading-tight">Síndrome del Sedentarismo: Qué le Pasa a tu Cuerpo</h3>
@@ -228,21 +266,21 @@
                 <p class="mt-4 text-orange-600 font-bold text-sm">Leer artículo →</p>
             </a>
 
-            <a href="productividad-movimiento.html" class="article-card prose-text block">
+            <a href="articles/productividad-movimiento.html" class="article-card prose-text block">
                 <span class="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600">Productividad</span>
                 <h3 class="text-lg font-black text-slate-900 uppercase italic mt-2 mb-3 leading-tight">Productividad y Movimiento: La Ciencia Detrás</h3>
                 <p class="text-sm">El movimiento es combustible para el cerebro. Cómo las pausas activas mejoran tu creatividad y toma de decisiones.</p>
                 <p class="mt-4 text-indigo-600 font-bold text-sm">Leer artículo →</p>
             </a>
 
-            <a href="hidratacion-rendimiento.html" class="article-card prose-text block">
+            <a href="articles/hidratacion-rendimiento.html" class="article-card prose-text block">
                 <span class="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600">Nutrición</span>
                 <h3 class="text-lg font-black text-slate-900 uppercase italic mt-2 mb-3 leading-tight">Hidratación y Rendimiento en el Trabajo</h3>
                 <p class="text-sm">Una deshidratación del 2% ya afecta tu rendimiento cognitivo. El impacto del agua en tu energía diaria.</p>
                 <p class="mt-4 text-indigo-600 font-bold text-sm">Leer artículo →</p>
             </a>
 
-            <a href="postura-y-vision.html" class="article-card prose-text block">
+            <a href="articles/postura-y-vision.html" class="article-card prose-text block">
                 <span class="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600">Ergonomía</span>
                 <h3 class="text-lg font-black text-slate-900 uppercase italic mt-2 mb-3 leading-tight">Guía de Postura y Visión</h3>
                 <p class="text-sm">Configurá tu espacio para proteger tu cuerpo. La relación entre postura y capacidad de decisión.</p>
@@ -251,11 +289,15 @@
         </div>
     </section>
 
+    <!-- ADSENSE BANNER 3 — antes del footer -->
     <div class="max-w-4xl mx-auto px-6 pb-12">
-        <div class="min-h-[90px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl overflow-hidden">
-            <ins class="adsbygoogle w-full" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="5249616039" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
+        <ins class="adsbygoogle ad-slot"
+             style="display:block"
+             data-ad-client="ca-pub-5719496512652584"
+             data-ad-slot="5249616039"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <footer class="py-10 text-center text-[10px] font-black uppercase text-slate-400 tracking-widest">
@@ -278,14 +320,12 @@
         let firebaseDBLoaded = false;
         let db, analytics;
 
-        // Service Worker
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js').then(reg => {
                 swRegistration = reg;
             });
         }
 
-        // Firebase Analytics al cargar — trackea todas las visitas
         function loadScript(src) {
             return new Promise((resolve, reject) => {
                 const s = document.createElement('script');
@@ -313,7 +353,6 @@
             analytics = firebase.analytics();
         })();
 
-        // DB se carga solo cuando el usuario activa el monitor
         async function loadFirebaseDB() {
             if (firebaseDBLoaded) return;
             firebaseDBLoaded = true;
@@ -321,7 +360,6 @@
             db = firebase.database().ref('logs_amoverse');
         }
 
-        // Banner notificaciones
         window.addEventListener('load', () => {
             if (notifPermission === 'default') {
                 setTimeout(() => {
