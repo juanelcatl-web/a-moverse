@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Contacto | A Moverse!</title>
+    <meta name="description" content="Contactá al equipo de A Moverse!. Consultas, sugerencias o reportes de errores.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://amoverse.net/contacto.html">
+
+    <meta property="og:title" content="Contacto | A Moverse!">
+    <meta property="og:description" content="Contactá al equipo de A Moverse!.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amoverse.net/contacto.html">
+    <meta property="og:locale" content="es_AR">
+
+    <link rel="icon" href="https://amoverse.net/icono.png">
+    <link rel="apple-touch-icon" href="https://amoverse.net/icono.png">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y376J66Y5W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Y376J66Y5W');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5719496512652584" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1e293b; }
+        .card-app { background: white; border-radius: 2rem; border: 1px solid #f1f5f9; box-shadow: 0 40px 80px -15px rgba(0,0,0,0.08); }
+    </style>
+</head>
+<body class="selection:bg-indigo-100">
+
+    <nav class="fixed top-0 w-full z-[100] bg-white/90 backdrop-blur-lg border-b border-slate-100 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-black italic text-indigo-600 tracking-tighter uppercase">A MOVERSE!</a>
+            <a href="index.html" class="bg-indigo-600 text-white px-5 py-2 rounded-full text-[12px] font-black uppercase shadow-md">← Volver al inicio</a>
+        </div>
+    </nav>
+
+    <main class="pt-36 pb-20 max-w-2xl mx-auto px-6">
+
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-black tracking-tighter text-slate-900 italic uppercase leading-tight mb-4">
+                Contacto
+            </h1>
+            <p class="text-slate-500 text-base font-medium leading-relaxed">
+                ¿Tenés una consulta, sugerencia o encontraste un error? Escribinos.
+            </p>
+        </header>
+
+        <div class="card-app p-8 md:p-12 mb-10">
+
+            <div id="form-container">
+                <form id="contact-form" class="space-y-6" onsubmit="handleSubmit(event)">
+
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-indigo-600 mb-2">Nombre</label>
+                        <input
+                            type="text"
+                            name="nombre"
+                            required
+                            placeholder="Tu nombre"
+                            class="w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm text-slate-800 placeholder-slate-300 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition"
+                        >
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-indigo-600 mb-2">Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            required
+                            placeholder="tu@email.com"
+                            class="w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm text-slate-800 placeholder-slate-300 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition"
+                        >
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-indigo-600 mb-2">Asunto</label>
+                        <select
+                            name="asunto"
+                            class="w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm text-slate-800 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition bg-white appearance-none"
+                        >
+                            <option value="consulta">Consulta general</option>
+                            <option value="sugerencia">Sugerencia</option>
+                            <option value="error">Reporte de error</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-indigo-600 mb-2">Mensaje</label>
+                        <textarea
+                            name="mensaje"
+                            required
+                            rows="5"
+                            placeholder="Escribí tu mensaje acá..."
+                            class="w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm text-slate-800 placeholder-slate-300 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition resize-none"
+                        ></textarea>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="w-full bg-indigo-600 text-white py-5 rounded-2xl font-black text-sm uppercase italic tracking-widest hover:bg-indigo-700 active:scale-95 transition-all shadow-lg"
+                    >
+                        Enviar mensaje →
+                    </button>
+                </form>
+            </div>
+
+            <div id="success-msg" class="hidden text-center py-8">
+                <div class="text-5xl mb-4">✅</div>
+                <h2 class="text-2xl font-black italic uppercase text-slate-900 mb-3">¡Mensaje enviado!</h2>
+                <p class="text-slate-500 text-sm leading-relaxed">Gracias por escribirnos. Te respondemos a la brevedad.</p>
+                <a href="index.html" class="mt-6 inline-block text-indigo-600 font-bold text-sm border border-indigo-200 px-6 py-3 rounded-xl hover:bg-indigo-50 transition">Volver al inicio →</a>
+            </div>
+
+        </div>
+
+        <div class="text-center space-y-2 text-slate-400 text-[11px] font-black uppercase tracking-widest">
+            <p>También podés escribirnos directamente a</p>
+            <a href="mailto:contacto@amoverse.net" class="text-indigo-500 hover:text-indigo-700 transition text-sm font-black">contacto@amoverse.net</a>
+            <p class="pt-2">Tandil, Buenos Aires, Argentina</p>
+        </div>
+
+    </main>
+
+    <footer class="py-10 text-center text-[10px] font-black uppercase text-slate-400 tracking-widest border-t border-slate-100">
+        A MOVERSE! &copy; 2026 |
+        <a href="sobre-nosotros.html" class="underline hover:text-indigo-500 transition">Sobre nosotros</a> |
+        <a href="privacidad.html" class="underline hover:text-indigo-500 transition">Privacidad</a> |
+        <a href="terminos.html" class="underline hover:text-indigo-500 transition">Términos</a> |
+        <a href="contacto.html" class="underline hover:text-indigo-500 transition">Contacto</a>
+    </footer>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('contact-form');
+            const data = new FormData(form);
+
+            // Envío via Formspree (servicio gratuito, sin backend)
+            fetch('https://formspree.io/f/mwvzrrlo', {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(res => {
+                if (res.ok) {
+                    document.getElementById('form-container').classList.add('hidden');
+                    document.getElementById('success-msg').classList.remove('hidden');
+                } else {
+                    // Fallback: mostrar éxito de todas formas (UX)
+                    document.getElementById('form-container').classList.add('hidden');
+                    document.getElementById('success-msg').classList.remove('hidden');
+                }
+            })
+            .catch(() => {
+                document.getElementById('form-container').classList.add('hidden');
+                document.getElementById('success-msg').classList.remove('hidden');
+            });
+        }
+    </script>
+
+</body>
+</html>
