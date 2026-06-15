@@ -1,1 +1,163 @@
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>NEAT: Las Calorías que Quemás sin Ir al Gimnasio | A Moverse!</title>
+    <meta name="description" content="El NEAT —Non-Exercise Activity Thermogenesis— puede representar hasta 2000 kcal diarias en personas activas. Qué es, por qué importa y cómo el trabajo sedentario lo destruye.">
+    <meta name="author" content="Juan — A Moverse!">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://amoverse.net/posts/neat-calorias-sin-gimnasio.html">
+    <meta property="og:title" content="NEAT: Las Calorías que Quemás sin Ir al Gimnasio | A Moverse!">
+    <meta property="og:description" content="El NEAT puede representar hasta 2000 kcal diarias. El trabajo sedentario lo destruye. Esto es lo que dice la ciencia.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://amoverse.net/posts/neat-calorias-sin-gimnasio.html">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:site_name" content="A Moverse!">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "NEAT: Las Calorías que Quemás sin Ir al Gimnasio",
+      "description": "El NEAT puede representar hasta 2000 kcal diarias en personas activas. Qué es, por qué importa y cómo el trabajo sedentario lo destruye.",
+      "author": { "@type": "Person", "name": "Juan", "url": "https://amoverse.net/sobre-nosotros.html" },
+      "publisher": { "@type": "Organization", "name": "A Moverse!", "url": "https://amoverse.net" },
+      "datePublished": "2026-02-03",
+      "dateModified": "2026-02-03",
+      "url": "https://amoverse.net/posts/neat-calorias-sin-gimnasio.html",
+      "mainEntityOfPage": "https://amoverse.net/posts/neat-calorias-sin-gimnasio.html"
+    }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y376J66Y5W"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y376J66Y5W');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5719496512652584" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://amoverse.net/icono.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1e293b; }
+        .prose h2 { font-size: 1.15rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; color: #0f172a; margin-top: 2.5rem; margin-bottom: 0.75rem; font-style: italic; }
+        .prose p { font-size: 0.92rem; color: #475569; line-height: 1.9; margin-bottom: 1rem; }
+        .prose ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+        .prose li { font-size: 0.92rem; color: #475569; line-height: 1.8; margin-bottom: 0.4rem; }
+        .prose strong { color: #1e293b; }
+        .callout { background: #eef2ff; border-left: 4px solid #4f46e5; border-radius: 0 1rem 1rem 0; padding: 1.25rem 1.5rem; margin: 1.75rem 0; }
+        .callout p { color: #3730a3; font-weight: 700; margin: 0; font-size: 0.9rem; line-height: 1.6; }
+        .quote-block { background: #f8fafc; border-radius: 1.5rem; padding: 1.5rem 2rem; margin: 2rem 0; }
+        .quote-block p { color: #334155; font-size: 1rem; font-style: italic; line-height: 1.8; margin: 0 0 0.75rem 0; }
+        .quote-block cite { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; font-style: normal; }
+        .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.75rem 0; }
+        .stat-box { background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 1rem; padding: 1.25rem; text-align: center; }
+        .stat-num { font-size: 2rem; font-weight: 900; font-style: italic; color: #4f46e5; line-height: 1; margin-bottom: 0.4rem; }
+        .stat-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3b8; line-height: 1.4; }
+        .related-card { background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 1.5rem; padding: 1.5rem; margin-top: 3rem; }
+        .author-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: #f1f5f9; border-radius: 2rem; padding: 0.4rem 0.9rem; margin-bottom: 1.5rem; }
+        .author-tag span { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; }
+    </style>
+</head>
+<body class="selection:bg-indigo-100">
+    <nav class="fixed top-0 w-full z-[100] bg-white/90 backdrop-blur-lg border-b border-slate-100 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-black italic text-indigo-600 tracking-tighter uppercase">A MOVERSE!</a>
+            <a href="../index.html" class="text-[11px] font-black uppercase text-slate-400 tracking-widest hover:text-indigo-600 transition-colors">← Volver</a>
+        </div>
+    </nav>
+    <main class="pt-36 pb-24 max-w-2xl mx-auto px-6">
+        <div class="mb-10">
+            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600">Metabolismo</span>
+            <h1 class="text-4xl md:text-5xl font-black italic uppercase tracking-tighter text-slate-900 leading-[0.95] mt-3 mb-5">NEAT: Las Calorías que Quemás sin Ir al Gimnasio</h1>
+            <p class="text-base text-slate-500 leading-relaxed">La diferencia de peso entre dos personas con la misma dieta y el mismo gimnasio puede explicarse completamente por un factor que casi nadie mide: el movimiento espontáneo durante el día. Así funciona el NEAT.</p>
+            <div class="author-tag mt-5"><span>Por Juan · A Moverse! · Febrero 2026</span></div>
+        </div>
+        <div class="mb-8 min-h-[90px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl overflow-hidden">
+            <ins class="adsbygoogle w-full" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="5249616039" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="stat-row">
+            <div class="stat-box"><div class="stat-num">2000</div><div class="stat-label">kcal/día que puede representar el NEAT en personas muy activas</div></div>
+            <div class="stat-box"><div class="stat-num">-80%</div><div class="stat-label">caída del NEAT al pasar de trabajo activo a escritorio</div></div>
+            <div class="stat-box"><div class="stat-num">+300</div><div class="stat-label">kcal extra diarias con pausas activas y movimiento frecuente</div></div>
+        </div>
+        <div class="prose">
+            <h2>El factor que nadie mide</h2>
+            <p>El Dr. James Levine, investigador de la Clínica Mayo especializado en metabolismo, realizó un experimento que cambió la forma en que entendemos el peso corporal. Tomó a un grupo de personas con características similares — misma edad, mismo índice de masa corporal, misma dieta — y las equipó con sensores de movimiento durante varios días. El resultado fue inesperado: la diferencia en gasto calórico entre los participantes más y menos activos llegaba a 2.000 kilocalorías diarias. Sin ir al gimnasio. Sin hacer deporte. Solo por la cantidad de movimiento espontáneo que cada persona hacía en su vida cotidiana.</p>
+            <p>Levine llamó a este fenómeno <strong>NEAT</strong>: Non-Exercise Activity Thermogenesis, o termogénesis de actividad no relacionada con el ejercicio. Es la energía que el cuerpo gasta en todo lo que no es dormir, comer o hacer ejercicio planificado: caminar, pararse, gesticular, subir escaleras, inquietarse en la silla, ir al baño, buscar algo en otro cuarto.</p>
+            <p>Para la mayoría de las personas sedentarias, el NEAT representa entre el 15 y el 20% del gasto energético total. Para personas con trabajos activos — mozos, enfermeras, obreros — puede llegar al 50%. Esa diferencia, acumulada día tras día, explica variaciones de peso que ningún plan de ejercicio o dieta puede replicar de forma eficiente.</p>
+            <div class="callout"><p>Un estudio de Levine y colaboradores publicado en Science (1999) implantó sensores de movimiento en 16 voluntarios durante 10 días. La variación en NEAT entre participantes llegó a 2.000 kcal/día. Los autores concluyeron que el NEAT es el principal determinante de la diferencia en gasto energético entre individuos con peso similar.</p></div>
+            <h2>Qué le pasa al NEAT cuando empezás a trabajar en un escritorio</h2>
+            <p>El trabajo de escritorio es el peor ambiente posible para el NEAT. No porque las personas sean menos activas por decisión, sino porque el entorno elimina sistemáticamente todas las oportunidades de movimiento espontáneo que el cuerpo habría tenido de otra forma.</p>
+            <p>Un estudio de la Universidad de Missouri comparó el NEAT de las mismas personas durante un día de trabajo en oficina y durante un día libre. El resultado fue una caída del 80% en el gasto calórico por movimiento espontáneo. Las personas no decidieron moverse menos — simplemente, el contexto de estar sentado frente a una pantalla durante 8 horas elimina el movimiento antes de que pueda ocurrir.</p>
+            <p>El mecanismo es claro: el NEAT depende de pequeñas decisiones continuas — levantarse a buscar algo, dar pasos mientras se piensa, cambiar de postura con frecuencia — que en un entorno de trabajo sedentario quedan suprimidas por la inercia de estar sentado y enfocado en una pantalla.</p>
+            <h2>Por qué el gimnasio no compensa</h2>
+            <p>Una de las conclusiones más contraintuitivas de la investigación sobre NEAT es que el ejercicio planificado no solo no compensa el sedentarismo laboral — en algunos casos, lo empeora.</p>
+            <p>Un estudio publicado en el American Journal of Physiology documentó lo que los investigadores llamaron "compensación de actividad": después de una sesión de ejercicio intenso, el cuerpo reduce de forma automática e inconsciente el NEAT durante el resto del día. Las personas que hacían ejercicio intenso por la mañana tenían niveles de movimiento espontáneo significativamente más bajos durante la tarde que las personas que no habían hecho ejercicio.</p>
+            <p>El mecanismo es fisiológico: el sistema nervioso autónomo regula el NEAT en función del gasto energético total. Cuando ese gasto sube por encima de cierto umbral a través del ejercicio, el cuerpo "ahorra" energía reduciendo el movimiento espontáneo. El resultado neto puede ser un gasto calórico similar o incluso menor al de alguien que no hizo ejercicio pero se movió de forma constante durante el día.</p>
+            <div class="quote-block">
+                <p>"El NEAT es el componente más variable del gasto energético total y el factor que más diferencia al individuo con sobrepeso del delgado. No es el metabolismo basal ni el ejercicio — es el movimiento de fondo."</p>
+                <cite>Dr. James Levine — Mayo Clinic, pionero en la investigación del NEAT</cite>
+            </div>
+            <h2>NEAT y regulación metabólica</h2>
+            <p>El impacto del NEAT no se limita a las calorías. El movimiento espontáneo también activa mecanismos metabólicos que el ejercicio formal no replica con la misma eficiencia, precisamente porque ocurre de forma distribuida a lo largo del día.</p>
+            <p>Cada vez que el cuerpo se mueve, aunque sea brevemente, los músculos activan transportadores de glucosa GLUT4 que mejoran la sensibilidad a la insulina. La lipoproteína lipasa — la enzima que descompone las grasas en sangre — se reactiva. La circulación mejora. Estos efectos son acumulativos y dependen de la frecuencia, no de la intensidad.</p>
+            <p>Un estudio de la Universidad de Maastricht midió los marcadores metabólicos de tres grupos: uno sedentario, uno con ejercicio estructurado y uno con alto NEAT pero sin ejercicio formal. El grupo de alto NEAT mostró marcadores de sensibilidad a la insulina y perfil lipídico comparables al grupo de ejercicio, a pesar de no haber hecho ninguna sesión planificada.</p>
+            <h2>El NEAT en el trabajo de escritorio: qué se puede hacer</h2>
+            <p>La buena noticia es que el NEAT no requiere cambiar de trabajo ni tener un escritorio de pie. Requiere interrumpir el patrón de inmovilidad con suficiente frecuencia como para que el cuerpo mantenga su nivel de movimiento espontáneo activo.</p>
+            <p>Las estrategias con mayor evidencia de impacto en el NEAT laboral son:</p>
+            <ul>
+                <li><strong>Levantarse cada 30 minutos</strong>, aunque sea por 60 segundos. El simple acto de ponerse de pie y volver activa grupos musculares grandes y reinicia el ciclo metabólico.</li>
+                <li><strong>Caminar mientras se habla por teléfono.</strong> Las llamadas son una de las pocas actividades laborales que permiten moverse sin perder productividad. Un trabajador con 3 llamadas diarias de 10 minutos puede sumar 30 minutos de caminata sin esfuerzo adicional.</li>
+                <li><strong>Ir personalmente a hablar con colegas</strong> en vez de mandar mensajes internos. Un viaje de 50 metros ida y vuelta hecho 10 veces al día son 500 metros extra de caminata.</li>
+                <li><strong>Usar escaleras en vez de ascensor.</strong> Subir escaleras tiene un costo metabólico 8 veces mayor que caminar en llano y activa grupos musculares que el movimiento sedentario no estimula.</li>
+                <li><strong>Cambiar de postura de forma activa</strong> cada vez que cambiás de tarea. De pie, sentado, apoyado — la variación de postura mantiene el tono muscular y el gasto calórico por encima del nivel de reposo absoluto.</li>
+            </ul>
+            <div class="callout"><p>Un análisis de intervenciones de NEAT en entornos de oficina publicado en el British Journal of Sports Medicine encontró que agregar pausas activas frecuentes durante la jornada aumentaba el gasto calórico diario entre 180 y 350 kcal sin ningún cambio en la dieta ni en el ejercicio fuera del trabajo.</p></div>
+            <h2>Cuánto NEAT es suficiente</h2>
+            <p>No hay un número exacto, pero la investigación sugiere que el objetivo debería ser reducir los bloques de sedentarismo continuo a no más de 30 minutos. Eso equivale a levantarse y moverse brevemente unas 16 veces durante una jornada de 8 horas.</p>
+            <p>Parece mucho, pero en la práctica implica levantarse a buscar agua, ir al baño, caminar hasta la impresora, hablar de pie con un colega — actividades que cualquier persona hace naturalmente, pero que en el trabajo remoto o en jornadas de alta concentración tienden a desaparecer completamente.</p>
+            <p>El monitor de pausas activas actúa como un sistema de restauración del NEAT: cada aviso es una oportunidad para reinsertar el movimiento espontáneo que el entorno de trabajo elimina. No reemplaza el ejercicio, pero sí preserva el componente del gasto calórico que más impacto tiene en la salud metabólica diaria.</p>
+            <div class="quote-block">
+                <p>"Aumentar el NEAT no requiere voluntad heroica ni tiempo extra. Requiere diseñar el entorno para que el movimiento ocurra de forma natural a lo largo del día."</p>
+                <cite>Dr. James Levine — Mayo Clinic / Arizona State University</cite>
+            </div>
+            <h2>La diferencia entre moverse y hacer ejercicio</h2>
+            <p>Esta distinción es el corazón del concepto NEAT y la razón por la que el monitor de pausas activas tiene sentido como herramienta independiente del gimnasio.</p>
+            <p>Hacer ejercicio es una actividad intensa, planificada, que ocurre en ventanas de tiempo específicas y que el cuerpo compensa reduciendo el movimiento de fondo. Moverse es el estado de fondo del organismo — el movimiento continuo, de baja intensidad, no planificado, que acompaña las actividades cotidianas.</p>
+            <p>La investigación de NEAT muestra que las personas más saludables metabólicamente no son necesariamente las que más ejercicio hacen, sino las que menos tiempo pasan completamente inmóviles. La acumulación de pequeños movimientos a lo largo de 16 horas de vigilia representa un gasto energético y un estímulo metabólico que ninguna sesión de ejercicio de 45 minutos puede replicar completamente.</p>
+        </div>
+        <div class="mb-8 min-h-[90px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl overflow-hidden">
+            <ins class="adsbygoogle w-full" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="5249616039" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="related-card">
+            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4">Seguí leyendo</p>
+            <div class="grid grid-cols-1 gap-3">
+                <a href="peligros-sedentarismo-2026.html" class="block hover:text-indigo-600 transition-colors">
+                    <p class="font-black text-slate-900 text-sm uppercase italic">Síndrome del Sedentarismo: Qué le Pasa a tu Cuerpo →</p>
+                    <p class="text-xs text-slate-400 mt-1">La cascada metabólica que se activa cuando dejás de moverte.</p>
+                </a>
+                <a href="productividad-movimiento.html" class="block hover:text-indigo-600 transition-colors">
+                    <p class="font-black text-slate-900 text-sm uppercase italic">Productividad y Movimiento: La Ciencia Detrás →</p>
+                    <p class="text-xs text-slate-400 mt-1">Cómo el movimiento mejora la concentración y la toma de decisiones.</p>
+                </a>
+            </div>
+        </div>
+        <div class="mt-10 text-center">
+            <a href="../index.html" class="inline-block bg-indigo-600 text-white px-8 py-4 rounded-2xl font-black text-sm uppercase italic tracking-widest hover:bg-indigo-700 transition-colors shadow-lg">Activar Monitor de Pausas →</a>
+        </div>
+    </main>
+    <footer class="py-10 text-center text-[10px] font-black uppercase text-slate-400 tracking-widest border-t border-slate-100">
+        A MOVERSE! &copy; 2026 |
+        <a href="../sobre-nosotros.html" class="underline hover:text-indigo-500 transition">Sobre nosotros</a> |
+        <a href="../privacidad.html" class="underline hover:text-indigo-500 transition">Privacidad</a> |
+        <a href="../terminos.html" class="underline hover:text-indigo-500 transition">Términos</a> |
+        <a href="../contacto.html" class="underline hover:text-indigo-500 transition">Contacto</a>
+    </footer>
+</body>
+</html>
