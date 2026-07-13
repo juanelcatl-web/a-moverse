@@ -1,37 +1,57 @@
-const CACHE_NAME = 'amoverse-v4-8-fixed';
+const CACHE_NAME = 'amoverse-v3';
+const STATIC_ASSETS = [
+  '/icono.png',
+  '/manifest.json'
+];
 
+// Instalación: solo cacheamos assets estáticos mínimos
 self.addEventListener('install', event => {
-    self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS))
+  );
+  self.skipWaiting();
 });
 
+// Activación: limpia cachés viejos
 self.addEventListener('activate', event => {
-    event.waitUntil(clients.claim());
-    event.waitUntil(
-        caches.keys().then(keys => Promise.all(
-            keys.map(key => {
-                if (key !== CACHE_NAME) return caches.delete(key);
-            })
-        ))
-    );
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+      )
+    )
+  );
+  self.clients.claim();
 });
 
+// Fetch: Network First para HTML, Cache First para imágenes/iconos
 self.addEventListener('fetch', event => {
-    event.respondWith(fetch(event.request));
-});
+  const url = new URL(event.request.url);
 
-// Cuando el usuario toca la notificación, enfoca la app
-self.addEventListener('notificationclick', event => {
-    event.notification.close();
-    event.waitUntil(
-        clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
-            // Si la app ya está abierta en alguna pestaña, la enfoca
-            for (const client of list) {
-                if (client.url.includes('amoverse.net') && 'focus' in client) {
-                    return client.focus();
-                }
-            }
-            // Si no, abre una nueva
-            if (clients.openWindow) return clients.openWindow('https://amoverse.net');
+  // HTML: siempre pide al servidor primero
+  if (event.request.headers.get('accept') &&
+      event.request.headers.get('accept').includes('text/html')) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          // Actualiza el caché con la versión nueva
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          return response;
         })
+        .catch(() => caches.match(event.request))
     );
+    return;
+  }
+
+  // Iconos y assets estáticos: cache first
+  if (STATIC_ASSETS.some(asset => url.pathname === asset)) {
+    event.respondWith(
+      caches.match(event.request).then(cached => cached || fetch(event.request))
+    );
+    return;
+  }
+
+  // Todo lo demás: network first
+  event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
 });
