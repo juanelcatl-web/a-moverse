@@ -1,10 +1,23 @@
-const CACHE_NAME = 'amoverse-v3';
-const STATIC_ASSETS = [
-  '/icono.png',
-  '/manifest.json'
+const CACHE_NAME = 'amoverse-v4';
+
+// Solo cacheamos el icono — nada más
+const STATIC_ASSETS = ['/icono.png'];
+
+// Dominios externos que NUNCA interceptamos
+const EXTERNAL_DOMAINS = [
+  'cdn.tailwindcss.com',
+  'fonts.googleapis.com',
+  'fonts.gstatic.com',
+  'pagead2.googlesyndication.com',
+  'www.googletagmanager.com',
+  'www.gstatic.com',
+  'firebase.googleapis.com',
+  'firebaseinstallations.googleapis.com',
+  'www.google-analytics.com',
+  'analytics.google.com',
+  'toncenter.com'
 ];
 
-// Instalación: solo cacheamos assets estáticos mínimos
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS))
@@ -12,7 +25,6 @@ self.addEventListener('install', event => {
   self.skipWaiting();
 });
 
-// Activación: limpia cachés viejos
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
@@ -24,17 +36,25 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
-// Fetch: Network First para HTML, Cache First para imágenes/iconos
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // HTML: siempre pide al servidor primero
+  // Dejar pasar SIN interceptar todos los dominios externos
+  if (EXTERNAL_DOMAINS.some(domain => url.hostname.includes(domain))) {
+    return; // fetch normal del navegador
+  }
+
+  // Solo interceptar recursos del propio dominio (amoverse.net)
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
+  // HTML propio: siempre network first
   if (event.request.headers.get('accept') &&
       event.request.headers.get('accept').includes('text/html')) {
     event.respondWith(
       fetch(event.request)
         .then(response => {
-          // Actualiza el caché con la versión nueva
           const clone = response.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
           return response;
@@ -44,14 +64,16 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Iconos y assets estáticos: cache first
-  if (STATIC_ASSETS.some(asset => url.pathname === asset)) {
+  // Icono: cache first
+  if (url.pathname === '/icono.png') {
     event.respondWith(
       caches.match(event.request).then(cached => cached || fetch(event.request))
     );
     return;
   }
 
-  // Todo lo demás: network first
-  event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
+  // Todo lo demás propio: network first
+  event.respondWith(
+    fetch(event.request).catch(() => caches.match(event.request))
+  );
 });
