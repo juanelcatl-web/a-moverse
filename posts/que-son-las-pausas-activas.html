@@ -120,6 +120,12 @@
         .sources ul { list-style: none; padding: 0; margin: 0; }
         .sources li { font-size: 0.78rem; color: #64748b; margin-bottom: 0.5rem; line-height: 1.5; }
         .sources a { color: #4f46e5; text-decoration: underline; }
+        .toc-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 1.25rem; padding: 1.5rem 1.75rem; margin: 1.75rem 0 2rem 0; }
+        .toc-title { font-size: 0.78rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #64748b; margin-bottom: 1rem; }
+        .toc-list { list-style: decimal; padding-left: 1.25rem; margin: 0; }
+        .toc-list li { font-size: 0.85rem; color: #475569; line-height: 1.7; margin-bottom: 0.3rem; }
+        .toc-list a { color: #4f46e5; text-decoration: none; font-weight: 600; }
+        .toc-list a:hover { text-decoration: underline; }
     </style>
 </head>
 <body class="selection:bg-indigo-100">
@@ -136,6 +142,21 @@
             <p class="text-base text-slate-500 leading-relaxed">Las pausas activas son la intervención más simple, más económica y más respaldada por la ciencia para contrarrestar el sedentarismo laboral. No requieren equipamiento, no demandan tiempo extra y producen efectos medibles desde la primera semana. Esto es todo lo que necesitás saber.</p>
             <div class="author-tag mt-5"><span>Por Juan Calderón · Desarrollador Tecnológico · Octubre 2026</span></div>
         </div>
+
+        <!-- TABLA DE CONTENIDOS -->
+        <nav class="toc-box" aria-label="Tabla de contenidos">
+            <p class="toc-title">📋 En este artículo</p>
+            <ol class="toc-list">
+                <li><a href="#que-son">¿Qué son las pausas activas exactamente?</a></li>
+                <li><a href="#para-que-sirven">¿Para qué sirven las pausas activas?</a></li>
+                <li><a href="#como-hacer">¿Cómo hacer una pausa activa correctamente?</a></li>
+                <li><a href="#ejercicios">Ejercicios para pausas activas en el trabajo</a></li>
+                <li><a href="#por-que-olvidamos">¿Por qué es difícil recordarlas?</a></li>
+                <li><a href="#monitor">El monitor de A Moverse</a></li>
+                <li><a href="#faq">Preguntas frecuentes</a></li>
+            </ol>
+        </nav>
+
         <div class="mb-8 min-h-[90px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl overflow-hidden">
             <ins class="adsbygoogle w-full" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="5249616039" data-ad-format="auto" data-full-width-responsive="true"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -146,12 +167,12 @@
             <div class="stat-box"><div class="stat-num">-54%</div><div class="stat-label">reducción del dolor lumbar con pausas activas regulares en 4 semanas</div></div>
         </div>
         <div class="prose">
-            <h2>Qué son las pausas activas exactamente</h2>
+            <h2 id="que-son">Qué son las pausas activas exactamente</h2>
             <p>Una <strong>pausa activa</strong> es una interrupción breve y programada del sedentarismo durante la jornada laboral en la que se realizan movimientos físicos suaves. A diferencia del descanso pasivo — sentarse sin hacer nada, mirar el celular, tomar café — una pausa activa implica movimiento real del cuerpo.</p>
             <p>La duración estándar es de 60 a 120 segundos. La frecuencia recomendada por la evidencia científica es cada 30 a 60 minutos. El tipo de movimiento puede variar — estiramientos, sentadillas, caminata breve, respiración — pero el principio es siempre el mismo: interrumpir el ciclo metabólico que activa el sedentarismo prolongado.</p>
             <div class="callout"><p>El término "pausa activa" a veces se confunde con "pausa de descanso". La diferencia es clave: una pausa de descanso reduce la carga cognitiva; una pausa activa hace eso <em>y además</em> revierte los efectos metabólicos del sedentarismo. Una es para la mente, la otra es para la mente y el cuerpo.</p></div>
 
-            <h2>Para qué sirven las pausas activas</h2>
+            <h2 id="para-que-sirven">Para qué sirven las pausas activas</h2>
             <p>La <a href="https://www.who.int/news-room/fact-sheets/detail/physical-activity" target="_blank" rel="noopener">OMS recomienda interrumpir el sedentarismo con movimiento frecuente</a> basándose en evidencia que muestra efectos sobre múltiples sistemas del organismo simultáneamente:</p>
             <ul>
                 <li><strong>Metabolismo de glucosa:</strong> los músculos en contracción captan glucosa sin necesitar insulina. Un <a href="https://pubmed.ncbi.nlm.nih.gov/22197488/" target="_blank" rel="noopener">estudio de la Universidad de Queensland</a> mostró mejoras significativas en glucosa postprandial con solo 2 minutos de movimiento cada 20 minutos.</li>
@@ -161,7 +182,7 @@
                 <li><strong>Cortisol y estrés:</strong> 60 segundos de respiración diafragmática o movimiento suave activan el nervio vago y reducen el cortisol circulante de forma medible.</li>
             </ul>
 
-            <h2>Cómo hacer una pausa activa correctamente</h2>
+            <h2 id="como-hacer">Cómo hacer una pausa activa correctamente</h2>
             <div class="my-6 space-y-3">
                 <div class="step-card">
                     <span class="step-num">01</span>
@@ -181,7 +202,7 @@
                 </div>
             </div>
 
-            <h2>Ejercicios para pausas activas en el trabajo</h2>
+            <h2 id="ejercicios">Ejercicios para pausas activas en el trabajo</h2>
             <p>Esta es la rutina de 60 segundos más efectiva para hacer en cualquier lugar de trabajo:</p>
             <ul>
                 <li><strong>0-15 seg — Retracción cervical:</strong> cabeza hacia atrás como haciendo papada, 5 repeticiones. Corrige la postura de cabeza proyectada.</li>
@@ -190,19 +211,19 @@
                 <li><strong>45-60 seg — Respiración 4-6:</strong> inhalá 4 segundos, exhalá 6. Activa el nervio vago y baja el cortisol.</li>
             </ul>
 
-            <h2>Por qué es difícil recordar las pausas activas</h2>
+            <h2 id="por-que-olvidamos">Por qué es difícil recordar las pausas activas</h2>
             <p>El problema principal de las pausas activas no es la voluntad — es el olvido. Cuando estás concentrado en una tarea, el tiempo pasa sin que lo notes. A la hora y media te acordás que "tenías que moverse" y el daño metabólico ya ocurrió.</p>
             <p>Por eso la herramienta más efectiva para implementar pausas activas no es la disciplina sino un <strong>sistema de recordatorio automático</strong>. Los estudios sobre adherencia a pausas activas muestran tasas de cumplimiento del 23% cuando dependen de la disciplina personal, y del 78% cuando hay un sistema automático de aviso.</p>
         </div>
 
         <!-- MONITOR CARD -->
-        <div class="monitor-card">
+        <div class="monitor-card" id="monitor">
             <h3>🔔 El Monitor de Pausas Activas de A Moverse</h3>
             <p>A Moverse es un monitor gratuito que corre en segundo plano mientras trabajás y te avisa automáticamente cada 15, 30 o 60 minutos — con aviso visual, sonoro y notificación del sistema. Cuando llega el momento, te propone una rutina de 60 segundos adaptada a tu espacio de trabajo: piernas, espalda, respiración, meditación, caminata o saltos. Sin suscripción, sin registro, sin instalación.</p>
             <a href="../index.html">Activar el Monitor →</a>
         </div>
 
-        <div class="faq-section">
+        <div class="faq-section" id="faq">
             <p class="faq-title">Preguntas frecuentes sobre pausas activas</p>
             <div class="faq-item">
                 <p class="faq-q">¿Qué son las pausas activas?</p>
