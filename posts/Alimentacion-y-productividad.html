@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Alimentación y Productividad: Glucosa, Foco y Decisiones | A Moverse!</title>
-    <meta name="description" content="Lo que comés determina directamente la calidad de tus decisiones, tu nivel de concentración y tu energía a lo largo del día. La ciencia de la nutrición aplicada al trabajo de escritorio.">
+    <title>Alimentación y Productividad: Cómo la Glucosa Afecta tu Concentración y Decisiones</title>
+    <meta name="description" content="Lo que comés determina tu concentración, decisiones y energía durante la jornada. Qué comer en cada momento del día para rendir más — con evidencia científica.">
     <meta name="author" content="Juan Calderón — A Moverse!">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://amoverse.net/posts/Alimentacion-y-productividad.html">
     <meta property="og:title" content="Alimentación y Productividad: Glucosa, Foco y Decisiones | A Moverse!">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://amoverse.net/posts/Alimentacion-y-productividad.html">
+    <meta property="og:image" content="https://amoverse.net/og-image.png">
     <meta property="og:locale" content="es_AR">
     <meta property="og:site_name" content="A Moverse!">
     <script type="application/ld+json">
@@ -22,9 +23,49 @@
       "author": { "@type": "Person", "name": "Juan Calderón", "url": "https://amoverse.net/sobre-nosotros.html" },
       "publisher": { "@type": "Organization", "name": "A Moverse!", "url": "https://amoverse.net" },
       "datePublished": "2026-02-12",
-      "dateModified": "2026-07-15",
+      "dateModified": "2026-10-24",
       "url": "https://amoverse.net/posts/Alimentacion-y-productividad.html",
       "mainEntityOfPage": "https://amoverse.net/posts/Alimentacion-y-productividad.html"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué alimentos mejoran la concentración en el trabajo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los alimentos que más ayudan a sostener la concentración son los de bajo índice glucémico: avena, huevos, legumbres, nueces, arándanos y chocolate negro +70%. Proveen energía estable sin los picos y caídas de azúcar que generan fatiga mental. Los omega-3 del pescado azul también mejoran la memoria de trabajo y la velocidad de procesamiento."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué me da sueño después de almorzar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La somnolencia post-almuerzo tiene una causa nutricional concreta: un almuerzo rico en carbohidratos refinados activa la producción de serotonina e inhibe la orexina, el neurotransmisor de la vigilia. La digestión también desvía flujo sanguíneo hacia el aparato digestivo. Un almuerzo equilibrado con proteína moderada, vegetales y carbohidratos de bajo índice glucémico reduce significativamente este efecto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto afecta el azúcar al rendimiento cognitivo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Un desayuno de alto índice glucémico (jugos, cereales azucarados, pan blanco) produce un pico de glucosa seguido de un rebote hipoglucémico que puede reducir el rendimiento cognitivo en un 13% a partir de la segunda hora. La estabilidad del suministro de glucosa es más importante que la cantidad total."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué comer antes de una tarea cognitiva exigente?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para tareas que requieren alta concentración, lo más efectivo es consumir proteína moderada (huevos, queso, legumbres) junto con grasas saludables (nueces, aguacate) y carbohidratos de bajo índice glucémico. Evitar comidas grandes inmediatamente antes — la digestión compite con el cerebro por el flujo sanguíneo."
+          }
+        }
+      ]
     }
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y376J66Y5W"></script>
@@ -61,6 +102,18 @@
         .sources ul { list-style: none; padding: 0; margin: 0; }
         .sources li { font-size: 0.78rem; color: #64748b; margin-bottom: 0.5rem; line-height: 1.5; }
         .sources a { color: #eab308; text-decoration: underline; }
+        .toc { background: #fefce8; border: 1px solid #fde68a; border-radius: 1.25rem; padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+        .toc-title { font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #92400e; margin-bottom: 0.75rem; }
+        .toc ol { list-style: decimal; padding-left: 1.25rem; margin: 0; }
+        .toc li { font-size: 0.82rem; color: #78350f; font-weight: 700; margin-bottom: 0.3rem; }
+        .toc a { color: #92400e; text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+        .faq-section { background: #f8fafc; border-radius: 1.5rem; padding: 2rem; margin: 2.5rem 0; }
+        .faq-title { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; font-style: italic; color: #0f172a; margin-bottom: 1.5rem; }
+        .faq-item { border-bottom: 1px solid #e2e8f0; padding-bottom: 1.25rem; margin-bottom: 1.25rem; }
+        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .faq-q { font-size: 0.9rem; font-weight: 900; color: #0f172a; margin-bottom: 0.5rem; }
+        .faq-a { font-size: 0.85rem; color: #475569; line-height: 1.8; margin: 0; }
     </style>
 </head>
 <body class="selection:bg-yellow-100">
@@ -77,6 +130,18 @@
             <p class="text-base text-slate-500 leading-relaxed">El cerebro representa el 2% del peso corporal pero consume el 20% de la energía del organismo. Lo que comés y cuándo lo comés determina directamente la calidad de tu pensamiento, tus decisiones y tu concentración durante la jornada laboral.</p>
             <div class="author-tag mt-5"><span>Por Juan Calderón · Desarrollador Tecnológico · Febrero 2026</span></div>
         </div>
+        <nav class="toc" aria-label="Tabla de contenidos">
+            <p class="toc-title">En este artículo</p>
+            <ol>
+                <li><a href="#cerebro-glucosa">El cerebro y la glucosa</a></li>
+                <li><a href="#almuerzo">El almuerzo que apaga el cerebro</a></li>
+                <li><a href="#proteinas">Proteínas y neurotransmisores</a></li>
+                <li><a href="#grasas">Grasas y función cerebral</a></li>
+                <li><a href="#movimiento">Movimiento post-comida</a></li>
+                <li><a href="#que-comer">Qué comer para rendir mejor</a></li>
+                <li><a href="#faq">Preguntas frecuentes</a></li>
+            </ol>
+        </nav>
         <div class="mb-8 min-h-[90px] flex items-center justify-center bg-white border border-dashed border-slate-200 rounded-3xl overflow-hidden">
             <ins class="adsbygoogle w-full" style="display:block" data-ad-client="ca-pub-5719496512652584" data-ad-slot="5249616039" data-ad-format="auto" data-full-width-responsive="true"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -87,23 +152,23 @@
             <div class="stat-box"><div class="stat-num">90min</div><div class="stat-label">duración típica del pico de energía tras una comida equilibrada</div></div>
         </div>
         <div class="prose">
-            <h2>El cerebro y la glucosa</h2>
+            <h2 id="cerebro-glucosa">El cerebro y la glucosa</h2>
             <p>Lo que hace la diferencia no es la cantidad de glucosa disponible sino la estabilidad de su suministro. Un <a href="https://pubmed.ncbi.nlm.nih.gov/21835082/" target="_blank" rel="noopener">estudio de la Universidad de Cambridge publicado en Frontiers in Human Neuroscience</a> midió el rendimiento cognitivo de estudiantes después de desayunos con distinto índice glucémico. El grupo de bajo índice glucémico mantuvo concentración significativamente más alta durante tres horas; el grupo de alto índice glucémico experimentó una caída notable a partir de la segunda hora.</p>
             <div class="callout"><p>La "Hora 11" — esa fatiga mental de media mañana — tiene frecuentemente una causa nutricional: el rebote hipoglucémico que sigue al pico de glucosa de un desayuno de alto índice glucémico (jugos, cereales azucarados, pan blanco).</p></div>
 
-            <h2>El almuerzo que apaga el cerebro</h2>
+            <h2 id="almuerzo">El almuerzo que apaga el cerebro</h2>
             <p>Un almuerzo abundante en carbohidratos refinados activa la producción de serotonina e inhibe la de orexina — el neurotransmisor de la vigilia. Un <a href="https://pubmed.ncbi.nlm.nih.gov/25225827/" target="_blank" rel="noopener">análisis publicado en el British Journal of Nutrition</a> identificó que la combinación proteína moderada + grasas saludables + carbohidratos de bajo índice glucémico producía la energía más estable para la segunda mitad de la jornada.</p>
 
-            <h2>Proteínas y neurotransmisores</h2>
+            <h2 id="proteinas">Proteínas y neurotransmisores</h2>
             <p>La dopamina, noradrenalina y serotonina se sintetizan a partir de aminoácidos de las proteínas. Un <a href="https://pubmed.ncbi.nlm.nih.gov/25078547/" target="_blank" rel="noopener">estudio de la Universidad de Leiden</a> encontró que consumir tirosina — presente en carnes, huevos y legumbres — antes de tareas cognitivas exigentes mejoraba el rendimiento bajo estrés.</p>
 
-            <h2>Grasas y función cerebral</h2>
+            <h2 id="grasas">Grasas y función cerebral</h2>
             <p>El 60% del cerebro está compuesto de grasa. Un <a href="https://pubmed.ncbi.nlm.nih.gov/20329590/" target="_blank" rel="noopener">metaanálisis en Nutritional Neuroscience</a> confirmó que el DHA (omega-3) mejoraba la memoria de trabajo, la velocidad de procesamiento y el estado de ánimo, especialmente en personas con bajo consumo habitual de pescado azul.</p>
 
-            <h2>Movimiento post-comida: la intervención más efectiva</h2>
+            <h2 id="movimiento">Movimiento post-comida: la intervención más efectiva</h2>
             <p>Un <a href="https://pubmed.ncbi.nlm.nih.gov/23827981/" target="_blank" rel="noopener">estudio publicado en Sports Medicine</a> demostró que moverse brevemente después de comer — aunque sea 60 segundos de sentadillas — reducía el pico de glucosa post-comida en hasta un 30%. Los músculos en acción capturan la glucosa circulante sin necesitar insulina como intermediario.</p>
 
-            <h2>Lo que comer para rendir mejor</h2>
+            <h2 id="que-comer">Lo que comer para rendir mejor</h2>
             <div class="my-6 space-y-3">
                 <div class="food-card">
                     <div class="food-name">Desayuno — base de proteína y grasa</div>
@@ -120,6 +185,25 @@
             </div>
         </div>
 
+        <div class="faq-section" id="faq">
+            <p class="faq-title">Preguntas frecuentes sobre alimentación y rendimiento</p>
+            <div class="faq-item">
+                <p class="faq-q">¿Qué alimentos mejoran la concentración en el trabajo?</p>
+                <p class="faq-a">Los de bajo índice glucémico: avena, huevos, legumbres, nueces, arándanos y chocolate negro +70%. Proveen energía estable sin los picos de azúcar que generan fatiga mental. Los omega-3 del pescado azul también mejoran la memoria de trabajo.</p>
+            </div>
+            <div class="faq-item">
+                <p class="faq-q">¿Por qué me da sueño después de almorzar?</p>
+                <p class="faq-a">Un almuerzo rico en carbohidratos refinados activa la serotonina e inhibe la orexina, el neurotransmisor de la vigilia. Un almuerzo equilibrado con proteína, vegetales y carbohidratos de bajo índice glucémico reduce significativamente este efecto.</p>
+            </div>
+            <div class="faq-item">
+                <p class="faq-q">¿Cuánto afecta el azúcar al rendimiento cognitivo?</p>
+                <p class="faq-a">Un desayuno de alto índice glucémico puede reducir el rendimiento cognitivo en un 13% a partir de la segunda hora. La estabilidad del suministro de glucosa importa más que la cantidad total.</p>
+            </div>
+            <div class="faq-item">
+                <p class="faq-q">¿Qué comer antes de una tarea cognitiva exigente?</p>
+                <p class="faq-a">Proteína moderada (huevos, queso, legumbres) con grasas saludables (nueces, aguacate) y carbohidratos de bajo índice glucémico. Evitá comidas grandes inmediatamente antes: la digestión compite con el cerebro por el flujo sanguíneo.</p>
+            </div>
+        </div>
         <div class="sources">
             <h3>Fuentes y referencias</h3>
             <ul>
@@ -138,7 +222,7 @@
         <div class="related-card">
             <p class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-4">Seguí leyendo</p>
             <div class="grid grid-cols-1 gap-3">
-                <a href="hidratación-rendimiento.html" class="block hover:text-indigo-600 transition-colors">
+                <a href="hidratacion-rendimiento.html" class="block hover:text-indigo-600 transition-colors">
                     <p class="font-black text-slate-900 text-sm uppercase italic">Hidratación y Rendimiento en el Trabajo →</p>
                     <p class="text-xs text-slate-400 mt-1">Por qué el agua es tan importante como lo que comés.</p>
                 </a>
